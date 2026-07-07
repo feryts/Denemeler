@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Oda — EY LIVE</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/room.css">
+</head>
+<body style="padding-bottom:0">
+
+<div class="roomWrap">
+
+  <div class="roomTop">
+    <button class="topBtn" onclick="Room.leave()">←</button>
+    <div class="roomInfo" id="roomInfo"></div>
+    <div class="flexCenter" style="gap:8px">
+      <button class="topBtn" onclick="Room.openRules()">📜</button>
+      <button class="topBtn" id="settingsBtn" onclick="Room.openManage()" style="display:none">⚙️</button>
+    </div>
+  </div>
+
+  <div class="micGrid" id="micGrid"></div>
+
+  <div class="handRow" id="handRow"></div>
+
+  <div class="roomChat" id="roomChat"></div>
+
+  <div class="roomBar">
+    <input class="input roomInput" id="chatInput" placeholder="Mesaj yaz..." style="margin-bottom:0">
+    <button class="rBtn" onclick="Room.sendChat()">➤</button>
+    <button class="rBtn" onclick="Room.openEmoji()">😊</button>
+    <button class="rBtn" onclick="Room.openGifts()">🎁</button>
+    <button class="rBtn" id="handBtn" onclick="Room.toggleHand()">✋</button>
+  </div>
+
+</div>
+
+<script src="../js/db.js"></script>
+<script src="../js/ui.js"></script>
+<script src="../js/firebase-config.js"></script>
+<script src="../js/room.js"></script>
+</body>
+</html>
