@@ -1,827 +1,188 @@
 <!DOCTYPE html>
 <html lang="tr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Profil | EY LIVE</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/profile.css">
-
+    <title>EY LIVE - Premium Profile</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div class="profile-page">
-
-    <!-- HEADER -->
-
-    <header class="profile-cover">
-
-        <img
-            id="coverPhoto"
-            src="../assets/covers/default.jpg"
-            class="cover-image">
-
-        <div class="cover-overlay"></div>
-
-        <button class="back-btn">
-            <i class="fa-solid fa-arrow-left"></i>
-        </button>
-
-        <button class="setting-btn">
-            <i class="fa-solid fa-gear"></i>
-        </button>
-
-    </header>
-
-    <!-- PROFILE -->
-
-    <section class="profile-top">
-
-        <div class="avatar-wrapper">
-
-            <div class="avatar-ring">
-
-                <img
-                    id="avatar"
-                    src="../assets/avatars/default.webp">
-
-            </div>
-
-            <span class="online"></span>
-
-        </div>
-
-        <h2>
-
-            <span id="username">
-
-                EY LIVE
-
-            </span>
-
-            <img
-                class="verify-icon"
-                src="../assets/icons/verify.svg">
-
-        </h2>
-
-        <div class="badge-row">
-
-            <div class="badge gender">
-
-                ♂ 29
-
-            </div>
-
-            <div class="badge vip">
-
-                VIP 5
-
-            </div>
-
-            <div class="badge level">
-
-                LV15
-
-            </div>
-
-            <div class="badge noble">
-
-                Noble
-
-            </div>
-
-        </div>
-
-        <div class="id-row">
-
-            <span>
-
-                ID :
-                <b id="userID">
-
-                    3047826
-
-                </b>
-
-            </span>
-
-            <button id="copyID">
-
-                <img src="../assets/icons/copy.svg">
-
-            </button>
-
-        </div>
-
-    </section>
-
-    <!-- FOLLOW -->
-
-    <section class="follow-box">
-
-        <div class="follow-item">
-
-            <h2>556</h2>
-
-            <span>Arkadaş</span>
-
-        </div>
-
-        <div class="follow-item">
-
-            <h2>986</h2>
-
-            <span>Takip</span>
-
-        </div>
-
-        <div class="follow-item">
-
-            <h2>675</h2>
-
-            <span>Fanlar</span>
-
-        </div>
-
-    </section>
-
-    <!-- WALLET -->
-
-    <section class="wallet-area">
-
-        <div class="wallet-card coins">
-
-            <img src="../assets/icons/coin.png">
-
-            <div>
-
-                <h4>XCoins</h4>
-
-                <h2 id="coins">
-
-                    99
-
-                </h2>
-
-            </div>
-
-        </div>
-
-        <div class="wallet-card diamonds">
-
-            <img src="../assets/icons/diamond.png">
-
-            <div>
-
-                <h4>Diamonds</h4>
-
-                <h2 id="diamonds">
-
-                    600
-
-                </h2>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- AGENCY -->
-
-    <section class="agency-card">
-
-        <div>
-
-            <h3>
-
-                👑 Ajans Merkezi
-
-            </h3>
-
-            <p>
-
-                Ajans yönetimi ve gelir detayı
-
-            </p>
-
-        </div>
-
-        <i class="fa-solid fa-chevron-right"></i>
-
-    </section>
-        <!-- ==========================
-         QUICK MENU
-    =========================== -->
-
-    <section class="menu-grid">
-
-        <a href="vip.html" class="menu-item">
-            <div class="menu-icon">
-                <img src="../assets/icons/vip.svg" alt="">
-            </div>
-            <span>VIP Merkezi</span>
-        </a>
-
-        <a href="noble.html" class="menu-item">
-            <div class="menu-icon">
-                <img src="../assets/icons/crown.svg" alt="">
-            </div>
-            <span>Noble</span>
-        </a>
-
-        <a href="level.html" class="menu-item">
-            <div class="menu-icon">
-                <img src="../assets/icons/level.svg" alt="">
-            </div>
-            <span>Seviye</span>
-        </a>
-
-        <a href="group.html" class="menu-item">
-            <div class="menu-icon">
-                <img src="../assets/icons/group.svg" alt="">
-            </div>
-            <span>Grup</span>
-        </a>
-
-        <a href="relationship.html" class="menu-item">
-            <div class="menu-icon">
-                <img src="../assets/icons/heart.svg" alt="">
-            </div>
-            <span>İlişki</span>
-        </a>
-
-        <a href="shop.html" class="menu-item">
-            <div class="menu-icon">
-                <img src="../assets/icons/shop.svg" alt="">
-            </div>
-            <span>Mağaza</span>
-        </a>
-
-        <a href="bag.html" class="menu-item">
-            <div class="menu-icon">
-                <img src="../assets/icons/bag.svg" alt="">
-            </div>
-            <span>Sırt Çantası</span>
-        </a>
-
-        <a href="games.html" class="menu-item">
-            <div class="menu-icon">
-                <img src="../assets/icons/game.svg" alt="">
-            </div>
-            <span>Oyun Merkezi</span>
-        </a>
-
-        <a href="badges.html" class="menu-item">
-            <div class="menu-icon">
-                <img src="../assets/icons/badge.svg" alt="">
-            </div>
-            <span>Rozetler</span>
-        </a>
-
-    </section>
-
-    <!-- ==========================
-         MY ROOM
-    =========================== -->
-
-    <section class="room-card">
-
-        <div class="room-left">
-
-            <img
-                class="room-cover"
-                src="../assets/rooms/default-room.webp">
-
-            <div>
-
-                <h3>
-
-                    Benim Odam
-
-                </h3>
-
-                <p>
-
-                    Sohbet et ve yeni arkadaşlar edin
-
-                </p>
-
-            </div>
-
-        </div>
-
-        <button class="room-btn">
-
-            Gir
-
-        </button>
-
-    </section>
-
-    <!-- ==========================
-         LEVEL PROGRESS
-    =========================== -->
-
-    <section class="level-card">
-
-        <div class="level-header">
-
-            <h3>
-
-                ⭐ Seviye İlerlemesi
-
-            </h3>
-
-            <span>
-
-                LV15
-
-            </span>
-
-        </div>
-
-        <div class="progress">
-
-            <div class="progress-fill"
-                 style="width:72%;">
-
-            </div>
-
-        </div>
-
-        <p>
-
-            Sonraki seviyeye
-
-            <b>
-
-                28.400 XP
-
-            </b>
-
-            kaldı.
-
-        </p>
-
-    </section>
-
-    <!-- ==========================
-         VIP CARD
-    =========================== -->
-
-    <section class="vip-card">
-
-        <div>
-
-            <h3>
-
-                👑 VIP Üyeliği
-
-            </h3>
-
-            <p>
-
-                Premium avantajlardan yararlan.
-
-            </p>
-
-        </div>
-
-        <button>
-
-            Yükselt
-
-        </button>
-
-    </section>
-
-    <!-- ==========================
-         NOBLE CARD
-    =========================== -->
-
-    <section class="noble-card">
-
-        <div>
-
-            <h3>
-
-                👑 Noble
-
-            </h3>
-
-            <p>
-
-                Noble ayrıcalıklarını keşfet.
-
-            </p>
-
-        </div>
-
-        <button>
-
-            İncele
-
-        </button>
-
-    </section>
-        <!-- ==========================
-         PHOTO GALLERY
-    =========================== -->
-
-    <section class="profile-card">
-
-        <div class="card-title">
-
-            <h3>📷 Fotoğraflar</h3>
-
-            <a href="gallery.html">Tümünü Gör</a>
-
-        </div>
-
-        <div class="photo-grid">
-
-            <img src="../assets/gallery/1.webp">
-            <img src="../assets/gallery/2.webp">
-            <img src="../assets/gallery/3.webp">
-            <img src="../assets/gallery/4.webp">
-            <img src="../assets/gallery/5.webp">
-            <img src="../assets/gallery/6.webp">
-
-        </div>
-
-    </section>
-
-    <!-- ==========================
-         ACHIEVEMENTS
-    =========================== -->
-
-    <section class="profile-card">
-
-        <div class="card-title">
-
-            <h3>🏆 Başarılar</h3>
-
-            <a href="achievements.html">Hepsi</a>
-
-        </div>
-
-        <div class="achievement-list">
-
-            <div class="achievement-item">
-
-                <img src="../assets/badges/top-host.webp">
-
-                <div>
-
-                    <h4>Top Host</h4>
-
-                    <p>En popüler yayıncı rozeti</p>
-
+    <div class="app-container">
+        
+        <div class="header-banner">
+            <div class="top-actions">
+                <button class="action-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                </button>
+                <div class="right-buttons">
+                    <button class="action-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                    </button>
+                    <button class="action-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24M14.83 9.17l4.24-4.24M14.83 14.83l4.24 4.24M9.17 14.83l-4.24 4.24"/></svg>
+                    </button>
+                    <button class="action-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff4d4d" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0M12 2v10"/></svg>
+                    </button>
                 </div>
-
             </div>
+        </div>
 
-            <div class="achievement-item">
-
-                <img src="../assets/badges/vip.webp">
-
-                <div>
-
-                    <h4>VIP Üye</h4>
-
-                    <p>Premium kullanıcı</p>
-
+        <div class="profile-section">
+            <div class="profile-header-main">
+                <div class="avatar-container">
+                    <svg width="100%" height="100%" viewBox="0 0 24 24" fill="#222"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5-4-8-4z"/></svg>
                 </div>
-
-            </div>
-
-            <div class="achievement-item">
-
-                <img src="../assets/badges/official.webp">
-
-                <div>
-
-                    <h4>Doğrulanmış</h4>
-
-                    <p>Resmi doğrulanmış hesap</p>
-
+                <div class="user-details">
+                    <div class="username" id="username-display">EY LIVE</div>
+                    <div class="badge-container">
+                        <div class="badge badge-gender">♂ 29</div>
+                        <div class="badge badge-vip">VIP3</div>
+                        <div class="badge badge-level">LV15</div>
+                        <div class="badge badge-heart">22</div>
+                    </div>
+                    <div class="user-id">
+                        <span>ID: <strong id="id-display">3047826</strong></span>
+                        <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                    </div>
                 </div>
-
             </div>
 
-        </div>
-
-    </section>
-
-    <!-- ==========================
-         STATISTICS
-    =========================== -->
-
-    <section class="profile-card">
-
-        <div class="card-title">
-
-            <h3>📊 İstatistikler</h3>
-
-        </div>
-
-        <div class="stats-grid">
-
-            <div class="stat-box">
-
-                <h2>128</h2>
-
-                <span>Yayın Saati</span>
-
-            </div>
-
-            <div class="stat-box">
-
-                <h2>452</h2>
-
-                <span>Canlı Yayın</span>
-
-            </div>
-
-            <div class="stat-box">
-
-                <h2>8.2M</h2>
-
-                <span>Popülerlik</span>
-
-            </div>
-
-            <div class="stat-box">
-
-                <h2>26K</h2>
-
-                <span>Alınan Hediye</span>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- ==========================
-         GIFT COLLECTION
-    =========================== -->
-
-    <section class="profile-card">
-
-        <div class="card-title">
-
-            <h3>🎁 Hediye Koleksiyonu</h3>
-
-            <a href="gifts.html">Hepsi</a>
-
-        </div>
-
-        <div class="gift-grid">
-
-            <div class="gift-item">
-
-                <img src="../assets/gifts/rose.webp">
-
-                <span>1250</span>
-
-            </div>
-
-            <div class="gift-item">
-
-                <img src="../assets/gifts/car.webp">
-
-                <span>82</span>
-
-            </div>
-
-            <div class="gift-item">
-
-                <img src="../assets/gifts/yacht.webp">
-
-                <span>14</span>
-
-            </div>
-
-            <div class="gift-item">
-
-                <img src="../assets/gifts/castle.webp">
-
-                <span>8</span>
-
-            </div>
-
-            <div class="gift-item">
-
-                <img src="../assets/gifts/rocket.webp">
-
-                <span>2</span>
-
-            </div>
-
-            <div class="gift-item">
-
-                <img src="../assets/gifts/ring.webp">
-
-                <span>34</span>
-
-            </div>
-
-        </div>
-
-    </section>
-        <!-- ==========================
-         LAST ACTIVITIES
-    =========================== -->
-
-    <section class="profile-card">
-
-        <div class="card-title">
-
-            <h3>📋 Son Hareketler</h3>
-
-            <a href="activity.html">Tümü</a>
-
-        </div>
-
-        <div class="activity-list">
-
-            <div class="activity-item">
-
-                <div class="activity-icon">
-                    <img src="../assets/icons/gift.svg">
+            <div class="live-metrics-bar">
+                <div class="metric-box">
+                    <div class="metric-box-title">Bu Ay Süre</div>
+                    <div class="metric-box-value" id="hours-display">0 Saat</div>
                 </div>
-
-                <div class="activity-info">
-
-                    <h4>1000 Diamond Hediyesi Alındı</h4>
-
-                    <p>5 dakika önce</p>
-
+                <div class="metric-box" style="border-left: 1px solid rgba(255,255,255,0.1); border-right: 1px solid rgba(255,255,255,0.1); padding: 0 15px;">
+                    <div class="metric-box-title">Popülerlik</div>
+                    <div class="metric-box-value" id="pop-display">0</div>
                 </div>
-
+                <div class="metric-box">
+                    <div class="metric-box-title">Son Etkinlik</div>
+                    <div class="metric-box-value" style="color: #ffb703;">İlk 10</div>
+                </div>
             </div>
 
-            <div class="activity-item">
-
-                <div class="activity-icon">
-                    <img src="../assets/icons/follow.svg">
+            <div class="stats-row">
+                <div class="stat-item">
+                    <div class="stat-value" id="friends-count">0</div>
+                    <div class="stat-label">Arkadaşlar</div>
                 </div>
-
-                <div class="activity-info">
-
-                    <h4>Yeni Takipçi</h4>
-
-                    <p>35 dakika önce</p>
-
+                <div class="stat-item">
+                    <div class="stat-value" id="following-count">0</div>
+                    <div class="stat-label">Takip ettim</div>
                 </div>
-
+                <div class="stat-item">
+                    <div class="stat-value" id="fans-count">0</div>
+                    <div class="stat-label">Fanlar</div>
+                </div>
             </div>
 
-            <div class="activity-item">
-
-                <div class="activity-icon">
-                    <img src="../assets/icons/live.svg">
+            <div class="wallet-row">
+                <div class="wallet-card card-xcoins">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="#ffb703"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M15 9H10.5a2.5 2.5 0 0 0 0 5H14a2.5 2.5 0 0 1 0 5H9" stroke="#18151c" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+                    <div class="wallet-info">
+                        <span class="wallet-title">Xcoins</span>
+                        <span class="wallet-value" id="xcoins-display">0</span>
+                    </div>
                 </div>
-
-                <div class="activity-info">
-
-                    <h4>Canlı Yayın Başladı</h4>
-
-                    <p>Bugün</p>
-
+                <div class="wallet-card card-diamonds">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="#00bbf9"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg>
+                    <div class="wallet-info">
+                        <span class="wallet-title">Diamonds</span>
+                        <span class="wallet-value" id="diamonds-display">0</span>
+                    </div>
                 </div>
+            </div>
 
+            <div class="banner-link">
+                <div class="banner-left">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffb703" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    <div class="banner-text">
+                        <h4>Ajans merkezi</h4>
+                        <p>Acente yönetimi ve gelir detayı</p>
+                    </div>
+                </div>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8e92b2" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg>
+            </div>
+
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="menu-icon-wrapper"><svg width="22" height="22" viewBox="0 0 24 24" fill="#ffb703"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                    <span class="menu-label">VIP Merkezi</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-icon-wrapper"><svg width="22" height="22" viewBox="0 0 24 24" fill="#ff9f1c"><path d="M2 22h20V10l-4-4-4 4-4-4-4 4-4-4v12z"/></svg></div>
+                    <span class="menu-label">Noble</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-icon-wrapper"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#20bf55" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+                    <span class="menu-label">Seviye</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-icon-wrapper"><svg width="22" height="22" viewBox="0 0 24 24" fill="#a2d2ff"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm14 10v-2a4 4 0 0 0-3-3.87m-4-12a4 4 0 0 1 0 7.75"/></svg></div>
+                    <span class="menu-label">Grup</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-icon-wrapper"><svg width="22" height="22" viewBox="0 0 24 24" fill="#ff4d6d"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.5 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+                    <span class="menu-label">İlişki</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-icon-wrapper"><svg width="22" height="22" viewBox="0 0 24 24" fill="#ff758f"><path d="M20 7h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zM10 4h4v3h-4V4z"/></svg></div>
+                    <span class="menu-label">Mağaza</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-icon-wrapper"><svg width="22" height="22" viewBox="0 0 24 24" fill="#b5179e"><path d="M16 11c0 2.21-1.79 4-4 4s-4-1.79-4-4V5c0-2.21 1.79-4 4-4s4 1.79 4 4v6z"/></svg></div>
+                    <span class="menu-label">Sırt Çantası</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-icon-wrapper"><svg width="22" height="22" viewBox="0 0 24 24" fill="#4361ee"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 3c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg></div>
+                    <span class="menu-label">Oyun Merkezi</span>
+                </div>
+            </div>
+
+            <div class="room-section">
+                <div class="room-left">
+                    <div class="room-avatar">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="#ffb703"><path d="M12 3L2 12h3v8h14v-8h3L12 3zm0 11c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+                    </div>
+                    <div class="room-details">
+                        <h5>Benim odam</h5>
+                        <p>Sohbet et ve yeni arkadaşlar edin</p>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px; color: var(--text-secondary); font-size: 13px;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#ff006e"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg> 
+                    <span>0</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8e92b2" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg>
+                </div>
             </div>
 
         </div>
 
-    </section>
-
-    <!-- ==========================
-         ACTION BUTTONS
-    =========================== -->
-
-    <section class="action-buttons">
-
-        <button id="followBtn">
-
-            ❤️ Takip Et
-
-        </button>
-
-        <button id="messageBtn">
-
-            💬 Mesaj
-
-        </button>
-
-        <button id="callBtn">
-
-            📞 Sesli Ara
-
-        </button>
-
-    </section>
-
-    <!-- ==========================
-         SETTINGS
-    =========================== -->
-
-    <section class="profile-card">
-
-        <div class="setting-item">
-
-            <span>👤 Profili Düzenle</span>
-
-            <i class="fa-solid fa-chevron-right"></i>
-
+        <div class="bottom-nav">
+            <div class="nav-item active">
+                <div class="nav-icon-circle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+                </div>
+            </div>
+            <div class="nav-item">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8e92b2" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            </div>
+            <div class="nav-item">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8e92b2" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div class="nav-item">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8e92b2" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="nav-item">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8e92b2" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
         </div>
 
-        <div class="setting-item">
+    </div>
 
-            <span>🖼 Avatarı Değiştir</span>
-
-            <i class="fa-solid fa-chevron-right"></i>
-
-        </div>
-
-        <div class="setting-item">
-
-            <span>🌄 Kapak Fotoğrafını Değiştir</span>
-
-            <i class="fa-solid fa-chevron-right"></i>
-
-        </div>
-
-        <div class="setting-item">
-
-            <span>🔒 Gizlilik</span>
-
-            <i class="fa-solid fa-chevron-right"></i>
-
-        </div>
-
-        <div class="setting-item">
-
-            <span>🛡 Güvenlik</span>
-
-            <i class="fa-solid fa-chevron-right"></i>
-
-        </div>
-
-        <div class="setting-item">
-
-            <span>🌍 Dil</span>
-
-            <i class="fa-solid fa-chevron-right"></i>
-
-        </div>
-
-        <div class="setting-item">
-
-            <span>🎨 Tema</span>
-
-            <i class="fa-solid fa-chevron-right"></i>
-
-        </div>
-
-        <div class="setting-item logout">
-
-            <span>🚪 Çıkış Yap</span>
-
-            <i class="fa-solid fa-chevron-right"></i>
-
-        </div>
-
-    </section>
-
-    <!-- ==========================
-         BOTTOM NAVIGATION
-    =========================== -->
-
-    <div id="navHost"></div>
-
-</div>
-
-<script src="https://kit.fontawesome.com/6b7c5f5b1a.js" crossorigin="anonymous"></script>
-
-<script src="../js/db.js"></script>
-<script src="../js/ui.js"></script>
-<script src="../js/firebase-config.js"></script>
-<script src="../js/profile.js"></script>
-
+    <script src="script.js"></script>
 </body>
 </html>
