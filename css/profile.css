@@ -1,33 +1,72 @@
-/*=========================================
-EY LIVE PROFILE V3
-PART 1
-=========================================*/
+/* ==========================================
+   EY LIVE PROFILE V5
+========================================== */
 
-.profilePage{
+:root{
+
+--bg:#0B0818;
+--card:#181328;
+--card2:#221A38;
+--purple:#7B2EFF;
+--pink:#FF3AA7;
+--gold:#FFC94D;
+--text:#FFFFFF;
+--text2:#B6B1D2;
+--line:rgba(255,255,255,.08);
+
+}
+
+*{
+
+margin:0;
+padding:0;
+box-sizing:border-box;
+
+}
+
+body{
+
+background:var(--bg);
+
+font-family:'Poppins',sans-serif;
+
+color:white;
+
+overflow-x:hidden;
+
+}
+
+a{
+
+text-decoration:none;
+
+color:white;
+
+}
+
+.profile-page{
 
 padding-bottom:120px;
-
-background:#0b0618;
 
 min-height:100vh;
 
 }
 
-/*========================
+/* ===========================
 COVER
-========================*/
+=========================== */
 
-.cover{
-
-position:relative;
+.profile-cover{
 
 height:260px;
+
+position:relative;
 
 overflow:hidden;
 
 }
 
-.cover img{
+.cover-image{
 
 width:100%;
 
@@ -37,41 +76,82 @@ object-fit:cover;
 
 }
 
-.coverGradient{
+.cover-overlay{
 
 position:absolute;
 
 left:0;
-
-right:0;
-
 top:0;
-
+right:0;
 bottom:0;
 
-background:linear-gradient(
+background:
+
+linear-gradient(
 
 180deg,
 
 rgba(0,0,0,.05),
 
-rgba(11,6,24,.95)
+rgba(11,8,24,.95)
 
 );
 
 }
 
-/*========================
-HEADER
-========================*/
+/* ===========================
+TOP BUTTON
+=========================== */
 
-.profileHeader{
+.back-btn,
 
-margin-top:-75px;
+.setting-btn{
 
-position:relative;
+position:absolute;
 
-z-index:5;
+top:20px;
+
+width:42px;
+
+height:42px;
+
+border:none;
+
+border-radius:14px;
+
+background:rgba(255,255,255,.15);
+
+backdrop-filter:blur(20px);
+
+color:white;
+
+font-size:17px;
+
+cursor:pointer;
+
+z-index:20;
+
+}
+
+.back-btn{
+
+left:16px;
+
+}
+
+.setting-btn{
+
+right:16px;
+
+}
+
+/* ===========================
+PROFILE HEADER
+=========================== */
+
+.profile-top{
+
+margin-top:-70px;
 
 display:flex;
 
@@ -79,39 +159,47 @@ flex-direction:column;
 
 align-items:center;
 
+position:relative;
+
+z-index:10;
+
 padding:0 20px;
 
 }
 
-.avatarBox{
+.avatar-wrapper{
 
 position:relative;
 
-width:130px;
+}
 
-height:130px;
+.avatar-ring{
+
+width:128px;
+
+height:128px;
+
+padding:4px;
 
 border-radius:50%;
 
-padding:5px;
+background:
 
-background:linear-gradient(
+linear-gradient(
 
 135deg,
 
-#7B2EFF,
+var(--purple),
 
-#FF2E9E
+var(--pink)
 
 );
 
-box-shadow:
-
-0 0 35px rgba(123,46,255,.45);
+animation:ring 4s linear infinite;
 
 }
 
-.avatarBox img{
+.avatar-ring img{
 
 width:100%;
 
@@ -121,91 +209,88 @@ border-radius:50%;
 
 object-fit:cover;
 
-background:#2c1b48;
+background:#2D224A;
 
 }
 
-.onlineDot{
+.online{
 
 position:absolute;
 
 bottom:10px;
 
-right:10px;
+right:8px;
 
 width:18px;
 
 height:18px;
 
-background:#00d96f;
+border-radius:50%;
+
+background:#17E26B;
 
 border:3px solid white;
 
-border-radius:50%;
+}
+
+@keyframes ring{
+
+0%{
+
+filter:hue-rotate(0deg);
 
 }
 
-.profileContent{
+100%{
+
+filter:hue-rotate(360deg);
+
+}
+
+}
+
+.profile-top h2{
 
 margin-top:18px;
 
-text-align:center;
-
-}
-
-.profileContent h2{
-
-font-size:30px;
+font-size:28px;
 
 font-weight:700;
 
 display:flex;
 
-justify-content:center;
-
 align-items:center;
 
 gap:8px;
 
 }
 
-.verify{
+.verify-icon{
 
-width:24px;
+width:22px;
 
-height:24px;
-
-border-radius:50%;
-
-background:#2196F3;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-font-size:13px;
-
-color:#fff;
+height:22px;
 
 }
+/* ==========================================
+BADGES
+========================================== */
 
-.badgeLine{
+.badge-row{
 
 display:flex;
 
 justify-content:center;
+
+gap:8px;
+
+margin-top:14px;
 
 flex-wrap:wrap;
 
-gap:8px;
-
-margin-top:15px;
-
 }
 
-.badgeLine span{
+.badge{
 
 padding:6px 14px;
 
@@ -215,25 +300,19 @@ font-size:12px;
 
 font-weight:600;
 
+backdrop-filter:blur(20px);
+
 }
 
 .gender{
 
-background:#263238;
+background:#243447;
 
 }
 
 .vip{
 
-background:linear-gradient(
-
-135deg,
-
-#FFD54F,
-
-#FF9800
-
-);
+background:linear-gradient(135deg,#FFD54F,#FF9800);
 
 color:#111;
 
@@ -241,45 +320,77 @@ color:#111;
 
 .level{
 
-background:#7B2EFF;
+background:linear-gradient(135deg,#7B2EFF,#9654ff);
 
 }
 
 .noble{
 
-background:#FF2E9E;
+background:linear-gradient(135deg,#FF3AA7,#ff77c5);
 
 }
 
-.idLine{
+/* ==========================================
+ID CARD
+========================================== */
+
+.id-row{
 
 margin-top:18px;
 
 display:flex;
 
-justify-content:center;
-
 align-items:center;
 
-gap:8px;
+gap:12px;
 
-font-size:15px;
+padding:12px 18px;
+
+border-radius:18px;
+
+background:rgba(255,255,255,.06);
+
+backdrop-filter:blur(20px);
+
+border:1px solid rgba(255,255,255,.08);
 
 }
 
-#copyId{
+.id-row span{
 
-width:34px;
+font-size:14px;
 
-height:34px;
+color:var(--text2);
+
+}
+
+.id-row b{
+
+font-size:16px;
+
+color:#fff;
+
+letter-spacing:1px;
+
+}
+
+#copyID{
+
+width:38px;
+
+height:38px;
 
 border:none;
 
 border-radius:12px;
 
-background:#241544;
+background:rgba(255,255,255,.08);
 
-color:white;
+display:flex;
+
+align-items:center;
+
+justify-content:center;
 
 cursor:pointer;
 
@@ -287,45 +398,61 @@ transition:.25s;
 
 }
 
-#copyId:active{
+#copyID img{
 
-transform:scale(.95);
+width:18px;
+
+height:18px;
 
 }
 
-/*========================
-FOLLOW
-========================*/
+#copyID:hover{
 
-.followRow{
+background:var(--purple);
+
+}
+
+/* ==========================================
+FOLLOW
+========================================== */
+
+.follow-box{
 
 display:grid;
 
 grid-template-columns:repeat(3,1fr);
 
-gap:15px;
+gap:14px;
 
-padding:25px 20px;
+padding:24px 20px;
 
 }
 
-.followItem{
+.follow-item{
 
 background:rgba(255,255,255,.05);
 
-backdrop-filter:blur(20px);
+backdrop-filter:blur(18px);
 
-border:1px solid rgba(255,255,255,.06);
+border:1px solid var(--line);
 
-border-radius:22px;
+border-radius:20px;
 
 padding:18px;
 
 text-align:center;
 
+transition:.25s;
+
 }
 
-.followItem h2{
+.follow-item:hover{
+
+transform:translateY(-4px);
+
+}
+
+.follow-item h2{
 
 font-size:24px;
 
@@ -333,112 +460,137 @@ font-weight:700;
 
 }
 
-.followItem p{
+.follow-item span{
+
+display:block;
 
 margin-top:6px;
 
 font-size:13px;
 
-color:#bfbfd2;
+color:var(--text2);
 
-  }
-/*=========================================
+}
+
+/* ==========================================
 WALLET
-=========================================*/
+========================================== */
 
-.walletGrid{
+.wallet-area{
 
 display:grid;
 
-grid-template-columns:repeat(2,1fr);
+grid-template-columns:1fr 1fr;
 
 gap:16px;
 
 padding:0 20px;
 
-margin-top:8px;
+margin-bottom:22px;
 
 }
 
-.walletCard{
+.wallet-card{
 
 display:flex;
 
-justify-content:space-between;
-
 align-items:center;
 
-padding:22px;
+gap:16px;
 
-border-radius:24px;
+padding:20px;
 
-background:rgba(255,255,255,.05);
+border-radius:22px;
 
-backdrop-filter:blur(20px);
+background:var(--card);
 
-border:1px solid rgba(255,255,255,.06);
-
-box-shadow:0 12px 30px rgba(0,0,0,.25);
+border:1px solid var(--line);
 
 transition:.25s;
 
-}
+box-shadow:
 
-.walletCard:active{
-
-transform:scale(.98);
+0 15px 35px rgba(0,0,0,.20);
 
 }
 
-.walletCard h3{
+.wallet-card:hover{
 
-font-size:14px;
+transform:translateY(-5px);
 
-color:#c8c4dc;
+}
+
+.wallet-card img{
+
+width:48px;
+
+height:48px;
+
+}
+
+.wallet-card h4{
+
+font-size:13px;
 
 font-weight:500;
 
+color:var(--text2);
+
 }
 
-.walletCard p{
+.wallet-card h2{
 
-margin-top:8px;
+margin-top:5px;
 
 font-size:28px;
 
 font-weight:700;
 
-color:#fff;
+}
+
+.coins{
+
+background:
+
+linear-gradient(
+
+135deg,
+
+#2E1D57,
+
+#1D1635
+
+);
 
 }
 
-.walletCard div:last-child{
+.diamonds{
 
-font-size:38px;
+background:
 
-}
+linear-gradient(
 
-.coinCard{
+135deg,
 
-background:linear-gradient(135deg,#34214f,#22133d);
+#143760,
 
-}
+#1A214A
 
-.diamondCard{
-
-background:linear-gradient(135deg,#261e58,#1d153d);
+);
 
 }
 
-/*=========================================
+/* ==========================================
 AGENCY
-=========================================*/
+========================================== */
 
-.agencyCard{
+.agency-card{
 
-margin:22px 20px;
+margin:0 20px 25px;
 
 padding:22px;
+
+border-radius:24px;
 
 display:flex;
 
@@ -446,25 +598,35 @@ justify-content:space-between;
 
 align-items:center;
 
-border-radius:24px;
+background:
 
-background:linear-gradient(135deg,#3d2269,#271646);
+linear-gradient(
 
-border:1px solid rgba(255,255,255,.06);
+135deg,
 
-box-shadow:0 12px 35px rgba(123,46,255,.20);
+#392160,
+
+#26183F
+
+);
+
+border:1px solid rgba(255,255,255,.08);
+
+box-shadow:
+
+0 18px 40px rgba(123,46,255,.15);
 
 transition:.25s;
 
 }
 
-.agencyCard:active{
+.agency-card:hover{
 
-transform:scale(.98);
+transform:translateY(-4px);
 
 }
 
-.agencyCard h2{
+.agency-card h3{
 
 font-size:20px;
 
@@ -472,27 +634,26 @@ margin-bottom:6px;
 
 }
 
-.agencyCard p{
+.agency-card p{
 
 font-size:13px;
 
-color:#d0c9e6;
+color:var(--text2);
 
 }
 
-.agencyCard div:last-child{
+.agency-card i{
 
-font-size:26px;
+font-size:22px;
 
-font-weight:700;
+color:#fff;
 
-}
+  }
+/* ==========================================
+   QUICK MENU
+========================================== */
 
-/*=========================================
-QUICK MENU
-=========================================*/
-
-.quickMenu{
+.menu-grid{
 
 display:grid;
 
@@ -502,19 +663,19 @@ gap:16px;
 
 padding:0 20px;
 
-margin-top:10px;
+margin-bottom:25px;
 
 }
 
-.menuCard{
+.menu-item{
 
 background:rgba(255,255,255,.05);
 
 border:1px solid rgba(255,255,255,.06);
 
-border-radius:24px;
+border-radius:22px;
 
-padding:20px 10px;
+padding:18px 10px;
 
 display:flex;
 
@@ -522,23 +683,29 @@ flex-direction:column;
 
 align-items:center;
 
+justify-content:center;
+
 transition:.25s;
 
-}
-
-.menuCard:active{
-
-transform:scale(.96);
+backdrop-filter:blur(18px);
 
 }
 
-.menuIcon{
+.menu-item:hover{
 
-width:66px;
+transform:translateY(-6px);
 
-height:66px;
+border-color:rgba(123,46,255,.45);
 
-border-radius:22px;
+}
+
+.menu-icon{
+
+width:64px;
+
+height:64px;
+
+border-radius:18px;
 
 display:flex;
 
@@ -546,87 +713,205 @@ justify-content:center;
 
 align-items:center;
 
-font-size:30px;
-
 margin-bottom:12px;
 
-color:#fff;
+background:linear-gradient(
+135deg,
+#7B2EFF,
+#FF3AA7);
+
+box-shadow:
+
+0 10px 25px rgba(123,46,255,.30);
 
 }
 
-.menuCard span{
+.menu-icon img{
+
+width:34px;
+
+height:34px;
+
+object-fit:contain;
+
+}
+
+.menu-item span{
 
 font-size:13px;
 
 font-weight:600;
 
+color:#fff;
+
 text-align:center;
 
 }
 
-/* ICON COLORS */
+/* ==========================================
+ROOM CARD
+========================================== */
 
-.vipIcon{
+.room-card{
 
-background:linear-gradient(135deg,#FFD54F,#FF9800);
+margin:0 20px 22px;
 
-}
+padding:18px;
 
-.nobleIcon{
+border-radius:24px;
 
-background:linear-gradient(135deg,#FF2E9E,#FF6AB6);
+display:flex;
 
-}
+justify-content:space-between;
 
-.levelIcon{
+align-items:center;
 
-background:linear-gradient(135deg,#7B2EFF,#9D6CFF);
+background:linear-gradient(
+135deg,
+#1E1833,
+#2A1E4A);
 
-}
-
-.groupIcon{
-
-background:linear-gradient(135deg,#00BCD4,#0097A7);
-
-}
-
-.loveIcon{
-
-background:linear-gradient(135deg,#F44336,#FF6B81);
+border:1px solid rgba(255,255,255,.08);
 
 }
 
-.shopIcon{
+.room-left{
 
-background:linear-gradient(135deg,#00C853,#43A047);
+display:flex;
 
-}
+align-items:center;
 
-.bagIcon{
-
-background:linear-gradient(135deg,#5E35B1,#4527A0);
+gap:15px;
 
 }
 
-.gameIcon{
+.room-cover{
 
-background:linear-gradient(135deg,#FF5722,#FF7043);
+width:72px;
+
+height:72px;
+
+border-radius:18px;
+
+object-fit:cover;
 
 }
 
-.badgeIcon{
+.room-left h3{
 
-background:linear-gradient(135deg,#3F51B5,#5C6BC0);
+font-size:18px;
+
+margin-bottom:4px;
 
 }
 
-/*=========================================
-MY ROOM
-=========================================*/
+.room-left p{
 
-.roomCard{
+font-size:13px;
 
-margin:24px 20px;
+color:#BDB7D9;
+
+}
+
+.room-btn{
+
+padding:12px 20px;
+
+border:none;
+
+border-radius:14px;
+
+font-weight:700;
+
+cursor:pointer;
+
+background:linear-gradient(
+135deg,
+#7B2EFF,
+#FF3AA7);
+
+color:#fff;
+
+}
+
+/* ==========================================
+LEVEL CARD
+========================================== */
+
+.level-card{
+
+margin:0 20px 22px;
+
+padding:20px;
+
+border-radius:24px;
+
+background:#181328;
+
+border:1px solid rgba(255,255,255,.06);
+
+}
+
+.level-header{
+
+display:flex;
+
+justify-content:space-between;
+
+margin-bottom:15px;
+
+}
+
+.level-header h3{
+
+font-size:17px;
+
+}
+
+.progress{
+
+height:12px;
+
+border-radius:20px;
+
+background:#2C2444;
+
+overflow:hidden;
+
+}
+
+.progress-fill{
+
+height:100%;
+
+background:linear-gradient(
+90deg,
+#7B2EFF,
+#FF3AA7);
+
+border-radius:20px;
+
+}
+
+.level-card p{
+
+margin-top:12px;
+
+font-size:13px;
+
+color:#BBB5D5;
+
+}
+
+/* ==========================================
+VIP CARD
+========================================== */
+
+.vip-card,
+
+.noble-card{
+
+margin:0 20px 18px;
 
 padding:20px;
 
@@ -636,88 +921,104 @@ justify-content:space-between;
 
 align-items:center;
 
-background:rgba(255,255,255,.05);
-
 border-radius:24px;
 
-border:1px solid rgba(255,255,255,.06);
+}
+
+.vip-card{
+
+background:linear-gradient(
+135deg,
+#FFD54F,
+#FF9800);
+
+color:#111;
 
 }
 
-.roomLeft{
+.noble-card{
 
-display:flex;
-
-align-items:center;
-
-gap:16px;
-
-}
-
-.roomLogo{
-
-width:64px;
-
-height:64px;
-
-border-radius:20px;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-font-size:30px;
-
-background:linear-gradient(135deg,#7B2EFF,#FF2E9E);
+background:linear-gradient(
+135deg,
+#7B2EFF,
+#FF3AA7);
 
 }
 
-.roomLeft h3{
+.vip-card h3,
+
+.noble-card h3{
 
 font-size:18px;
 
+margin-bottom:5px;
+
 }
 
-.roomLeft p{
+.vip-card p,
 
-margin-top:5px;
+.noble-card p{
 
 font-size:13px;
 
-color:#c6c0dc;
+opacity:.85;
 
 }
 
-.roomArrow{
+.vip-card button,
 
-font-size:28px;
+.noble-card button{
 
-color:#888;
+padding:11px 18px;
+
+border:none;
+
+border-radius:14px;
+
+font-weight:700;
+
+cursor:pointer;
 
 }
-/*=========================================
-PHOTO GALLERY
-=========================================*/
 
-.sectionCard{
+.vip-card button{
 
-margin:22px 20px;
+background:#111;
 
-padding:22px;
+color:#fff;
 
-background:rgba(255,255,255,.05);
+}
 
-border:1px solid rgba(255,255,255,.06);
+.noble-card button{
+
+background:#fff;
+
+color:#7B2EFF;
+
+}
+/* ==========================================
+PROFILE CARD
+========================================== */
+
+.profile-card{
+
+margin:0 20px 22px;
+
+padding:20px;
 
 border-radius:24px;
 
-backdrop-filter:blur(20px);
+background:rgba(255,255,255,.05);
+
+backdrop-filter:blur(18px);
+
+border:1px solid rgba(255,255,255,.06);
+
+box-shadow:0 12px 30px rgba(0,0,0,.20);
 
 }
 
-.sectionHeader{
+.card-title{
 
 display:flex;
 
@@ -729,99 +1030,131 @@ margin-bottom:18px;
 
 }
 
-.sectionHeader h2{
+.card-title h3{
 
-font-size:20px;
+font-size:18px;
 
 font-weight:700;
 
 }
 
-.sectionHeader span{
+.card-title a{
 
 font-size:13px;
 
-color:#9d94c7;
+color:#9F8BFF;
 
 }
 
-.photoGrid{
+/* ==========================================
+PHOTO GALLERY
+========================================== */
+
+.photo-grid{
 
 display:grid;
 
 grid-template-columns:repeat(3,1fr);
 
-gap:12px;
+gap:10px;
 
 }
 
-.photoItem{
-
-aspect-ratio:1;
-
-border-radius:18px;
-
-background:linear-gradient(135deg,#2d1c52,#1b1233);
-
-overflow:hidden;
-
-}
-
-.photoItem img{
+.photo-grid img{
 
 width:100%;
 
-height:100%;
+aspect-ratio:1;
 
 object-fit:cover;
 
+border-radius:16px;
+
+transition:.25s;
+
+cursor:pointer;
+
 }
 
-/*=========================================
-BADGES
-=========================================*/
+.photo-grid img:hover{
 
-.badgeList{
+transform:scale(1.05);
+
+}
+
+/* ==========================================
+ACHIEVEMENTS
+========================================== */
+
+.achievement-list{
 
 display:flex;
 
-flex-wrap:wrap;
+flex-direction:column;
 
-gap:12px;
-
-}
-
-.badge{
-
-padding:10px 16px;
-
-border-radius:30px;
-
-background:linear-gradient(135deg,#7B2EFF,#FF2E9E);
-
-font-size:13px;
-
-font-weight:600;
+gap:14px;
 
 }
 
-/*=========================================
+.achievement-item{
+
+display:flex;
+
+align-items:center;
+
+gap:14px;
+
+padding:14px;
+
+background:#241C3B;
+
+border-radius:18px;
+
+}
+
+.achievement-item img{
+
+width:54px;
+
+height:54px;
+
+object-fit:contain;
+
+}
+
+.achievement-item h4{
+
+font-size:15px;
+
+margin-bottom:3px;
+
+}
+
+.achievement-item p{
+
+font-size:12px;
+
+color:#BEB8D7;
+
+}
+
+/* ==========================================
 STATISTICS
-=========================================*/
+========================================== */
 
-.statsGrid{
+.stats-grid{
 
 display:grid;
 
 grid-template-columns:repeat(2,1fr);
 
-gap:15px;
+gap:14px;
 
 }
 
-.statItem{
+.stat-box{
 
-background:#21153f;
+background:#241C3B;
 
 border-radius:18px;
 
@@ -831,99 +1164,29 @@ text-align:center;
 
 }
 
-.statItem h3{
+.stat-box h2{
 
 font-size:24px;
 
 font-weight:700;
 
-color:#fff;
+margin-bottom:6px;
 
 }
 
-.statItem span{
-
-display:block;
-
-margin-top:6px;
+.stat-box span{
 
 font-size:13px;
 
-color:#bdb8d8;
+color:#BBB5D5;
 
 }
 
-/*=========================================
-TIMELINE
-=========================================*/
+/* ==========================================
+GIFTS
+========================================== */
 
-.timeline{
-
-display:flex;
-
-flex-direction:column;
-
-gap:16px;
-
-}
-
-.timelineItem{
-
-display:flex;
-
-align-items:flex-start;
-
-gap:14px;
-
-padding:16px;
-
-background:#21153f;
-
-border-radius:18px;
-
-}
-
-.timelineIcon{
-
-width:48px;
-
-height:48px;
-
-border-radius:50%;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-font-size:22px;
-
-background:linear-gradient(135deg,#7B2EFF,#FF2E9E);
-
-}
-
-.timelineItem h4{
-
-font-size:15px;
-
-margin-bottom:4px;
-
-}
-
-.timelineItem p{
-
-font-size:12px;
-
-color:#aaa6c6;
-
-}
-
-/*=========================================
-PROFILE BUTTONS
-=========================================*/
-
-.profileButtons{
+.gift-grid{
 
 display:grid;
 
@@ -931,11 +1194,135 @@ grid-template-columns:repeat(3,1fr);
 
 gap:15px;
 
-padding:25px 20px;
+}
+
+.gift-item{
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+padding:16px;
+
+border-radius:18px;
+
+background:#241C3B;
 
 }
 
-.profileButtons button{
+.gift-item img{
+
+width:58px;
+
+height:58px;
+
+object-fit:contain;
+
+margin-bottom:10px;
+
+}
+
+.gift-item span{
+
+font-size:14px;
+
+font-weight:600;
+
+}
+
+/* ==========================================
+ACTIVITY
+========================================== */
+
+.activity-list{
+
+display:flex;
+
+flex-direction:column;
+
+gap:14px;
+
+}
+
+.activity-item{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+padding:14px;
+
+background:#241C3B;
+
+border-radius:18px;
+
+}
+
+.activity-icon{
+
+width:50px;
+
+height:50px;
+
+border-radius:50%;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:linear-gradient(
+135deg,
+#7B2EFF,
+#FF3AA7);
+
+}
+
+.activity-icon img{
+
+width:24px;
+
+height:24px;
+
+}
+
+.activity-info h4{
+
+font-size:15px;
+
+margin-bottom:4px;
+
+}
+
+.activity-info p{
+
+font-size:12px;
+
+color:#BEB8D7;
+
+}
+/*=========================================
+ACTION BUTTONS
+=========================================*/
+
+.action-buttons{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:14px;
+
+padding:0 20px 22px;
+
+}
+
+.action-buttons button{
 
 height:52px;
 
@@ -947,17 +1334,260 @@ font-size:15px;
 
 font-weight:700;
 
-color:#fff;
-
-background:linear-gradient(135deg,#7B2EFF,#FF2E9E);
+cursor:pointer;
 
 transition:.25s;
 
 }
 
-.profileButtons button:active{
+#followBtn{
 
-transform:scale(.96);
+background:linear-gradient(135deg,#FF4D6D,#FF758F);
+
+color:#fff;
+
+}
+
+#messageBtn{
+
+background:linear-gradient(135deg,#7B2EFF,#9B5BFF);
+
+color:#fff;
+
+}
+
+#callBtn{
+
+background:linear-gradient(135deg,#00C853,#43A047);
+
+color:#fff;
+
+}
+
+.action-buttons button:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 12px 25px rgba(0,0,0,.25);
+
+}
+
+.action-buttons button:active{
+
+transform:scale(.97);
+
+}
+
+/*=========================================
+SETTINGS
+=========================================*/
+
+.setting-item{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:18px 0;
+
+border-bottom:1px solid rgba(255,255,255,.06);
+
+cursor:pointer;
+
+transition:.25s;
+
+}
+
+.setting-item:last-child{
+
+border-bottom:none;
+
+}
+
+.setting-item:hover{
+
+padding-left:8px;
+
+}
+
+.setting-item span{
+
+font-size:15px;
+
+font-weight:500;
+
+}
+
+.setting-item i{
+
+color:#8F86C7;
+
+}
+
+.logout span{
+
+color:#FF5A72;
+
+font-weight:700;
+
+}
+
+/*=========================================
+CARD ANIMATION
+=========================================*/
+
+.profile-card,
+.wallet-card,
+.room-card,
+.menu-item,
+.follow-item,
+.vip-card,
+.noble-card,
+.agency-card{
+
+transition:.25s ease;
+
+}
+
+.profile-card:hover,
+.wallet-card:hover,
+.room-card:hover,
+.menu-item:hover{
+
+transform:translateY(-5px);
+
+box-shadow:0 18px 35px rgba(0,0,0,.25);
+
+}
+
+/*=========================================
+SCROLLBAR
+=========================================*/
+
+::-webkit-scrollbar{
+
+width:5px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#7B2EFF;
+
+border-radius:30px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:transparent;
+
+}
+
+/*=========================================
+RESPONSIVE
+=========================================*/
+
+@media(max-width:768px){
+
+.wallet-area{
+
+grid-template-columns:1fr;
+
+}
+
+.stats-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.menu-grid{
+
+grid-template-columns:repeat(3,1fr);
+
+}
+
+.action-buttons{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+@media(max-width:480px){
+
+.profile-cover{
+
+height:220px;
+
+}
+
+.avatar-ring{
+
+width:105px;
+
+height:105px;
+
+}
+
+.profile-top h2{
+
+font-size:22px;
+
+}
+
+.follow-box{
+
+gap:10px;
+
+padding:20px 15px;
+
+}
+
+.follow-item{
+
+padding:14px;
+
+}
+
+.wallet-area{
+
+padding:0 15px;
+
+}
+
+.menu-grid{
+
+padding:0 15px;
+
+gap:12px;
+
+}
+
+.menu-icon{
+
+width:54px;
+
+height:54px;
+
+}
+
+.room-card,
+.level-card,
+.vip-card,
+.noble-card,
+.profile-card,
+.agency-card{
+
+margin-left:15px;
+
+margin-right:15px;
+
+}
 
 }
 
@@ -965,8 +1595,8 @@ transform:scale(.96);
 BOTTOM SPACE
 =========================================*/
 
-.profileFooter{
+#navHost{
 
-height:100px;
+height:90px;
 
 }
