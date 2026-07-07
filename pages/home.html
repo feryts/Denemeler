@@ -1,49 +1,1182 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Ana Sayfa — EY LIVE</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>EY LIVE</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/home.css">
+
 </head>
+
 <body>
 
 <div class="page">
-  <div class="homeHeader">
-    <div class="flexCenter">
-      <div class="avatarCircle" style="width:40px;height:40px;font-size:20px" id="meAvatar"></div>
-      <div>
-        <div style="font-weight:700;font-size:14px" id="meName"></div>
-        <div class="muted" id="meCoins"></div>
-      </div>
-    </div>
-    <div class="flexCenter" style="gap:14px">
-      <a href="messages.html?tab=notif" class="topBtn" style="position:relative">🔔<span id="notifDot"></span></a>
-      <a href="wallet.html" class="topBtn">💰</a>
-    </div>
-  </div>
 
-  <input class="input" id="searchBox" placeholder="🔍 Oda, kullanıcı veya etiket ara...">
+<header class="homeHeader">
 
-  <div class="banner" id="banner"></div>
+<div class="leftHeader">
 
-  <div class="sectionTitle"><span>📋 Günlük Görevler</span></div>
-  <div class="scrollRow" id="tasksRow"></div>
+<div class="avatarBox">
 
-  <div class="sectionTitle"><span>🟢 Çevrimiçi Kullanıcılar</span></div>
-  <div class="scrollRow" id="onlineRow"></div>
+<img id="myAvatar" src="../assets/avatar/default.png">
 
-  <div class="sectionTitle"><span>🏢 Ajans Etkinlikleri</span></div>
-  <div id="agencyEvents"></div>
+<span class="onlineDot"></span>
 
-  <div class="sectionTitle">
-    <span>🔥 Popüler Odalar</span>
-  </div>
-  <div class="categoryTabs" id="catTabs"></div>
-  <div class="roomGrid" id="roomGrid"></div>
 </div>
+
+<div class="userInfo">
+
+<h3 id="myName">Kullanıcı</h3>
+
+<p>
+
+ID
+
+<span id="myId">
+
+EY100000001
+
+</span>
+
+</p>
+
+<div class="levelRow">
+
+<span class="levelBadge">
+
+LV1
+
+</span>
+
+<span class="vipBadge">
+
+VIP0
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="rightHeader">
+
+<button class="headerBtn" id="searchBtn">
+
+🔍
+
+</button>
+
+<button class="headerBtn" id="notificationBtn">
+
+🔔
+
+<span class="badge">
+
+3
+
+</span>
+
+</button>
+
+<button class="headerBtn" id="settingBtn">
+
+⚙️
+
+</button>
+
+</div>
+
+</header>
+
+<section class="banner
+  <!-- ===========================
+ONLINE KULLANICILAR
+=========================== -->
+
+<section class="onlineSection">
+
+<div class="sectionHeader">
+
+<h2>
+
+🟢 Çevrimiçi Kullanıcılar
+
+</h2>
+
+<a href="#">
+
+Tümü
+
+</a>
+
+</div>
+
+<div class="storyRow">
+
+<div class="storyCard">
+
+<div class="storyAvatar host">
+
+<img src="../assets/avatar/1.jpg">
+
+</div>
+
+<span>Ahmet</span>
+
+</div>
+
+<div class="storyCard">
+
+<div class="storyAvatar vip">
+
+<img src="../assets/avatar/2.jpg">
+
+</div>
+
+<span>Elif</span>
+
+</div>
+
+<div class="storyCard">
+
+<div class="storyAvatar">
+
+<img src="../assets/avatar/3.jpg">
+
+</div>
+
+<span>Can</span>
+
+</div>
+
+<div class="storyCard">
+
+<div class="storyAvatar">
+
+<img src="../assets/avatar/4.jpg">
+
+</div>
+
+<span>Merve</span>
+
+</div>
+
+<div class="storyCard">
+
+<div class="storyAvatar">
+
+<img src="../assets/avatar/5.jpg">
+
+</div>
+
+<span>Emre</span>
+
+</div>
+
+<div class="storyCard">
+
+<div class="storyAvatar">
+
+<img src="../assets/avatar/6.jpg">
+
+</div>
+
+<span>Ece</span>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================
+AJANS ETKİNLİKLERİ
+=========================== -->
+
+<section class="agencySection">
+
+<div class="sectionHeader">
+
+<h2>
+
+🏢 Ajans Etkinlikleri
+
+</h2>
+
+<a href="#">
+
+Detay
+
+</a>
+
+</div>
+
+<div class="agencyCard">
+
+<div class="agencyLeft">
+
+<img src="../assets/logo/agency.png">
+
+</div>
+
+<div class="agencyCenter">
+
+<h3>
+
+EY Official Agency
+
+</h3>
+
+<p>
+
+🎉 Yeni yayıncı alımları başladı.
+
+</p>
+
+</div>
+
+<div class="agencyRight">
+
+<button>
+
+Katıl
+
+</button>
+
+</div>
+
+</div>
+
+<div class="agencyCard">
+
+<div class="agencyLeft">
+
+<img src="../assets/logo/agency2.png">
+
+</div>
+
+<div class="agencyCenter">
+
+<h3>
+
+Istanbul Stars
+
+</h3>
+
+<p>
+
+🔥 Haftalık yarışma başladı.
+
+</p>
+
+</div>
+
+<div class="agencyRight">
+
+<button>
+
+Git
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================
+KATEGORİLER
+=========================== -->
+
+<section class="categorySection">
+
+<div class="categoryTabs">
+
+<button class="active">
+
+⭐ Önerilen
+
+</button>
+
+<button>
+
+🎙 Party
+
+</button>
+
+<button>
+
+🎵 Müzik
+
+</button>
+
+<button>
+
+🎮 Oyun
+
+</button>
+
+<button>
+
+🌍 Ülkeler
+
+</button>
+
+<button>
+
+❤️ Yeni
+
+</button>
+
+</div>
+
+</section>
+<!-- ===========================
+POPÜLER ODALAR
+=========================== -->
+
+<section class="roomSection">
+
+<div class="sectionHeader">
+
+<h2>
+
+🔥 Popüler Odalar
+
+</h2>
+
+<a href="#">
+
+Tümünü Gör
+
+</a>
+
+</div>
+
+<div class="roomGrid">
+
+<!-- ROOM 1 -->
+
+<div class="roomCard">
+
+<div class="liveTag">
+
+LIVE
+
+</div>
+
+<img class="roomCover" src="../assets/rooms/room1.jpg">
+
+<div class="roomOverlay">
+
+<div class="roomTop">
+
+<div class="hostAvatar">
+
+<img src="../assets/avatar/host1.jpg">
+
+</div>
+
+<div>
+
+<h3>
+
+Türkiye Lounge
+
+</h3>
+
+<p>
+
+EY Official
+
+</p>
+
+</div>
+
+</div>
+
+<div class="roomBottom">
+
+<div class="onlineCount">
+
+👥 458
+
+</div>
+
+<div class="roomLevel">
+
+LV15
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ROOM 2 -->
+
+<div class="roomCard">
+
+<div class="liveTag">
+
+LIVE
+
+</div>
+
+<img class="roomCover" src="../assets/rooms/room2.jpg">
+
+<div class="roomOverlay">
+
+<div class="roomTop">
+
+<div class="hostAvatar">
+
+<img src="../assets/avatar/host2.jpg">
+
+</div>
+
+<div>
+
+<h3>
+
+Music Night
+
+</h3>
+
+<p>
+
+Istanbul Agency
+
+</p>
+
+</div>
+
+</div>
+
+<div class="roomBottom">
+
+<div class="onlineCount">
+
+👥 316
+
+</div>
+
+<div class="roomLevel">
+
+LV10
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ROOM 3 -->
+
+<div class="roomCard">
+
+<div class="liveTag">
+
+EVENT
+
+</div>
+
+<img class="roomCover" src="../assets/rooms/room3.jpg">
+
+<div class="roomOverlay">
+
+<div class="roomTop">
+
+<div class="hostAvatar">
+
+<img src="../assets/avatar/host3.jpg">
+
+</div>
+
+<div>
+
+<h3>
+
+Love Room
+
+</h3>
+
+<p>
+
+Romance Club
+
+</p>
+
+</div>
+
+</div>
+
+<div class="roomBottom">
+
+<div class="onlineCount">
+
+👥 812
+
+</div>
+
+<div class="roomLevel">
+
+LV23
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ROOM 4 -->
+
+<div class="roomCard">
+
+<div class="liveTag">
+
+HOT
+
+</div>
+
+<img class="roomCover" src="../assets/rooms/room4.jpg">
+
+<div class="roomOverlay">
+
+<div class="roomTop">
+
+<div class="hostAvatar">
+
+<img src="../assets/avatar/host4.jpg">
+
+</div>
+
+<div>
+
+<h3>
+
+Gaming Hub
+
+</h3>
+
+<p>
+
+Game Masters
+
+</p>
+
+</div>
+
+</div>
+
+<div class="roomBottom">
+
+<div class="onlineCount">
+
+👥 265
+
+</div>
+
+<div class="roomLevel">
+
+LV18
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================
+TREND YAYINCILAR
+=========================== -->
+
+<section class="hostSection">
+
+<div class="sectionHeader">
+
+<h2>
+
+👑 Trend Yayıncılar
+
+</h2>
+
+<a href="#">
+
+Daha Fazla
+
+</a>
+
+</div>
+
+<div class="hostRow">
+
+<div class="hostCard">
+
+<img src="../assets/avatar/host1.jpg">
+
+<h4>
+
+Ahmet
+
+</h4>
+
+<span>
+
+LV18 • VIP3
+
+</span>
+
+<button>
+
+Takip Et
+
+</button>
+
+</div>
+
+<div class="hostCard">
+
+<img src="../assets/avatar/host2.jpg">
+
+<h4>
+
+Elif
+
+</h4>
+
+<span>
+
+LV20 • VIP5
+
+</span>
+
+<button>
+
+Takip Et
+
+</button>
+
+</div>
+
+<div class="hostCard">
+
+<img src="../assets/avatar/host3.jpg">
+
+<h4>
+
+Merve
+
+</h4>
+
+<span>
+
+LV16 • VIP2
+
+</span>
+
+<button>
+
+Takip Et
+
+</button>
+
+</div>
+
+<div class="hostCard">
+
+<img src="../assets/avatar/host4.jpg">
+
+<h4>
+
+Emre
+
+</h4>
+
+<span>
+
+LV25 • VIP6
+
+</span>
+
+<button>
+
+Takip Et
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+<!-- ===========================
+OYUN MERKEZİ
+=========================== -->
+
+<section class="gameSection">
+
+<div class="sectionHeader">
+
+<h2>
+
+🎮 Oyun Merkezi
+
+</h2>
+
+<a href="#">
+
+Hepsi
+
+</a>
+
+</div>
+
+<div class="gameGrid">
+
+<div class="gameCard">
+
+<div class="gameIcon">🎰</div>
+
+<h4>Slot</h4>
+
+<p>Kazanma Şansı</p>
+
+</div>
+
+<div class="gameCard">
+
+<div class="gameIcon">🎲</div>
+
+<h4>Zar</h4>
+
+<p>Arkadaşlarınla Oyna</p>
+
+</div>
+
+<div class="gameCard">
+
+<div class="gameIcon">🎡</div>
+
+<h4>Şans Çarkı</h4>
+
+<p>Günlük Ödüller</p>
+
+</div>
+
+<div class="gameCard">
+
+<div class="gameIcon">🃏</div>
+
+<h4>Kart</h4>
+
+<p>Yakında</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================
+LİDERLİK TABLOSU
+=========================== -->
+
+<section class="leaderSection">
+
+<div class="sectionHeader">
+
+<h2>
+
+🏆 Liderlik
+
+</h2>
+
+<a href="#">
+
+İlk 100
+
+</a>
+
+</div>
+
+<div class="leaderCard">
+
+<div class="rank">🥇</div>
+
+<img src="../assets/avatar/top1.jpg">
+
+<div>
+
+<h3>Ahmet</h3>
+
+<p>LV25 • VIP6</p>
+
+</div>
+
+<span>9.8M</span>
+
+</div>
+
+<div class="leaderCard">
+
+<div class="rank">🥈</div>
+
+<img src="../assets/avatar/top2.jpg">
+
+<div>
+
+<h3>Elif</h3>
+
+<p>LV22 • VIP5</p>
+
+</div>
+
+<span>8.4M</span>
+
+</div>
+
+<div class="leaderCard">
+
+<div class="rank">🥉</div>
+
+<img src="../assets/avatar/top3.jpg">
+
+<div>
+
+<h3>Merve</h3>
+
+<p>LV20 • VIP4</p>
+
+</div>
+
+<span>7.6M</span>
+
+</div>
+
+</section>
+
+<!-- ===========================
+RESMİ DUYURULAR
+=========================== -->
+
+<section class="noticeSection">
+
+<div class="sectionHeader">
+
+<h2>
+
+📢 Resmi Duyurular
+
+</h2>
+
+</div>
+
+<div class="noticeCard">
+
+<h3>
+
+🎉 Yaz Etkinliği Başladı
+
+</h3>
+
+<p>
+
+Yayın aç, görevleri tamamla ve özel ödüller kazan.
+
+</p>
+
+</div>
+
+<div class="noticeCard">
+
+<h3>
+
+🛠 Sistem Güncellemesi
+
+</h3>
+
+<p>
+
+Yeni oda efektleri ve performans iyileştirmeleri eklendi.
+
+</p>
+
+</div>
+
+</section>
+
+<!-- ===========================
+HIZLI MENÜ
+=========================== -->
+
+<section class="quickMenu">
+
+<div class="quickItem">
+
+<div class="quickIcon">
+
+🎁
+
+</div>
+
+<span>Çanta</span>
+
+</div>
+
+<div class="quickItem">
+
+<div class="quickIcon">
+
+🛒
+
+</div>
+
+<span>Mağaza</span>
+
+</div>
+
+<div class="quickItem">
+
+<div class="quickIcon">
+
+💎
+
+</div>
+
+<span>VIP</span>
+
+</div>
+
+<div class="quickItem">
+
+<div class="quickIcon">
+
+🏢
+
+</div>
+
+<span>Ajans</span>
+
+</div>
+
+<div class="quickItem">
+
+<div class="quickIcon">
+
+⚙️
+
+</div>
+
+<span>Ayarlar</span>
+
+</div>
+
+</section>
+<!-- ===========================
+ALT MENÜ
+=========================== -->
+
+<nav class="bottomNav">
+
+<a href="home.html" class="active">
+
+<div class="navIcon">🏠</div>
+
+<span>Ana Sayfa</span>
+
+</a>
+
+<a href="games.html">
+
+<div class="navIcon">🎮</div>
+
+<span>Oyunlar</span>
+
+</a>
+
+<a href="messages.html">
+
+<div class="navIcon">💬</div>
+
+<span>Mesajlar</span>
+
+<span class="notifyBadge">5</span>
+
+</a>
+
+<a href="wallet.html">
+
+<div class="navIcon">💎</div>
+
+<span>Cüzdan</span>
+
+</a>
+
+<a href="profile.html">
+
+<div class="navIcon">👤</div>
+
+<span>Profil</span>
+
+</a>
+
+</nav>
+
+<!-- ===========================
+GÜNLÜK ÖDÜL POPUP
+=========================== -->
+
+<div class="rewardPopup hidden" id="dailyReward">
+
+<div class="rewardCard">
+
+<div class="rewardIcon">
+
+🎁
+
+</div>
+
+<h2>
+
+Günlük Giriş Ödülü
+
+</h2>
+
+<p>
+
+Bugünkü giriş ödülünüz hazır.
+
+</p>
+
+<h1>
+
++100 Coin
+
+</h1>
+
+<button id="claimReward">
+
+Ödülü Al
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ===========================
+ARAMA PANELİ
+=========================== -->
+
+<div class="searchOverlay hidden" id="searchOverlay">
+
+<div class="searchPanel">
+
+<input
+type="text"
+placeholder="Oda, kullanıcı veya EY ID ara..."
+id="searchInput">
+
+<div class="recentSearch">
+
+<h3>
+
+Son Aramalar
+
+</h3>
+
+<div class="searchItem">
+
+EY100000123
+
+</div>
+
+<div class="searchItem">
+
+Türkiye Lounge
+
+</div>
+
+<div class="searchItem">
+
+Music Night
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ===========================
+BİLDİRİM PANELİ
+=========================== -->
+
+<div class="notificationPanel hidden" id="notificationPanel">
+
+<h2>
+
+🔔 Bildirimler
+
+</h2>
+
+<div class="notifyItem">
+
+🎉 Yaz Etkinliği başladı.
+
+</div>
+
+<div class="notifyItem">
+
+🎁 Günlük ödülünüz hazır.
+
+</div>
+
+<div class="notifyItem">
+
+👑 Ajans başvurunuz inceleniyor.
+
+</div>
+
+</div>
+
+<!-- ===========================
+YÜZEN BUTON
+=========================== -->
+
+<button class="floatingRoomBtn">
+
+🎙
+
+</button>
+
+<!-- ===========================
+SCRIPTLER
+=========================== -->
 
 <div id="navHost"></div>
 
@@ -51,5 +1184,7 @@
 <script src="../js/ui.js"></script>
 <script src="../js/firebase-config.js"></script>
 <script src="../js/home.js"></script>
+
 </body>
+
 </html>
