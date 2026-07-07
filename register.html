@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Kayıt Ol — EY LIVE</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+<div class="page">
+  <div id="topbarHost"></div>
+
+  <div class="stepDots" id="stepDots"></div>
+
+  <!-- STEP 1: PHONE -->
+  <div class="stepPanel" id="step1">
+    <h2>Telefon Numaranız</h2>
+    <p class="muted">SMS doğrulama kodu göndereceğiz</p>
+    <label class="fieldLabel">Telefon Numarası</label>
+    <input class="input" id="regPhone" placeholder="5xx xxx xx xx" maxlength="10">
+    <button class="btn btnPrimary btnBlock" onclick="Auth.regSendSms()">Kod Gönder</button>
+  </div>
+
+  <!-- STEP 2: SMS VERIFY (UI only, mock) -->
+  <div class="stepPanel" id="step2" style="display:none">
+    <h2>Doğrulama Kodu</h2>
+    <p class="muted">Telefonunuza gönderilen 4 haneli kodu girin <br><span class="hint">(Demo modu: herhangi bir kod çalışır — gerçek SMS Firebase bağlanınca aktif olacak)</span></p>
+    <div class="otpRow">
+      <input class="otpBox" maxlength="1" inputmode="numeric">
+      <input class="otpBox" maxlength="1" inputmode="numeric">
+      <input class="otpBox" maxlength="1" inputmode="numeric">
+      <input class="otpBox" maxlength="1" inputmode="numeric">
+    </div>
+    <button class="btn btnPrimary btnBlock" onclick="Auth.regVerifySms()">Doğrula</button>
+    <button class="btn btnGhost btnBlock" style="margin-top:10px" onclick="Auth.regSendSms(true)">Kodu Tekrar Gönder</button>
+  </div>
+
+  <!-- STEP 3: PROFILE -->
+  <div class="stepPanel" id="step3" style="display:none">
+    <h2>Profilini Oluştur</h2>
+
+    <label class="fieldLabel">Avatar Seç</label>
+    <div class="avatarPicker" id="avatarPicker"></div>
+
+    <label class="fieldLabel">Kullanıcı Adı</label>
+    <input class="input" id="regUsername" placeholder="benzersiz kullanıcı adı">
+    <p class="muted" id="usernameHint" style="margin:-8px 0 12px 4px"></p>
+
+    <label class="fieldLabel">Cinsiyet</label>
+    <div class="inputRow" style="margin-bottom:12px">
+      <button class="genderBtn" data-g="kadın">👩 Kadın</button>
+      <button class="genderBtn" data-g="erkek">👨 Erkek</button>
+      <button class="genderBtn" data-g="belirtmek istemiyorum">🙂 Diğer</button>
+    </div>
+
+    <label class="fieldLabel">Doğum Tarihi</label>
+    <input class="input" id="regBirth" type="date">
+
+    <label class="fieldLabel">Şifre</label>
+    <input class="input" id="regPass" type="password" placeholder="En az 4 karakter">
+
+    <button class="btn btnPrimary btnBlock" onclick="Auth.completeRegister()">Kayıt Ol ve Başla 🎉</button>
+  </div>
+</div>
+
+<script src="js/db.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/auth.js"></script>
+<script>Auth.initRegister();</script>
+</body>
+</html>
