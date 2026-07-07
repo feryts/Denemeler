@@ -1,315 +1,1371 @@
-/* ===========================================
-   EY LIVE — VOICE ROOM (room.js)
-=========================================== */
+/* ==========================================
+   EY LIVE
+   ROOM SYSTEM
+========================================== */
 
-const Room = (function () {
+const ROOM = {
 
-  const me = UI.requireAuth();
-  if (!me) return {};
+id: "ROOM100001",
 
-  const params = new URLSearchParams(location.search);
-  const roomId = params.get("id");
-  let room = DB.getRoom(roomId);
+name: "Türkiye Lounge",
 
-  if (!room) {
-    document.body.innerHTML = `<div class="emptyState" style="padding-top:80px">Oda bulunamadı.<br><a href="home.html" style="color:var(--primary)">Ana sayfaya dön</a></div>`;
-    return {};
-  }
+owner: "EY100000001",
 
-  function isHost() { return room.hostId === me.id; }
-  function isMod() {
-    return isHost() || (room.moderators || []).includes(me.id) || (room.admins || []).includes(me.id) || me.role === "admin";
-  }
-  function mySeat() { return room.mics.findIndex(m => m.userId === me.id); }
+host: "EY LIVE",
 
-  function refresh() {
-    room = DB.getRoom(roomId);
-    renderInfo();
-    renderMics();
-    renderHands();
-    renderChat();
-  }
+online: 286,
 
-  function renderInfo() {
-    const host = DB.getUser(room.hostId);
-    document.getElementById("roomInfo").innerHTML = `
-      <div class="rTitle">${UI.esc(room.name)} ${room.locked ? "🔒" : ""}</div>
-      <div class="rSub">Lv.${room.level} · Host: ${host ? UI.esc(host.username) : "?"} · ${room.mics.filter(m => m.userId).length}/12</div>`;
-    document.getElementById("settingsBtn").style.display = isMod() ? "flex" : "none";
-  }
+locked: false,
 
-  function seatLabel(m) {
-    if (m.locked) return { icon: "🔒", label: "Kilitli" };
-    if (!m.userId) return { icon: "➕", label: "Boş" };
-    const u = DB.getUser(m.userId);
-    return { icon: u ? u.avatar : "🙂", label: u ? u.username : "?" };
-  }
+maxMic: 16,
 
-  function roleTagFor(userId) {
-    if (userId === room.hostId) return "HOST";
-    if ((room.coHost || []).includes(userId)) return "CO-HOST";
-    if ((room.moderators || []).includes(userId)) return "MOD";
-    return "";
-  }
+};
 
-  function renderMics() {
-    document.getElementById("micGrid").innerHTML = room.mics.map((m, i) => {
-      const { icon, label } = seatLabel(m);
-      const role = m.userId ? roleTagFor(m.userId) : "";
-      const cls = ["micSeat"];
-      if (m.userId) cls.push("filled");
-      if (m.userId === room.hostId) cls.push("host");
-      if (m.locked) cls.push("locked");
-      return `
-        <div class="${cls.join(" ")}" onclick="Room.tapSeat(${i})">
-          <div class="seatCircle">
-            ${icon}
-            ${role ? `<span class="roleTag">${role}</span>` : ""}
-            ${m.locked ? `<span class="lockTag">🔒</span>` : ""}
-          </div>
-          <div class="seatLabel">${UI.esc(label)}</div>
-        </div>`;
-    }).join("");
-  }
+const currentUser = JSON.parse(
 
-  function renderHands() {
-    const hands = room.handsRaised || [];
-    document.getElementById("handRow").innerHTML = hands.map(uid => {
-      const u = DB.getUser(uid);
-      const action = isMod() ? `onclick="Room.approveHand('${uid}')"` : "";
-      return `<div class="handChip" ${action}>✋ ${u ? UI.esc(u.username) : uid}${isMod() ? " · onayla" : ""}</div>`;
-    }).join("");
-  }
+localStorage.getItem("eylive_user")
 
-  function renderChat() {
-    const box = document.getElementById("roomChat");
-    box.innerHTML = room.chat.map(m => {
-      if (m.type === "system") return `<div class="chatMsg sys">${UI.esc(m.text)}</div>`;
-      const u = DB.getUser(m.userId);
-      const cls = m.type === "gift" ? "chatMsg gift" : "chatMsg";
-      return `<div class="${cls}"><span class="who">${u ? UI.esc(u.username) : "?"}:</span>${UI.esc(m.text)}</div>`;
-    }).join("");
-    box.scrollTop = box.scrollHeight;
-  }
+);
 
-  function tapSeat(i) {
-    const m = room.mics[i];
-    if (m.userId === me.id) {
-      UI.confirm("Mikrofondan inmek istiyor musun?", () => {
-        DB.leaveMic(roomId, me.id);
-        refresh();
-      });
-      return;
+const roomUsers = [];
+
+const roomModerators = [];
+
+const roomCoHosts = [];
+
+const roomBanList = [];
+
+const micSeats = [];
+
+for(let i=1;i<=ROOM.maxMic;i++){
+
+micSeats.push({
+
+seat:i,
+
+user:null,
+
+locked:false,
+
+mute:false
+
+});
+
+}
+
+/* ===========================
+ROOM LOAD
+=========================== */
+
+window.onload=()=>{
+
+loadRoom();
+
+loadSeats();
+
+loadOnline();
+
+};
+
+/* ===========================
+ROOM INFO
+=========================== */
+
+function loadRoom(){
+
+document.getElementById("roomName").innerHTML=
+
+ROOM.name;
+
+document.getElementById("roomId").innerHTML=
+
+ROOM.id;
+
+document.getElementById("onlineCount").innerHTML=
+
+ROOM.online;
+
+document.getElementById("hostName").innerHTML=
+
+ROOM.host;
+
+}
+
+/* ===========================
+MIC LOAD
+=========================== */
+
+function loadSeats(){
+
+document
+
+.querySelectorAll(".micSeat")
+
+.forEach((seat,index)=>{
+
+seat.dataset.seat=index+1;
+
+seat.onclick=()=>{
+
+openSeat(index+1);
+
+};
+
+});
+
+}
+
+/* ===========================
+CLICK SEAT
+=========================== */
+
+function openSeat(seat){
+
+if(isOwner()){
+
+openOwnerSeatMenu(seat);
+
+return;
+
+}
+
+if(isModerator()){
+
+openModeratorSeatMenu(seat);
+
+return;
+
+}
+
+requestMic(seat);
+
+}
+/* ===========================
+PERMISSION SYSTEM
+=========================== */
+
+function isOwner(){
+
+    if(!currentUser) return false;
+
+    return currentUser.id===ROOM.owner;
+
+}
+
+function isModerator(){
+
+    if(!currentUser) return false;
+
+    return roomModerators.includes(currentUser.id);
+
+}
+
+function isCoHost(){
+
+    if(!currentUser) return false;
+
+    return roomCoHosts.includes(currentUser.id);
+
+}
+
+/* ===========================
+OWNER MENU
+=========================== */
+
+function openOwnerSeatMenu(seat){
+
+    const action=prompt(
+
+`Koltuk ${seat}
+
+1 Mikrofon Aç
+
+2 Mikrofon Kapat
+
+3 Kilitle
+
+4 Kilidi Aç
+
+5 Kullanıcı Al
+
+6 Kullanıcı İndir`
+
+    );
+
+    switch(action){
+
+        case "1":
+
+            micSeats[seat-1].mute=false;
+
+            toast("🎤 Mikrofon açıldı");
+
+        break;
+
+        case "2":
+
+            micSeats[seat-1].mute=true;
+
+            toast("🔇 Mikrofon kapatıldı");
+
+        break;
+
+        case "3":
+
+            micSeats[seat-1].locked=true;
+
+            toast("🔒 Mikrofon kilitlendi");
+
+        break;
+
+        case "4":
+
+            micSeats[seat-1].locked=false;
+
+            toast("🔓 Mikrofon açıldı");
+
+        break;
+
+        case "5":
+
+            inviteUserToSeat(seat);
+
+        break;
+
+        case "6":
+
+            removeSeatUser(seat);
+
+        break;
+
     }
-    if (m.userId) {
-      if (isMod()) openSeatManage(i, m);
-      else UI.toast("Bu koltuk dolu");
-      return;
+
+}
+
+/* ===========================
+MODERATOR MENU
+=========================== */
+
+function openModeratorSeatMenu(seat){
+
+    const action=prompt(
+
+`Koltuk ${seat}
+
+1 Mikrofon Aç
+
+2 Mikrofon Kapat
+
+3 Kullanıcı İndir`
+
+    );
+
+    switch(action){
+
+        case "1":
+
+            micSeats[seat-1].mute=false;
+
+            toast("🎤 Mikrofon açıldı");
+
+        break;
+
+        case "2":
+
+            micSeats[seat-1].mute=true;
+
+            toast("🔇 Mikrofon kapandı");
+
+        break;
+
+        case "3":
+
+            removeSeatUser(seat);
+
+        break;
+
     }
-    if (m.locked) {
-      if (isMod()) {
-        UI.confirm("Bu mikrofonun kilidini açmak ister misin?", () => { DB.toggleMicLock(roomId, i); refresh(); });
-      } else {
-        UI.toast("Bu mikrofon kilitli 🔒", "error");
-      }
-      return;
+
+}
+
+/* ===========================
+REQUEST MIC
+=========================== */
+
+function requestMic(seat){
+
+    if(micSeats[seat-1].locked){
+
+        toast("🔒 Mikrofon kilitli");
+
+        return;
+
     }
-    const res = DB.sitOnMic(roomId, i, me.id);
-    if (!res.ok) UI.toast(res.msg, "error");
-    else { UI.toast("Mikrofona oturdun 🎤", "success"); refresh(); }
-  }
 
-  function openSeatManage(i, m) {
-    const u = DB.getUser(m.userId);
-    if (!u) return;
-    const wrap = document.createElement("div");
-    wrap.className = "modalOverlay";
-    wrap.innerHTML = `
-      <div class="modalBox">
-        <div class="flexCenter" style="margin-bottom:14px">
-          <div class="avatarCircle" style="width:44px;height:44px;font-size:22px">${u.avatar}</div>
-          <div><b>${UI.esc(u.username)}</b><div class="muted">Koltuk ${i + 1}</div></div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <button class="btn btnGhost" id="mkCoHost">🎙️ Co-Host Yap</button>
-          <button class="btn btnGhost" id="mkMod">🛡️ Moderatör Yap</button>
-          <button class="btn btnGhost" id="mkMute">🔇 ${m.muted ? "Sesi Aç" : "Sustur"}</button>
-          <button class="btn btnGhost" id="mkKick">⬇️ Mikrofondan Düşür</button>
-          <button class="btn btnGhost" id="mkLock">🔒 Koltuğu Kilitle</button>
-          <button class="btn btnDanger" id="mkClose">Kapat</button>
-        </div>
-      </div>`;
-    document.body.appendChild(wrap);
-    wrap.querySelector("#mkCoHost").onclick = () => { DB.setRoomRole(roomId, u.id, "cohost"); UI.toast("Co-Host yapıldı", "success"); wrap.remove(); refresh(); };
-    wrap.querySelector("#mkMod").onclick = () => { DB.setRoomRole(roomId, u.id, "moderator"); UI.toast("Moderatör yapıldı", "success"); wrap.remove(); refresh(); };
-    wrap.querySelector("#mkMute").onclick = () => { m.muted = !m.muted; DB.save(); wrap.remove(); refresh(); };
-    wrap.querySelector("#mkKick").onclick = () => { DB.leaveMic(roomId, u.id); UI.toast("Mikrofondan düşürüldü"); wrap.remove(); refresh(); };
-    wrap.querySelector("#mkLock").onclick = () => { DB.toggleMicLock(roomId, i); wrap.remove(); refresh(); };
-    wrap.querySelector("#mkClose").onclick = () => wrap.remove();
-  }
+    toast("✋ Mikrofon isteği gönderildi");
 
-  function toggleHand() {
-    const seat = mySeat();
-    if (seat >= 0) { UI.toast("Zaten mikrofondasın"); return; }
-    const hands = room.handsRaised || [];
-    if (hands.includes(me.id)) {
-      DB.lowerHand(roomId, me.id);
-      UI.toast("El indirildi");
-    } else {
-      DB.raiseHand(roomId, me.id);
-      UI.toast("El kaldırıldı ✋", "success");
+}
+
+/* ===========================
+INVITE USER
+=========================== */
+
+function inviteUserToSeat(seat){
+
+    toast("👤 Kullanıcı davet edildi");
+
+}
+
+/* ===========================
+REMOVE USER
+=========================== */
+
+function removeSeatUser(seat){
+
+    micSeats[seat-1].user=null;
+
+    toast("⬇ Kullanıcı mikrofondan indirildi");
+
+}
+
+/* ===========================
+TOAST
+=========================== */
+
+function toast(text){
+
+    let div=document.createElement("div");
+
+    div.className="toast";
+
+    div.innerHTML=text;
+
+    document.body.appendChild(div);
+
+    setTimeout(()=>{
+
+        div.classList.add("show");
+
+    },50);
+
+    setTimeout(()=>{
+
+        div.remove();
+
+    },2500);
+
+}
+/* ==========================================
+   EY LIVE
+   ROOM MANAGEMENT
+========================================== */
+
+/* ===========================
+MIC REQUEST QUEUE
+=========================== */
+
+const micRequests = [];
+
+function sendMicRequest() {
+
+    if (!currentUser) return;
+
+    if (micRequests.find(x => x.id === currentUser.id)) {
+
+        toast("✋ Zaten isteğiniz bekliyor.");
+
+        return;
+
     }
-    refresh();
-    document.getElementById("handBtn").classList.toggle("raised", (DB.getRoom(roomId).handsRaised || []).includes(me.id));
-  }
 
-  function approveHand(uid) {
-    const free = room.mics.findIndex(m => !m.userId && !m.locked);
-    if (free < 0) { UI.toast("Boş mikrofon yok", "error"); return; }
-    DB.sitOnMic(roomId, free, uid);
-    UI.toast("Kullanıcı mikrofona alındı", "success");
-    refresh();
-  }
+    micRequests.push({
 
-  function sendChat() {
-    const input = document.getElementById("chatInput");
-    const text = input.value.trim();
-    if (!text) return;
-    DB.sendRoomMessage(roomId, me.id, text);
-    input.value = "";
-    refresh();
-  }
+        id: currentUser.id,
 
-  function openEmoji() {
-    const emojis = ["😂","❤️","🔥","👏","😍","🎉","😢","😮","👍","🙏","💯","😅","🥳","😴","🤔","😡","🎶","✨","👑","💎","🚀","🎁","💪","🤝"];
-    const sheet = openSheet(`
-      <div class="sectionTitle"><span>Emoji Gönder</span></div>
-      <div class="emojiGrid">${emojis.map(e => `<button onclick="Room.sendEmoji('${e}')">${e}</button>`).join("")}</div>
-    `);
-  }
+        username: currentUser.username,
 
-  function sendEmoji(e) {
-    DB.sendRoomMessage(roomId, me.id, e, "emoji");
-    closeSheet();
-    refresh();
-  }
+        avatar: currentUser.avatar,
 
-  function openGifts() {
-    const gifts = DB.allGifts();
-    const seated = room.mics.filter(m => m.userId).map(m => DB.getUser(m.userId));
-    openSheet(`
-      <div class="sectionTitle"><span>🎁 Hediye Gönder</span></div>
-      <p class="muted" style="margin-bottom:10px">Bakiyen: 💰 ${me.coin}</p>
-      <div class="giftGrid" id="giftGrid">
-        ${gifts.map(g => `<div class="giftItem" data-g="${g.id}" onclick="Room.pickGift('${g.id}')">
-          <div class="gIcon">${g.icon}</div><div class="gName">${g.name}</div><div class="gPrice">💰${g.price}</div>
-        </div>`).join("")}
-      </div>
-      <div class="sectionTitle" style="margin-top:16px"><span>Alıcı Seç</span></div>
-      <div class="scrollRow" id="giftTargets">
-        ${seated.length ? seated.map(u => `<div class="pill" data-u="${u.id}" onclick="Room.pickTarget('${u.id}')">${u.avatar} ${UI.esc(u.username)}</div>`).join("") : `<span class="muted">Mikrofonda kimse yok</span>`}
-      </div>
-      <button class="btn btnPrimary btnBlock" style="margin-top:16px" onclick="Room.confirmGift()">Gönder</button>
-    `);
-  }
+        time: Date.now()
 
-  let _giftSel = null, _targetSel = null;
-  function pickGift(id) {
-    _giftSel = id;
-    document.querySelectorAll("#giftGrid .giftItem").forEach(el => el.classList.toggle("selected", el.dataset.g === id));
-  }
-  function pickTarget(id) {
-    _targetSel = id;
-    document.querySelectorAll("#giftTargets .pill").forEach(el => el.classList.toggle("active", el.dataset.u === id));
-  }
-  function confirmGift() {
-    if (!_giftSel || !_targetSel) { UI.toast("Hediye ve alıcı seç", "error"); return; }
-    const res = DB.sendGift(me.id, _targetSel, _giftSel, roomId);
-    if (!res.ok) { UI.toast(res.msg, "error"); return; }
-    UI.toast("Hediye gönderildi! 🎁", "success");
-    closeSheet();
-    refresh();
-  }
+    });
 
-  function openRules() {
-    const editable = isMod();
-    openSheet(`
-      <div class="sectionTitle"><span>📜 Oda Kuralları</span></div>
-      <textarea class="input" id="rulesArea" rows="6" ${editable ? "" : "readonly"} style="resize:vertical">${UI.esc(room.rules || "")}</textarea>
-      ${editable ? `<button class="btn btnPrimary btnBlock" onclick="Room.saveRules()">Kaydet</button>` : ""}
-    `);
-  }
-  function saveRules() {
-    const text = document.getElementById("rulesArea").value;
-    DB.updateRoom(roomId, { rules: text });
-    UI.toast("Kurallar güncellendi", "success");
-    closeSheet();
-    refresh();
-  }
+    toast("✅ Mikrofon isteği gönderildi");
 
-  function openManage() {
-    if (!isMod()) return;
-    openSheet(`
-      <div class="sectionTitle"><span>⚙️ Oda Yönetimi</span></div>
-      <div class="manageRow"><span>Oda Seviyesi</span><b>Lv.${room.level}</b></div>
-      <div class="manageRow"><span>Oda Kilidi</span>
-        <button class="btn btnGhost btnSm" onclick="Room.toggleRoomLock()">${room.locked ? "🔓 Kilidi Aç" : "🔒 Kilitle"}</button>
-      </div>
-      <div class="manageRow"><span>Yöneticiler</span>
-        <span class="muted">${(room.admins || []).map(id => DB.getUser(id)?.username).filter(Boolean).join(", ") || "yok"}</span>
-      </div>
-      <div class="sectionTitle" style="margin-top:14px"><span>Oda Adını Değiştir</span></div>
-      <input class="input" id="renameRoom" value="${UI.esc(room.name)}">
-      <button class="btn btnPrimary btnBlock" onclick="Room.renameRoom()">Kaydet</button>
-    `);
-  }
-  function toggleRoomLock() {
-    DB.updateRoom(roomId, { locked: !room.locked });
-    UI.toast("Oda durumu güncellendi", "success");
-    closeSheet();
-    refresh();
-  }
-  function renameRoom() {
-    const v = document.getElementById("renameRoom").value.trim();
-    if (!v) return;
-    DB.updateRoom(roomId, { name: v });
-    UI.toast("Oda adı güncellendi", "success");
-    closeSheet();
-    refresh();
-  }
+}
 
-  function openSheet(html) {
-    closeSheet();
-    const overlay = document.createElement("div");
-    overlay.className = "modalOverlay";
-    overlay.id = "roomSheetOverlay";
-    overlay.innerHTML = `<div class="sheetBox">${html}</div>`;
-    overlay.onclick = (e) => { if (e.target === overlay) closeSheet(); };
-    document.body.appendChild(overlay);
-    return overlay;
-  }
-  function closeSheet() {
-    const el = document.getElementById("roomSheetOverlay");
-    if (el) el.remove();
-  }
+/* ===========================
+OWNER ACCEPT
+=========================== */
 
-  function leave() {
-    DB.leaveMic(roomId, me.id);
-    DB.lowerHand(roomId, me.id);
+function acceptMicRequest(userId, seatNo){
+
+    const request = micRequests.find(x=>x.id===userId);
+
+    if(!request){
+
+        toast("İstek bulunamadı");
+
+        return;
+
+    }
+
+    micSeats[seatNo-1].user=request;
+
+    micRequests.splice(
+
+        micRequests.indexOf(request),
+
+        1
+
+    );
+
+    renderSeats();
+
+    toast("🎤 Kullanıcı mikrofona alındı");
+
+}
+
+/* ===========================
+REJECT REQUEST
+=========================== */
+
+function rejectMicRequest(userId){
+
+    const request=micRequests.find(
+
+        x=>x.id===userId
+
+    );
+
+    if(!request) return;
+
+    micRequests.splice(
+
+        micRequests.indexOf(request),
+
+        1
+
+    );
+
+    toast("❌ Mikrofon isteği reddedildi");
+
+}
+
+/* ===========================
+RENDER SEATS
+=========================== */
+
+function renderSeats(){
+
+    document
+
+    .querySelectorAll(".micSeat")
+
+    .forEach((seat,index)=>{
+
+        const mic=micSeats[index];
+
+        const img=seat.querySelector("img");
+
+        const text=seat.querySelector("span");
+
+        if(mic.user){
+
+            img.src=mic.user.avatar;
+
+            text.innerHTML=mic.user.username;
+
+        }else{
+
+            img.src="../assets/avatar/default.png";
+
+            text.innerHTML=index+1;
+
+        }
+
+        if(mic.locked){
+
+            seat.classList.add("locked");
+
+        }else{
+
+            seat.classList.remove("locked");
+
+        }
+
+        if(mic.mute){
+
+            seat.classList.add("muted");
+
+        }else{
+
+            seat.classList.remove("muted");
+
+        }
+
+    });
+
+}
+
+/* ===========================
+SPEAKING EFFECT
+=========================== */
+
+function speakingStart(seatNo){
+
+    const seat=document
+
+    .querySelectorAll(".micSeat")[seatNo-1];
+
+    if(!seat) return;
+
+    seat.classList.add("speaking");
+
+}
+
+function speakingStop(seatNo){
+
+    const seat=document
+
+    .querySelectorAll(".micSeat")[seatNo-1];
+
+    if(!seat) return;
+
+    seat.classList.remove("speaking");
+
+}
+
+/* ===========================
+ROOM LOG
+=========================== */
+
+const roomLogs=[];
+
+function addRoomLog(action,user){
+
+    roomLogs.unshift({
+
+        action,
+
+        user,
+
+        time:new Date()
+
+            .toLocaleTimeString()
+
+    });
+
+}
+
+/* ===========================
+ADD MODERATOR
+=========================== */
+
+function addModerator(userId){
+
+    if(roomModerators.includes(userId))
+
+        return;
+
+    roomModerators.push(userId);
+
+    addRoomLog(
+
+        "Moderator Added",
+
+        userId
+
+    );
+
+    toast("🛡 Moderatör eklendi");
+
+}
+
+/* ===========================
+REMOVE MODERATOR
+=========================== */
+
+function removeModerator(userId){
+
+    const index=
+
+    roomModerators.indexOf(userId);
+
+    if(index===-1) return;
+
+    roomModerators.splice(index,1);
+
+    addRoomLog(
+
+        "Moderator Removed",
+
+        userId
+
+    );
+
+    toast("🗑 Moderatör kaldırıldı");
+
+}
+
+/* ===========================
+ADD COHOST
+=========================== */
+
+function addCoHost(userId){
+
+    if(roomCoHosts.includes(userId))
+
+        return;
+
+    roomCoHosts.push(userId);
+
+    addRoomLog(
+
+        "CoHost Added",
+
+        userId
+
+    );
+
+    toast("⭐ Co-Host atandı");
+
+}
+
+/* ===========================
+REMOVE COHOST
+=========================== */
+
+function removeCoHost(userId){
+
+    const index=
+
+    roomCoHosts.indexOf(userId);
+
+    if(index===-1) return;
+
+    roomCoHosts.splice(index,1);
+
+    addRoomLog(
+
+        "CoHost Removed",
+
+        userId
+
+    );
+
+    toast("⭐ Co-Host kaldırıldı");
+
+}
+/* ==========================================
+   EY LIVE
+   ROOM SECURITY
+========================================== */
+
+/* ===========================
+BAN SYSTEM
+=========================== */
+
+const roomBans=[];
+
+function banUser(userId,reason=""){
+
+    if(roomBans.find(x=>x.id===userId)){
+
+        toast("Kullanıcı zaten yasaklı");
+
+        return;
+
+    }
+
+    roomBans.push({
+
+        id:userId,
+
+        reason:reason,
+
+        date:Date.now(),
+
+        by:currentUser.id
+
+    });
+
+    addRoomLog("Ban",userId);
+
+    toast("🚫 Kullanıcı yasaklandı");
+
+}
+
+/* ===========================
+UNBAN
+=========================== */
+
+function unbanUser(userId){
+
+    const index=roomBans.findIndex(
+
+        x=>x.id===userId
+
+    );
+
+    if(index==-1) return;
+
+    roomBans.splice(index,1);
+
+    addRoomLog("Unban",userId);
+
+    toast("✅ Yasak kaldırıldı");
+
+}
+
+/* ===========================
+KICK USER
+=========================== */
+
+function kickUser(userId){
+
+    const index=roomUsers.findIndex(
+
+        x=>x.id===userId
+
+    );
+
+    if(index==-1) return;
+
+    roomUsers.splice(index,1);
+
+    addRoomLog("Kick",userId);
+
+    toast("👢 Kullanıcı odadan çıkarıldı");
+
+}
+
+/* ===========================
+MUTE CHAT
+=========================== */
+
+const mutedUsers=[];
+
+function muteUser(userId){
+
+    if(mutedUsers.includes(userId))
+
+        return;
+
+    mutedUsers.push(userId);
+
+    addRoomLog("Mute",userId);
+
+    toast("🔇 Sohbet susturuldu");
+
+}
+
+function unmuteUser(userId){
+
+    const index=
+
+    mutedUsers.indexOf(userId);
+
+    if(index==-1) return;
+
+    mutedUsers.splice(index,1);
+
+    addRoomLog("Unmute",userId);
+
+    toast("🔊 Sohbet açıldı");
+
+}
+
+/* ===========================
+ROOM ANNOUNCEMENT
+=========================== */
+
+let roomNotice="";
+
+function setRoomNotice(text){
+
+    roomNotice=text;
+
+    document.getElementById(
+
+        "roomNotice"
+
+    ).innerHTML=text;
+
+    addRoomLog(
+
+        "Announcement",
+
+        currentUser.id
+
+    );
+
+}
+
+/* ===========================
+ROOM SETTINGS
+=========================== */
+
+function updateRoom(data){
+
+    ROOM.name=data.name;
+
+    ROOM.locked=data.locked;
+
+    ROOM.maxMic=data.maxMic;
+
+    document.getElementById(
+
+        "roomName"
+
+    ).innerHTML=ROOM.name;
+
+    addRoomLog(
+
+        "Room Updated",
+
+        currentUser.id
+
+    );
+
+    toast("💾 Oda ayarları kaydedildi");
+
+}
+
+/* ===========================
+OWNER CHECK
+=========================== */
+
+function checkPermission(permission){
+
+    if(isOwner())
+
+        return true;
+
+    if(permission==="moderate"
+
+        && isModerator())
+
+        return true;
+
+    if(permission==="cohost"
+
+        && isCoHost())
+
+        return true;
+
+    toast("⛔ Yetkiniz yok");
+
+    return false;
+
+}
+
+/* ===========================
+SAVE ROOM
+=========================== */
+
+function saveRoom(){
+
+    localStorage.setItem(
+
+        "eylive_room_"+ROOM.id,
+
+        JSON.stringify({
+
+            room:ROOM,
+
+            seats:micSeats,
+
+            moderators:roomModerators,
+
+            cohosts:roomCoHosts,
+
+            bans:roomBans,
+
+            logs:roomLogs
+
+        })
+
+    );
+
+}
+
+/* ===========================
+LOAD ROOM
+=========================== */
+
+function loadRoomData(){
+
+    const data=localStorage.getItem(
+
+        "eylive_room_"+ROOM.id
+
+    );
+
+    if(!data) return;
+
+    const room=
+
+    JSON.parse(data);
+
+    Object.assign(ROOM,room.room);
+
+}
+/* ==========================================
+   EY LIVE
+   REALTIME ROOM ENGINE
+========================================== */
+
+/* ===========================
+ROOM STATE
+=========================== */
+
+const roomState={
+
+playingMusic:false,
+
+gameRunning:false,
+
+giftQueue:[],
+
+joinQueue:[],
+
+speakingUsers:[],
+
+};
+
+/* ===========================
+USER JOIN
+=========================== */
+
+function joinRoom(user){
+
+    if(roomUsers.find(x=>x.id===user.id))
+
+        return;
+
+    roomUsers.push(user);
+
+    ROOM.online=roomUsers.length;
+
+    updateOnline();
+
+    roomState.joinQueue.push(user);
+
+    playJoinAnimation(user);
+
+    addRoomLog("Join",user.id);
+
+}
+
+/* ===========================
+USER LEAVE
+=========================== */
+
+function leaveRoom(userId){
+
+    const index=roomUsers.findIndex(
+
+        x=>x.id===userId
+
+    );
+
+    if(index==-1)
+
+        return;
+
+    roomUsers.splice(index,1);
+
+    ROOM.online=roomUsers.length;
+
+    updateOnline();
+
+    addRoomLog("Leave",userId);
+
+}
+
+/* ===========================
+ONLINE
+=========================== */
+
+function updateOnline(){
+
+    const online=document.getElementById(
+
+        "onlineCount"
+
+    );
+
+    if(online)
+
+        online.innerHTML=ROOM.online;
+
+}
+
+/* ===========================
+JOIN EFFECT
+=========================== */
+
+function playJoinAnimation(user){
+
+    toast(
+
+        "🎉 "+user.username+
+
+        " odaya katıldı"
+
+    );
+
+}
+
+/* ===========================
+GIFT SYSTEM
+=========================== */
+
+function sendGift(gift){
+
+    roomState.giftQueue.push(gift);
+
+    playGift(gift);
+
+}
+
+function playGift(gift){
+
+    toast(
+
+        "🎁 "+gift.name+
+
+        " gönderildi"
+
+    );
+
+}
+
+/* ===========================
+VOICE EFFECT
+=========================== */
+
+function voiceLevel(
+
+seat,
+
+level
+
+){
+
+    const seats=document
+
+    .querySelectorAll(".micSeat");
+
+    if(!seats[seat-1])
+
+        return;
+
+    seats[seat-1]
+
+    .style.boxShadow=
+
+`0 0 ${level}px #7B2EFF`;
+
+}
+
+/* ===========================
+START TALK
+=========================== */
+
+function startTalking(seat){
+
+    speakingStart(seat);
+
+    roomState.speakingUsers.push(seat);
+
+}
+
+/* ===========================
+STOP TALK
+=========================== */
+
+function stopTalking(seat){
+
+    speakingStop(seat);
+
+    roomState.speakingUsers=
+
+    roomState.speakingUsers
+
+    .filter(x=>x!=seat);
+
+}
+
+/* ===========================
+EMOJI
+=========================== */
+
+function sendEmoji(icon){
+
+    toast(icon);
+
+}
+
+/* ===========================
+CHAT
+=========================== */
+
+function sendChat(text){
+
+    if(!text)
+
+        return;
+
+    const box=document
+
+    .getElementById(
+
+        "chatMessages"
+
+    );
+
+    const div=document
+
+    .createElement("div");
+
+    div.className="chatItem";
+
+    div.innerHTML=
+
+    `
+
+    <img src="${currentUser.avatar}">
+
+    <div>
+
+    <b>${currentUser.username}</b>
+
+    <p>${text}</p>
+
+    </div>
+
+    `;
+
+    box.appendChild(div);
+
+    box.scrollTop=
+
+    box.scrollHeight;
+
+}
+
+/* ===========================
+MESSAGE
+=========================== */
+
+document
+
+.getElementById(
+
+"sendMessage"
+
+)
+
+.onclick=()=>{
+
+const input=document
+
+.getElementById(
+
+"roomMessage"
+
+);
+
+sendChat(
+
+input.value
+
+);
+
+input.value="";
+
+};
+/* ==========================================
+   EY LIVE
+   ROOM ENGINE FINAL
+========================================== */
+
+/* ===========================
+SYNC ENGINE
+=========================== */
+
+let roomSyncTimer = null;
+
+function startRoomSync() {
+
+    if (roomSyncTimer) return;
+
+    roomSyncTimer = setInterval(() => {
+
+        syncRoom();
+
+    }, 2000);
+
+}
+
+function stopRoomSync() {
+
+    clearInterval(roomSyncTimer);
+
+    roomSyncTimer = null;
+
+}
+
+function syncRoom() {
+
+    saveRoom();
+
+}
+
+/* ===========================
+ROOM TIMER
+=========================== */
+
+let roomSeconds = 0;
+
+setInterval(() => {
+
+    roomSeconds++;
+
+    const h = Math.floor(roomSeconds / 3600);
+    const m = Math.floor((roomSeconds % 3600) / 60);
+
+    const t = document.getElementById("roomTime");
+
+    if (t) {
+
+        t.innerHTML =
+            String(h).padStart(2, "0") +
+            ":" +
+            String(m).padStart(2, "0");
+
+    }
+
+}, 1000);
+
+/* ===========================
+OWNER TRANSFER
+=========================== */
+
+function transferRoom(newOwnerId) {
+
+    if (!isOwner()) {
+
+        toast("Yetkiniz yok");
+
+        return;
+
+    }
+
+    ROOM.owner = newOwnerId;
+
+    addRoomLog("Owner Changed", newOwnerId);
+
+    toast("👑 Oda sahibi değiştirildi");
+
+}
+
+/* ===========================
+ROOM CLOSE
+=========================== */
+
+function closeRoom() {
+
+    if (!isOwner()) {
+
+        toast("Sadece oda sahibi kapatabilir");
+
+        return;
+
+    }
+
+    stopRoomSync();
+
+    localStorage.removeItem(
+        "eylive_room_" + ROOM.id
+    );
+
     window.location.href = "home.html";
-  }
 
-  document.getElementById("chatInput").addEventListener("keydown", (e) => {
-    if (e.key === "Enter") sendChat();
-  });
+}
 
-  refresh();
-  setInterval(refresh, 4000);
+/* ===========================
+MIC LOCK ALL
+=========================== */
 
-  return {
-    tapSeat, toggleHand, approveHand, sendChat, openEmoji, sendEmoji,
-    openGifts, pickGift, pickTarget, confirmGift, openRules, saveRules,
-    openManage, toggleRoomLock, renameRoom, leave
-  };
+function lockAllMics() {
 
-})();
+    micSeats.forEach(m => {
+
+        m.locked = true;
+
+    });
+
+    renderSeats();
+
+    toast("🔒 Tüm mikrofonlar kilitlendi");
+
+}
+
+function unlockAllMics() {
+
+    micSeats.forEach(m => {
+
+        m.locked = false;
+
+    });
+
+    renderSeats();
+
+    toast("🔓 Mikrofonlar açıldı");
+
+}
+
+/* ===========================
+ROOM MUSIC
+=========================== */
+
+function playMusic() {
+
+    roomState.playingMusic = true;
+
+    toast("🎵 Oda müziği başladı");
+
+}
+
+function stopMusic() {
+
+    roomState.playingMusic = false;
+
+    toast("⏹ Müzik durduruldu");
+
+}
+
+/* ===========================
+AUTO SAVE
+=========================== */
+
+window.addEventListener("beforeunload", () => {
+
+    saveRoom();
+
+});
+
+/* ===========================
+START
+=========================== */
+
+startRoomSync();
+
+renderSeats();
+
+updateOnline();
+
+console.log("EY LIVE ROOM ENGINE READY");
