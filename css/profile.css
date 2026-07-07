@@ -1,0 +1,23 @@
+.coverBox {
+  height: 130px; border-radius: var(--radius); background: linear-gradient(120deg, var(--primary), var(--secondary));
+  position: relative; margin-bottom: 46px;
+}
+.profileAvatarWrap {
+  position: absolute; bottom: -36px; left: 20px;
+}
+.profileAvatarWrap .avatarCircle { width: 84px; height: 84px; font-size: 40px; border: 4px solid var(--bg); }
+.editCoverBtn { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,.35); border-radius: 10px; padding: 6px 10px; font-size: 12px; }
+
+.pName { font-size: 19px; font-weight: 800; display: flex; align-items: center; gap: 6px; }
+.pIdRow { display: flex; align-items: center; gap: 6px; color: var(--text2); font-size: 12px; margin: 4px 0 10px; }
+.pIdRow button { font-size: 11px; background: rgba(255,255,255,.08); padding: 2px 8px; border-radius: 8px; }
+
+.statsRow { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; margin: 16px 0; }
+.statBox { text-align: center; background: rgba(255,255,255,.05); border-radius: 14px; padding: 10px 4px; }
+.statBox .v { font-weight: 800; font-size: 15px; }
+.statBox .l { font-size: 10px; color: var(--text2); }
+
+.infoRow { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.06); font-size: 13px; }
+.infoRow:last-child { border-bottom: none; }
+
+.aboutBox { font-size: 13px; color: var(--text2); line-height: 1.6; margin: 6px 0 4px; }

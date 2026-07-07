@@ -1,0 +1,25 @@
+.balanceCard {
+  background: linear-gradient(120deg, var(--primary), var(--secondary)); border-radius: var(--radius);
+  padding: 20px; margin-bottom: 16px; display: flex; justify-content: space-between;
+}
+.balanceCard .bItem .v { font-size: 22px; font-weight: 800; }
+.balanceCard .bItem .l { font-size: 11px; opacity: .85; }
+
+.pkgGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 6px; }
+.pkgCard { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: 16px; padding: 14px; text-align: center; }
+.pkgCard .pCoin { font-weight: 800; font-size: 16px; }
+.pkgCard .pPrice { font-size: 12px; color: var(--text2); margin: 4px 0 10px; }
+
+.vipGrid { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px; }
+.vipCard { min-width: 130px; background: rgba(255,255,255,.05); border-radius: 16px; padding: 14px; flex-shrink: 0; }
+.vipCard .vName { font-weight: 700; font-size: 13px; margin-bottom: 6px; }
+.vipCard .vPerk { font-size: 10px; color: var(--text2); }
+.vipCard.current { border: 1px solid var(--secondary); }
+
+.txRow { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.06); font-size: 12.5px; }
+.txRow .tNote { max-width: 200px; }
+.txRow .tAmt.pos { color: var(--success); }
+.txRow .tAmt.neg { color: var(--danger); }
+.txRow .tTime { font-size: 10px; color: var(--text2); }
+
+.walletTabs { display: flex; gap: 8px; margin: 16px 0 10px; overflow-x: auto; }

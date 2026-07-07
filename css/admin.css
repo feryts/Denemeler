@@ -1,0 +1,15 @@
+.adminTabs { display: flex; gap: 6px; overflow-x: auto; margin-bottom: 14px; }
+.adminTabs::-webkit-scrollbar { display: none; }
+
+.statsGridAdmin { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+.statsGridAdmin .statCard { background: rgba(255,255,255,.05); border-radius: 14px; padding: 14px; text-align: center; }
+.statsGridAdmin .v { font-size: 18px; font-weight: 800; }
+.statsGridAdmin .l { font-size: 11px; color: var(--text2); }
+
+.adminUserRow { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+.adminUserRow .name { font-weight: 700; font-size: 13px; }
+.adminUserRow .meta { font-size: 11px; color: var(--text2); }
+.adminUserRow .actions { display: flex; gap: 6px; margin-left: auto; }
+
+.logRow { font-size: 12px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+.logRow .lMeta { color: var(--text2); font-size: 10px; margin-top: 2px; }

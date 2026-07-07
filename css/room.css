@@ -1,0 +1,48 @@
+body { padding-bottom: 0; }
+.roomWrap { display: flex; flex-direction: column; height: 100vh; padding: 14px; }
+
+.roomTop { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.roomInfo { flex: 1; text-align: center; }
+.roomInfo .rTitle { font-weight: 700; font-size: 14px; }
+.roomInfo .rSub { font-size: 11px; color: var(--text2); }
+
+.micGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 10px; }
+.micSeat { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.micSeat .seatCircle {
+  width: 54px; height: 54px; border-radius: 50%; background: rgba(255,255,255,.05);
+  border: 2px dashed rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center;
+  font-size: 22px; position: relative;
+}
+.micSeat.filled .seatCircle { border: 2px solid var(--primary); background: rgba(123,46,255,.15); }
+.micSeat.host .seatCircle { border-color: var(--secondary); box-shadow: 0 0 16px rgba(255,46,158,.5); }
+.micSeat.locked .seatCircle { border-color: var(--danger); opacity: .5; }
+.micSeat .seatLabel { font-size: 10px; color: var(--text2); max-width: 60px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.micSeat .roleTag { position: absolute; bottom: -4px; font-size: 8px; background: var(--warning); color: #000; padding: 1px 4px; border-radius: 4px; font-weight: 700; }
+.micSeat .lockTag { position: absolute; top: -4px; right: -4px; font-size: 12px; }
+
+.handRow { display: flex; gap: 6px; overflow-x: auto; padding: 4px 0; min-height: 26px; }
+.handChip { font-size: 11px; background: rgba(245,158,11,.2); border: 1px solid var(--warning); padding: 4px 10px; border-radius: 12px; white-space: nowrap; }
+
+.roomChat { flex: 1; overflow-y: auto; margin: 8px 0; display: flex; flex-direction: column; gap: 6px; padding-right: 2px; }
+.chatMsg { font-size: 12.5px; background: rgba(255,255,255,.04); padding: 7px 11px; border-radius: 12px; max-width: 85%; }
+.chatMsg .who { color: var(--secondary); font-weight: 700; margin-right: 4px; }
+.chatMsg.gift { background: rgba(245,158,11,.15); border: 1px solid rgba(245,158,11,.3); }
+.chatMsg.sys { background: transparent; color: var(--text2); text-align: center; align-self: center; font-size: 11px; }
+
+.roomBar { display: flex; gap: 8px; align-items: center; padding-top: 6px; }
+.roomInput { flex: 1; padding: 11px 14px; }
+.rBtn { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,.08); font-size: 16px; flex-shrink: 0; }
+.rBtn.raised { background: var(--warning); color: #000; }
+
+.emojiGrid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+.emojiGrid button { font-size: 26px; padding: 6px; border-radius: 10px; }
+.emojiGrid button:active { background: rgba(255,255,255,.08); }
+
+.giftGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.giftItem { background: rgba(255,255,255,.05); border-radius: 14px; padding: 10px; text-align: center; }
+.giftItem .gIcon { font-size: 26px; }
+.giftItem .gName { font-size: 11px; margin: 4px 0; }
+.giftItem .gPrice { font-size: 11px; color: var(--warning); }
+.giftItem.selected { border: 1px solid var(--primary); background: rgba(123,46,255,.15); }
+
+.manageRow { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.06); }

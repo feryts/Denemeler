@@ -1,0 +1,25 @@
+.msgTabs { display: flex; gap: 8px; margin-bottom: 14px; }
+.msgTabs .pill { flex: 1; text-align: center; padding: 10px; }
+
+.convoRow {
+  display: flex; align-items: center; gap: 12px; padding: 12px 4px;
+  border-bottom: 1px solid rgba(255,255,255,.06); position: relative;
+}
+.convoRow .avatarCircle { position: relative; }
+.convoRow .dot { width: 10px; height: 10px; background: var(--success); border-radius: 50%; position: absolute; bottom: 0; right: 0; border: 2px solid var(--bg); }
+.convoRow .cName { font-weight: 700; font-size: 13px; }
+.convoRow .cLast { font-size: 12px; color: var(--text2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
+.convoRow .cTime { font-size: 10px; color: var(--text2); position: absolute; top: 12px; right: 4px; }
+
+.notifRow { display: flex; gap: 10px; padding: 12px 4px; border-bottom: 1px solid rgba(255,255,255,.06); }
+.notifRow .nIcon { font-size: 20px; }
+.notifRow .nTxt { font-size: 13px; }
+.notifRow .nTime { font-size: 11px; color: var(--text2); margin-top: 2px; }
+.notifRow.unread { background: rgba(123,46,255,.08); border-radius: 12px; }
+
+.chatDetail { display: flex; flex-direction: column; height: calc(100vh - 20px); }
+.chatMsgsBox { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; padding: 10px 2px; }
+.bubble { max-width: 75%; padding: 10px 14px; border-radius: 16px; font-size: 13px; }
+.bubble.me { align-self: flex-end; background: linear-gradient(135deg, var(--primary), var(--secondary)); }
+.bubble.them { align-self: flex-start; background: rgba(255,255,255,.07); }
+.chatSendRow { display: flex; gap: 8px; padding-top: 8px; }
