@@ -10,14 +10,20 @@ content="width=device-width,initial-scale=1.0">
 
 <title>Profil | EY LIVE</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
 <link rel="stylesheet"
 href="../css/style.css">
 
 <link rel="stylesheet"
 href="../css/profile.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-rel="stylesheet">
 
 </head>
 
@@ -25,21 +31,43 @@ rel="stylesheet">
 
 <div class="profilePage">
 
-<!-- COVER -->
+<!-- ===========================
+COVER
+=========================== -->
 
-<div class="cover">
+<section class="coverSection">
 
 <img
+
 id="coverPhoto"
+
+class="coverPhoto"
+
 src="../assets/images/cover.jpg">
 
-<div class="coverGradient"></div>
+<div class="coverOverlay"></div>
 
-</div>
+<button
+class="backBtn">
 
-<!-- PROFILE HEADER -->
+←
 
-<div class="profileHeader">
+</button>
+
+<button
+class="settingBtn">
+
+⚙️
+
+</button>
+
+</section>
+
+<!-- ===========================
+PROFILE
+=========================== -->
+
+<section class="profileHeader">
 
 <div class="avatarBox">
 
@@ -53,23 +81,19 @@ src="../assets/avatar/default.png">
 
 </div>
 
-<div class="profileContent">
-
-<h2>
-
-<span id="profileName">
+<h2 id="profileName">
 
 EY LIVE
 
-</span>
-
 <span class="verify">
 
-✔</span>
+✔
+
+</span>
 
 </h2>
 
-<div class="badgeLine">
+<div class="badgeRow">
 
 <span class="gender">
 
@@ -97,17 +121,21 @@ Noble I
 
 </div>
 
-<div class="idLine">
+<div class="idRow">
 
-ID :
+<span>
 
-<span id="profileId">
-
-EY100000001
+ID
 
 </span>
 
-<button id="copyId">
+<b id="profileId">
+
+EY100000001
+
+</b>
+
+<button id="copyID">
 
 📋
 
@@ -115,17 +143,17 @@ EY100000001
 
 </div>
 
-</div>
+</section>
 
-</div>
+<!-- ===========================
+FOLLOW
+=========================== -->
 
-<!-- FOLLOW -->
+<section class="followGrid">
 
-<div class="followRow">
+<div class="followCard">
 
-<div class="followItem">
-
-<h2 id="friendCount">
+<h2>
 
 556
 
@@ -139,9 +167,9 @@ Arkadaş
 
 </div>
 
-<div class="followItem">
+<div class="followCard">
 
-<h2 id="followingCount">
+<h2>
 
 986
 
@@ -155,9 +183,9 @@ Takip
 
 </div>
 
-<div class="followItem">
+<div class="followCard">
 
-<h2 id="fansCount">
+<h2>
 
 675
 
@@ -171,69 +199,61 @@ Fanlar
 
 </div>
 
-</div>
+</section>
 
-<!-- WALLET -->
+<!-- ===========================
+WALLET
+=========================== -->
 
-<div class="walletGrid">
+<section class="walletGrid">
 
-<div class="walletCard coinCard">
-
-<div>
-
-<h3>
-
-XCoins
-
-</h3>
-
-<p id="coinValue">
-
-0
-
-</p>
-
-</div>
-
-<div>
-
-🪙
-
-</div>
-
-</div>
-
-<div class="walletCard diamondCard">
+<div class="walletCard">
 
 <div>
 
 <h3>
 
-Diamonds
+🪙 XCoins
 
 </h3>
 
-<p id="diamondValue">
+<h2 id="coinValue">
 
-0
+999
 
-</p>
+</h2>
 
 </div>
+
+</div>
+
+<div class="walletCard">
 
 <div>
 
-💎
+<h3>
+
+💎 Diamonds
+
+</h3>
+
+<h2 id="diamondValue">
+
+550
+
+</h2>
 
 </div>
 
 </div>
 
-</div>
+</section>
 
-<!-- AGENCY -->
+<!-- ===========================
+AGENCY
+=========================== -->
 
-<div class="agencyCard">
+<section class="agencyCard">
 
 <div>
 
@@ -245,7 +265,7 @@ Diamonds
 
 <p>
 
-Ajans Yönetimi ve Gelir Detayı
+Ajans yönetimi ve gelir detayları
 
 </p>
 
@@ -257,142 +277,95 @@ Ajans Yönetimi ve Gelir Detayı
 
 </div>
 
-</div>
-<!-- ==========================================
+</section>
+<!-- ===========================
 QUICK MENU
-========================================== -->
+=========================== -->
 
-<div class="quickMenu">
+<section class="quickMenu">
 
-<div class="menuCard">
+<a href="vip.html" class="menuItem">
+    <div class="menuIcon vipIcon">
+        <img src="../assets/icons/vip.png" alt="">
+    </div>
+    <span>VIP Merkezi</span>
+</a>
 
-<div class="menuIcon vipIcon">
+<a href="noble.html" class="menuItem">
+    <div class="menuIcon nobleIcon">
+        <img src="../assets/icons/crown.png" alt="">
+    </div>
+    <span>Noble</span>
+</a>
 
-💛
+<a href="level.html" class="menuItem">
+    <div class="menuIcon levelIcon">
+        <img src="../assets/icons/level.png" alt="">
+    </div>
+    <span>Seviye</span>
+</a>
 
-</div>
+<a href="group.html" class="menuItem">
+    <div class="menuIcon groupIcon">
+        <img src="../assets/icons/group.png" alt="">
+    </div>
+    <span>Grup</span>
+</a>
 
-<span>VIP Merkezi</span>
+<a href="relationship.html" class="menuItem">
+    <div class="menuIcon loveIcon">
+        <img src="../assets/icons/love.png" alt="">
+    </div>
+    <span>İlişki</span>
+</a>
 
-</div>
+<a href="shop.html" class="menuItem">
+    <div class="menuIcon shopIcon">
+        <img src="../assets/icons/shop.png" alt="">
+    </div>
+    <span>Mağaza</span>
+</a>
 
-<div class="menuCard">
+<a href="bag.html" class="menuItem">
+    <div class="menuIcon bagIcon">
+        <img src="../assets/icons/bag.png" alt="">
+    </div>
+    <span>Sırt Çantası</span>
+</a>
 
-<div class="menuIcon nobleIcon">
+<a href="games.html" class="menuItem">
+    <div class="menuIcon gameIcon">
+        <img src="../assets/icons/game.png" alt="">
+    </div>
+    <span>Oyun Merkezi</span>
+</a>
 
-👑
+<a href="badges.html" class="menuItem">
+    <div class="menuIcon badgeIcon">
+        <img src="../assets/icons/badge.png" alt="">
+    </div>
+    <span>Rozetler</span>
+</a>
 
-</div>
+</section>
 
-<span>Noble</span>
-
-</div>
-
-<div class="menuCard">
-
-<div class="menuIcon levelIcon">
-
-⭐
-
-</div>
-
-<span>Seviye</span>
-
-</div>
-
-<div class="menuCard">
-
-<div class="menuIcon groupIcon">
-
-👥
-
-</div>
-
-<span>Grup</span>
-
-</div>
-
-<div class="menuCard">
-
-<div class="menuIcon loveIcon">
-
-💖
-
-</div>
-
-<span>İlişki</span>
-
-</div>
-
-<div class="menuCard">
-
-<div class="menuIcon shopIcon">
-
-🛍️
-
-</div>
-
-<span>Mağaza</span>
-
-</div>
-
-<div class="menuCard">
-
-<div class="menuIcon bagIcon">
-
-🎒
-
-</div>
-
-<span>Çanta</span>
-
-</div>
-
-<div class="menuCard">
-
-<div class="menuIcon gameIcon">
-
-🎮
-
-</div>
-
-<span>Oyun Merkezi</span>
-
-</div>
-
-<div class="menuCard">
-
-<div class="menuIcon badgeIcon">
-
-🏅
-
-</div>
-
-<span>Rozetler</span>
-
-</div>
-
-</div>
-
-<!-- ==========================================
+<!-- ===========================
 MY ROOM
-========================================== -->
+=========================== -->
 
-<div class="roomCard">
+<section class="roomCard">
 
 <div class="roomLeft">
 
-<div class="roomLogo">
-
-🎙
-
-</div>
+<img
+class="roomAvatar"
+src="../assets/rooms/default-room.jpg">
 
 <div>
 
 <h3>
 
-Benim Odam
+🎙 Benim Odam
 
 </h3>
 
@@ -406,249 +379,679 @@ Henüz oda oluşturulmadı
 
 </div>
 
-<div class="roomArrow">
+<button class="enterRoom">
 
->
+Gir
+
+</button>
+
+</section>
+
+<!-- ===========================
+AGENCY INFO
+=========================== -->
+
+<section class="agencyInfo">
+
+<div class="agencyLogo">
+
+<img
+src="../assets/logo/agency.png">
+
+</div>
+
+<div class="agencyText">
+
+<h3>
+
+EY Official Agency
+
+</h3>
+
+<p>
+
+Ajans Üyesi
+
+</p>
+
+</div>
+
+<button>
+
+Detay
+
+</button>
+
+</section>
+<!-- =====================================
+PHOTO GALLERY
+===================================== -->
+
+<section class="galleryCard">
+
+<div class="cardHeader">
+
+<h2>📷 Fotoğraflar</h2>
+
+<a href="#">Tümünü Gör</a>
+
+</div>
+
+<div class="galleryGrid">
+
+<div class="galleryItem">
+<img src="../assets/gallery/1.jpg" alt="">
+</div>
+
+<div class="galleryItem">
+<img src="../assets/gallery/2.jpg" alt="">
+</div>
+
+<div class="galleryItem">
+<img src="../assets/gallery/3.jpg" alt="">
+</div>
+
+<div class="galleryItem">
+<img src="../assets/gallery/4.jpg" alt="">
+</div>
+
+<div class="galleryItem">
+<img src="../assets/gallery/5.jpg" alt="">
+</div>
+
+<div class="galleryItem">
+<img src="../assets/gallery/6.jpg" alt="">
+</div>
+
+</div>
+
+</section>
+
+<!-- =====================================
+GIFT COLLECTION
+===================================== -->
+
+<section class="giftCard">
+
+<div class="cardHeader">
+
+<h2>🎁 Hediye Koleksiyonu</h2>
+
+<a href="#">Tümü</a>
+
+</div>
+
+<div class="giftGrid">
+
+<div class="giftItem">
+
+<img src="../assets/gifts/rose.png">
+
+<span>1250</span>
+
+</div>
+
+<div class="giftItem">
+
+<img src="../assets/gifts/car.png">
+
+<span>82</span>
+
+</div>
+
+<div class="giftItem">
+
+<img src="../assets/gifts/yacht.png">
+
+<span>14</span>
+
+</div>
+
+<div class="giftItem">
+
+<img src="../assets/gifts/castle.png">
+
+<span>3</span>
+
+</div>
+
+<div class="giftItem">
+
+<img src="../assets/gifts/rocket.png">
+
+<span>7</span>
+
+</div>
+
+<div class="giftItem">
+
+<img src="../assets/gifts/ring.png">
+
+<span>54</span>
 
 </div>
 
 </div>
 
-<!-- ==========================================
-GALLERY
-========================================== -->
+</section>
 
-<div class="sectionCard">
+<!-- =====================================
+STATISTICS
+===================================== -->
 
-<div class="sectionHeader">
+<section class="statisticsCard">
 
-<h2>
+<div class="cardHeader">
 
-📷 Fotoğraflar
-
-</h2>
-
-<span>
-
-Tümü >
-
-</span>
+<h2>📊 İstatistikler</h2>
 
 </div>
 
-<div class="photoGrid">
+<div class="statisticsGrid">
 
-<div class="photoItem"></div>
+<div class="statBox">
 
-<div class="photoItem"></div>
+<h3>126 Saat</h3>
 
-<div class="photoItem"></div>
+<p>Bu Ay Yayın</p>
 
-<div class="photoItem"></div>
+</div>
 
-<div class="photoItem"></div>
+<div class="statBox">
 
-<div class="photoItem"></div>
+<h3>8.2M</h3>
+
+<p>Popülerlik</p>
+
+</div>
+
+<div class="statBox">
+
+<h3>18.5K</h3>
+
+<p>Toplam Hediye</p>
+
+</div>
+
+<div class="statBox">
+
+<h3>312</h3>
+
+<p>Canlı Yayın</p>
 
 </div>
 
 </div>
 
-<!-- ==========================================
-BADGES
-========================================== -->
+</section>
 
-<div class="sectionCard">
+<!-- =====================================
+ACHIEVEMENTS
+===================================== -->
 
-<div class="sectionHeader">
+<section class="achievementCard">
 
-<h2>
+<div class="cardHeader">
 
-🏆 Başarılar
+<h2>🏆 Başarılar</h2>
 
-</h2>
+<a href="#">Hepsi</a>
 
 </div>
 
-<div class="badgeList">
+<div class="achievementList">
 
-<div class="badge">
+<div class="achievementItem">
 
 🥇 En İyi Yayıncı
 
 </div>
 
-<div class="badge">
+<div class="achievementItem">
 
-🔥 Haftanın Yıldızı
+🔥 Haftanın Hostu
 
 </div>
 
-<div class="badge">
+<div class="achievementItem">
 
 💎 VIP Üye
 
 </div>
 
-<div class="badge">
+<div class="achievementItem">
 
-🎤 Profesyonel Host
+👑 Noble Üyesi
+
+</div>
+
+<div class="achievementItem">
+
+❤️ 10K Takipçi
 
 </div>
 
 </div>
 
-</div>
-<!-- ==========================================
-ACTIVITY
-========================================== -->
-
-<div class="sectionCard">
-
-    <div class="sectionHeader">
-
-        <h2>📈 İstatistikler</h2>
-
-    </div>
-
-    <div class="statsGrid">
-
-        <div class="statItem">
-            <h3 id="liveHours">128</h3>
-            <span>Yayın Saati</span>
-        </div>
-
-        <div class="statItem">
-            <h3 id="giftCount">24.5K</h3>
-            <span>Hediye</span>
-        </div>
-
-        <div class="statItem">
-            <h3 id="roomCount">312</h3>
-            <span>Oda</span>
-        </div>
-
-        <div class="statItem">
-            <h3 id="levelPoint">985K</h3>
-            <span>Popülerlik</span>
-        </div>
-
-    </div>
-
-</div>
-
-<!-- ==========================================
+</section>
+<!-- =====================================
 LAST ACTIVITIES
-========================================== -->
+===================================== -->
 
-<div class="sectionCard">
+<section class="activityCard">
 
-    <div class="sectionHeader">
+<div class="cardHeader">
 
-        <h2>📰 Son Hareketler</h2>
+<h2>📋 Son Hareketler</h2>
 
-        <span>Tümü</span>
-
-    </div>
-
-    <div class="timeline">
-
-        <div class="timelineItem">
-
-            <div class="timelineIcon">🎁</div>
-
-            <div>
-
-                <h4>500 Diamond Hediye Aldı</h4>
-
-                <p>2 dakika önce</p>
-
-            </div>
-
-        </div>
-
-        <div class="timelineItem">
-
-            <div class="timelineIcon">❤️</div>
-
-            <div>
-
-                <h4>12 Yeni Takipçi</h4>
-
-                <p>35 dakika önce</p>
-
-            </div>
-
-        </div>
-
-        <div class="timelineItem">
-
-            <div class="timelineIcon">🎙</div>
-
-            <div>
-
-                <h4>Canlı Yayın Açtı</h4>
-
-                <p>Bugün</p>
-
-            </div>
-
-        </div>
-
-        <div class="timelineItem">
-
-            <div class="timelineIcon">🏆</div>
-
-            <div>
-
-                <h4>Haftalık İlk 10'a Girdi</h4>
-
-                <p>Dün</p>
-
-            </div>
-
-        </div>
-
-    </div>
+<a href="#">Tümü</a>
 
 </div>
 
-<!-- ==========================================
-PROFILE ACTIONS
-========================================== -->
+<div class="activityList">
 
-<div class="profileButtons">
+<div class="activityItem">
 
-<button id="followBtn">
+<div class="activityIcon giftBg">
 
-➕ Takip Et
-
-</button>
-
-<button id="messageBtn">
-
-💬 Mesaj
-
-</button>
-
-<button id="callBtn">
-
-📞 Sesli Ara
-
-</button>
+🎁
 
 </div>
 
-<!-- ==========================================
+<div class="activityInfo">
+
+<h3>
+
+1000 Diamond Hediyesi Alındı
+
+</h3>
+
+<p>
+
+5 dakika önce
+
+</p>
+
+</div>
+
+</div>
+
+<div class="activityItem">
+
+<div class="activityIcon followBg">
+
+❤️
+
+</div>
+
+<div class="activityInfo">
+
+<h3>
+
+Yeni Takipçi
+
+</h3>
+
+<p>
+
+18 dakika önce
+
+</p>
+
+</div>
+
+</div>
+
+<div class="activityItem">
+
+<div class="activityIcon roomBg">
+
+🎙
+
+</div>
+
+<div class="activityInfo">
+
+<h3>
+
+Canlı Yayın Başladı
+
+</h3>
+
+<p>
+
+Bugün
+
+</p>
+
+</div>
+
+</div>
+
+<div class="activityItem">
+
+<div class="activityIcon levelBg">
+
+🏆
+
+</div>
+
+<div class="activityInfo">
+
+<h3>
+
+Level 16 Oldu
+
+</h3>
+
+<p>
+
+Dün
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =====================================
+PROFILE BUTTONS
+===================================== -->
+
+<section class="profileActions">
+
+<button class="followBtn">
+
+❤️
+
+Takip Et
+
+</button>
+
+<button class="messageBtn">
+
+💬
+
+Mesaj
+
+</button>
+
+<button class="voiceBtn">
+
+📞
+
+Ara
+
+</button>
+
+</section>
+
+<!-- =====================================
+SHARE CARD
+===================================== -->
+
+<section class="shareCard">
+
+<div>
+
+<h3>
+
+👥 Arkadaşlarını Davet Et
+
+</h3>
+
+<p>
+
+Davet bağlantını paylaşarak ödül kazan.
+
+</p>
+
+</div>
+
+<button>
+
+Paylaş
+
+</button>
+
+</section>
+
+<!-- =====================================
+VISITOR CARD
+===================================== -->
+
+<section class="visitorCard">
+
+<div class="cardHeader">
+
+<h2>
+
+👀 Son Ziyaretçiler
+
+</h2>
+
+<a href="#">
+
+Hepsi
+
+</a>
+
+</div>
+
+<div class="visitorList">
+
+<img src="../assets/avatar/default.png">
+
+<img src="../assets/avatar/default.png">
+
+<img src="../assets/avatar/default.png">
+
+<img src="../assets/avatar/default.png">
+
+<img src="../assets/avatar/default.png">
+
+<img src="../assets/avatar/default.png">
+
+</div>
+
+</section>
+
+<!-- =====================================
+PROFILE SETTINGS
+===================================== -->
+
+<section class="settingCard">
+
+<div class="settingItem">
+
+<span>
+
+🔒 Gizlilik
+
+</span>
+
+>
+
+</div>
+
+<div class="settingItem">
+
+<span>
+
+🛡 Güvenlik
+
+</span>
+
+>
+
+</div>
+
+<div class="settingItem">
+
+<span>
+
+🌍 Dil
+
+</span>
+
+>
+
+</div>
+
+<div class="settingItem">
+
+<span>
+
+🎨 Tema
+
+</span>
+
+>
+
+</div>
+
+<div class="settingItem">
+
+<span>
+
+❓ Yardım
+
+</span>
+
+>
+
+</div>
+
+<div class="settingItem logout">
+
+<span>
+
+🚪 Çıkış Yap
+
+</span>
+
+>
+
+</div>
+
+    </section>
+    <!-- =====================================
+OFFICIAL CENTER
+===================================== -->
+
+<section class="officialCard">
+
+<div class="officialHeader">
+
+<h2>🏛 EY LIVE Merkezi</h2>
+
+<span>Resmi</span>
+
+</div>
+
+<div class="officialGrid">
+
+<a href="events.html" class="officialItem">
+
+<div class="officialIcon">🎉</div>
+
+<p>Etkinlikler</p>
+
+</a>
+
+<a href="missions.html" class="officialItem">
+
+<div class="officialIcon">🎯</div>
+
+<p>Görevler</p>
+
+</a>
+
+<a href="ranking.html" class="officialItem">
+
+<div class="officialIcon">🏆</div>
+
+<p>Sıralama</p>
+
+</a>
+
+<a href="support.html" class="officialItem">
+
+<div class="officialIcon">🎧</div>
+
+<p>Destek</p>
+
+</a>
+
+</div>
+
+</section>
+
+<!-- =====================================
+PROFILE INFO
+===================================== -->
+
+<section class="infoCard">
+
+<div class="infoItem">
+
+<span>Kullanıcı Türü</span>
+
+<b>Yayıncı</b>
+
+</div>
+
+<div class="infoItem">
+
+<span>Ajans</span>
+
+<b>EY Official</b>
+
+</div>
+
+<div class="infoItem">
+
+<span>Kayıt Tarihi</span>
+
+<b>15.02.2026</b>
+
+</div>
+
+<div class="infoItem">
+
+<span>Son Giriş</span>
+
+<b>Bugün</b>
+
+</div>
+
+</section>
+
+<!-- =====================================
+VERSION
+===================================== -->
+
+<div class="versionBox">
+
+<img src="../assets/logo/logo.png" class="appLogo">
+
+<h3>EY LIVE</h3>
+
+<p>Version 2.0.0</p>
+
+<p>Build 002</p>
+
+</div>
+
+<!-- =====================================
 BOTTOM NAVIGATION
-========================================== -->
+===================================== -->
 
 <div id="navHost"></div>
-
-<!-- ==========================================
-SCRIPTS
-========================================== -->
-
 <script src="../js/db.js"></script>
 
 <script src="../js/ui.js"></script>
