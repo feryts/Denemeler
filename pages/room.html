@@ -1,45 +1,1266 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Oda — EY LIVE</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/style.css">
-<link rel="stylesheet" href="../css/room.css">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>EY LIVE Room</title>
+
+<link rel="stylesheet"
+href="../css/style.css">
+
+<link rel="stylesheet"
+href="../css/room.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
 </head>
-<body style="padding-bottom:0">
 
-<div class="roomWrap">
+<body>
 
-  <div class="roomTop">
-    <button class="topBtn" onclick="Room.leave()">←</button>
-    <div class="roomInfo" id="roomInfo"></div>
-    <div class="flexCenter" style="gap:8px">
-      <button class="topBtn" onclick="Room.openRules()">📜</button>
-      <button class="topBtn" id="settingsBtn" onclick="Room.openManage()" style="display:none">⚙️</button>
-    </div>
-  </div>
+<div class="roomPage">
 
-  <div class="micGrid" id="micGrid"></div>
+<!-- ROOM HEADER -->
 
-  <div class="handRow" id="handRow"></div>
+<header class="roomHeader">
 
-  <div class="roomChat" id="roomChat"></div>
+<div class="roomLeft">
 
-  <div class="roomBar">
-    <input class="input roomInput" id="chatInput" placeholder="Mesaj yaz..." style="margin-bottom:0">
-    <button class="rBtn" onclick="Room.sendChat()">➤</button>
-    <button class="rBtn" onclick="Room.openEmoji()">😊</button>
-    <button class="rBtn" onclick="Room.openGifts()">🎁</button>
-    <button class="rBtn" id="handBtn" onclick="Room.toggleHand()">✋</button>
-  </div>
+<img
+id="roomAvatar"
+class="roomAvatar"
+src="../assets/rooms/default.jpg">
+
+<div>
+
+<h2 id="roomName">
+
+Türkiye Lounge
+
+</h2>
+
+<p>
+
+ID :
+
+<span id="roomId">
+
+ROOM100001
+
+</span>
+
+</p>
 
 </div>
 
+</div>
+
+<div class="roomRight">
+
+<div class="onlineBox">
+
+👥
+
+<span id="onlineCount">
+
+286
+
+</span>
+
+</div>
+
+<button
+id="roomSetting">
+
+⚙️
+
+</button>
+
+<button
+id="roomClose">
+
+✖
+
+</button>
+
+</div>
+
+</header>
+
+<!-- ROOM INFO -->
+
+<section class="roomInfo">
+
+<div class="infoCard">
+
+👑
+
+Host
+
+<br>
+
+<span id="hostName">
+
+EY LIVE
+
+</span>
+
+</div>
+
+<div class="infoCard">
+
+🏢
+
+Ajans
+
+<br>
+
+<span>
+
+EY Official
+
+</span>
+
+</div>
+
+<div class="infoCard">
+
+⭐
+
+Level
+
+<br>
+
+<span>
+
+15
+
+</span>
+
+</div>
+
+<div class="infoCard">
+
+🔥
+
+Heat
+
+<br>
+
+<span>
+
+98K
+
+</span>
+
+</div>
+
+</section>
+
+<!-- MICROPHONES -->
+
+<section
+class="micGrid">
+
+<!-- HOST -->
+
+<div
+class="micSeat owner">
+
+<div class="seatRing"></div>
+
+<img
+src="../assets/avatar/default.png">
+
+<span>
+
+HOST
+
+</span>
+
+</div>
+
+<!-- MIC 1 -->
+
+<div
+class="micSeat">
+
+<img
+src="../assets/avatar/default.png">
+
+<span>
+
+①
+
+</span>
+
+</div>
+
+<!-- MIC 2 -->
+
+<div
+class="micSeat">
+
+<img
+src="../assets/avatar/default.png">
+
+<span>
+
+②
+
+</span>
+
+</div>
+
+<!-- MIC 3 -->
+
+<div
+class="micSeat">
+
+<img
+src="../assets/avatar/default.png">
+
+<span>
+
+③
+
+</span>
+
+</div>
+
+<!-- MIC 4 -->
+
+<div
+class="micSeat">
+
+<img
+src="../assets/avatar/default.png">
+
+<span>
+
+④
+
+</span>
+
+</div>
+
+<!-- MIC 5 -->
+
+<div
+class="micSeat">
+
+<img
+src="../assets/avatar/default.png">
+
+<span>
+
+⑤
+
+</span>
+
+</div>
+
+<!-- MIC 6 -->
+
+<div
+class="micSeat">
+
+<img
+src="../assets/avatar/default.png">
+
+<span>
+
+⑥
+
+</span>
+
+</div>
+
+<!-- MIC 7 -->
+
+<div
+class="micSeat">
+
+<img
+src="../assets/avatar/default.png">
+
+<span>
+
+⑦
+
+</span>
+
+</div>
+
+<!-- MIC 8 -->
+
+<div
+class="micSeat">
+
+<img
+src="../assets/avatar/default.png">
+
+<span>
+
+⑧
+
+</span>
+
+</div>
+
+<!-- MIC 9 -->
+
+<div
+class="micSeat">
+
+<img
+src="../assets/avatar/default.png">
+
+<span>
+
+⑨
+
+</span>
+
+</div>
+
+<!-- MIC 10 -->
+
+<div
+class="micSeat">
+
+<img
+src="../assets/avatar/default.png">
+
+<span>
+
+⑩
+
+</span>
+
+</div>
+
+<!-- MIC 11 -->
+
+<div
+class="micSeat">
+
+<img
+src="../assets/avatar/default.png">
+
+<span>
+
+⑪
+
+</span>
+
+</div>
+
+<!-- MIC 12 -->
+
+<div
+class="micSeat">
+
+<img
+src="../assets/avatar/default.png">
+
+<span>
+
+⑫
+
+</span>
+
+</div>
+
+<!-- MIC 13 -->
+
+<div
+class="micSeat">
+
+<img
+src="../assets/avatar/default.png">
+
+<span>
+
+⑬
+
+</span>
+
+</div>
+
+<!-- MIC 14 -->
+
+<div
+class="micSeat">
+
+<img
+src="../assets/avatar/default.png">
+
+<span>
+
+⑭
+
+</span>
+
+</div>
+
+<!-- MIC 15 -->
+
+<div
+class="micSeat">
+
+<img
+src="../assets/avatar/default.png">
+
+<span>
+
+⑮
+
+</span>
+
+</div>
+
+<!-- MIC 16 -->
+
+<div
+class="micSeat">
+
+<img
+src="../assets/avatar/default.png">
+
+<span>
+
+⑯
+
+</span>
+
+</div>
+
+</section>
+<!-- ==========================================
+ROOM CHAT
+========================================== -->
+
+<section class="roomChat">
+
+<div class="chatHeader">
+
+<h3>
+
+💬 Oda Sohbeti
+
+</h3>
+
+<span id="chatOnline">
+
+286 Mesaj
+
+</span>
+
+</div>
+
+<div id="chatMessages" class="chatMessages">
+
+<div class="chatItem">
+
+<img src="../assets/avatar/default.png">
+
+<div>
+
+<b>Host</b>
+
+<p>
+
+Herkese iyi eğlenceler ❤️
+
+</p>
+
+</div>
+
+</div>
+
+<div class="chatItem">
+
+<img src="../assets/avatar/default.png">
+
+<div>
+
+<b>Elif</b>
+
+<p>
+
+Merhaba 🎉
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================================
+BOTTOM ACTION BAR
+========================================== -->
+
+<div class="actionBar">
+
+<button id="giftBtn">
+
+🎁
+
+<span>
+
+Hediye
+
+</span>
+
+</button>
+
+<button id="emojiBtn">
+
+😀
+
+<span>
+
+Emoji
+
+</span>
+
+</button>
+
+<button id="gameBtn">
+
+🎮
+
+<span>
+
+Oyun
+
+</span>
+
+</button>
+
+<button id="raiseHandBtn">
+
+✋
+
+<span>
+
+El Kaldır
+
+</span>
+
+</button>
+
+<button id="micBtn">
+
+🎤
+
+<span>
+
+Mikrofon
+
+</span>
+
+</button>
+
+</div>
+
+<!-- ==========================================
+RIGHT FLOAT MENU
+========================================== -->
+
+<div class="rightMenu">
+
+<button>
+
+👥
+
+</button>
+
+<button>
+
+🏆
+
+</button>
+
+<button>
+
+🎵
+
+</button>
+
+<button>
+
+📢
+
+</button>
+
+<button>
+
+⚙️
+
+</button>
+
+</div>
+
+<!-- ==========================================
+OWNER PANEL
+========================================== -->
+
+<div
+id="ownerPanel"
+class="popup hidden">
+
+<div class="popupCard">
+
+<h2>
+
+👑 Oda Yönetimi
+
+</h2>
+
+<button>
+
+🛡 Moderatör Ekle
+
+</button>
+
+<button>
+
+⭐ Co-Host Ata
+
+</button>
+
+<button>
+
+🎤 Mikrofonları Kilitle
+
+</button>
+
+<button>
+
+🚫 Kullanıcı Yasakla
+
+</button>
+
+<button>
+
+⚙️ Oda Ayarları
+
+</button>
+
+<button>
+
+🗑 Odayı Kapat
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+MODERATOR PANEL
+========================================== -->
+
+<div
+id="moderatorPanel"
+class="popup hidden">
+
+<div class="popupCard">
+
+<h2>
+
+🛡 Moderatör
+
+</h2>
+
+<button>
+
+🎤 Mikrofon Aç
+
+</button>
+
+<button>
+
+🔇 Mikrofon Kapat
+
+</button>
+
+<button>
+
+🚫 Kullanıcı Çıkar
+
+</button>
+
+<button>
+
+💬 Mesaj Sil
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+GIFT PANEL
+========================================== -->
+
+<div
+id="giftPanel"
+class="popup hidden">
+
+<div class="popupCard">
+
+<h2>
+
+🎁 Hediyeler
+
+</h2>
+
+<div class="giftGrid">
+
+<div class="giftItem">
+
+🌹
+
+<span>
+
+1
+
+</span>
+
+</div>
+
+<div class="giftItem">
+
+💎
+
+<span>
+
+50
+
+</span>
+
+</div>
+
+<div class="giftItem">
+
+🚗
+
+<span>
+
+500
+
+</span>
+
+</div>
+
+<div class="giftItem">
+
+🏰
+
+<span>
+
+5000
+
+</span>
+
+</div>
+
+<div class="giftItem">
+
+🛥
+
+<span>
+
+10000
+
+</span>
+
+</div>
+
+<div class="giftItem">
+
+🚀
+
+<span>
+
+50000
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<!-- ==========================================
+ONLINE USER LIST
+========================================== -->
+
+<div id="memberSheet" class="bottomSheet hidden">
+
+<div class="sheetHeader">
+
+<h2>
+
+👥 Oda Üyeleri
+
+</h2>
+
+<span id="roomMemberCount">
+
+286 Online
+
+</span>
+
+</div>
+
+<div class="memberList">
+
+<div class="memberItem">
+
+<img src="../assets/avatar/default.png">
+
+<div class="memberInfo">
+
+<h3>
+
+EY LIVE
+
+<span class="ownerBadge">
+
+OWNER
+
+</span>
+
+</h3>
+
+<p>
+
+ID : EY100000001
+
+</p>
+
+</div>
+
+<button>
+
+Profil
+
+</button>
+
+</div>
+
+<div class="memberItem">
+
+<img src="../assets/avatar/default.png">
+
+<div class="memberInfo">
+
+<h3>
+
+Moderator
+
+<span class="modBadge">
+
+MOD
+
+</span>
+
+</h3>
+
+<p>
+
+ID : EY100000010
+
+</p>
+
+</div>
+
+<button>
+
+Profil
+
+</button>
+
+</div>
+
+<div class="memberItem">
+
+<img src="../assets/avatar/default.png">
+
+<div class="memberInfo">
+
+<h3>
+
+VIP User
+
+<span class="vipBadge">
+
+VIP6
+
+</span>
+
+</h3>
+
+<p>
+
+ID : EY100000250
+
+</p>
+
+</div>
+
+<button>
+
+Profil
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+ROOM TOP RANK
+========================================== -->
+
+<div class="roomRank">
+
+<div class="rankUser">
+
+🥇
+
+<img src="../assets/avatar/default.png">
+
+<span>
+
+Host
+
+</span>
+
+</div>
+
+<div class="rankUser">
+
+🥈
+
+<img src="../assets/avatar/default.png">
+
+<span>
+
+Elif
+
+</span>
+
+</div>
+
+<div class="rankUser">
+
+🥉
+
+<img src="../assets/avatar/default.png">
+
+<span>
+
+Ahmet
+
+</span>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+GIFT ANIMATION
+========================================== -->
+
+<div id="giftAnimation">
+
+<div class="giftEffect hidden">
+
+🎁
+
+</div>
+
+</div>
+
+<!-- ==========================================
+JOIN ANIMATION
+========================================== -->
+
+<div id="joinAnimation">
+
+<div class="joinCard hidden">
+
+🎉
+
+<span>
+
+Yeni kullanıcı katıldı.
+
+</span>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+ROOM RULES
+========================================== -->
+
+<div id="roomRules"
+
+class="popup hidden">
+
+<div class="popupCard">
+
+<h2>
+
+📜 Oda Kuralları
+
+</h2>
+
+<ul>
+
+<li>
+
+Saygılı olun.
+
+</li>
+
+<li>
+
+Küfür yasaktır.
+
+</li>
+
+<li>
+
+Spam yasaktır.
+
+</li>
+
+<li>
+
+Moderatör kararlarına uyunuz.
+
+</li>
+
+<li>
+
+Reklam yapmak yasaktır.
+
+</li>
+
+</ul>
+
+<button>
+
+Tamam
+
+</button>
+
+</div>
+
+</div>
+<!-- ==========================================
+MIC TALKING EFFECT
+========================================== -->
+
+<div id="voiceAnimation">
+
+<div class="voiceCircle hidden"></div>
+
+</div>
+
+<!-- ==========================================
+CHAT INPUT
+========================================== -->
+
+<div class="chatInputBar">
+
+<button id="emojiOpen">
+
+😀
+
+</button>
+
+<input
+type="text"
+id="roomMessage"
+placeholder="Mesaj yaz...">
+
+<button id="sendMessage">
+
+Gönder
+
+</button>
+
+</div>
+
+<!-- ==========================================
+OWNER MENU
+========================================== -->
+
+<div id="ownerMenu"
+
+class="bottomSheet hidden">
+
+<div class="sheetHeader">
+
+<h2>
+
+👑 Oda Yönetimi
+
+</h2>
+
+</div>
+
+<div class="sheetMenu">
+
+<button data-action="room-info">
+
+📝 Oda Bilgilerini Düzenle
+
+</button>
+
+<button data-action="room-cover">
+
+🖼 Kapak Fotoğrafını Değiştir
+
+</button>
+
+<button data-action="room-password">
+
+🔒 Oda Şifresi
+
+</button>
+
+<button data-action="room-moderators">
+
+🛡 Moderatörleri Yönet
+
+</button>
+
+<button data-action="room-cohost">
+
+⭐ Co-Host Yönetimi
+
+</button>
+
+<button data-action="room-ban">
+
+🚫 Yasaklı Kullanıcılar
+
+</button>
+
+<button data-action="room-lock">
+
+🎤 Mikrofon Kilitle
+
+</button>
+
+<button data-action="room-logs">
+
+📋 Oda İşlem Geçmişi
+
+</button>
+
+<button class="danger"
+
+data-action="room-close">
+
+🗑 Odayı Kapat
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+USER MENU
+========================================== -->
+
+<div id="userMenu"
+
+class="bottomSheet hidden">
+
+<div class="sheetHeader">
+
+<h2>
+
+👤 Kullanıcı
+
+</h2>
+
+</div>
+
+<div class="sheetMenu">
+
+<button>
+
+👤 Profili Gör
+
+</button>
+
+<button>
+
+➕ Takip Et
+
+</button>
+
+<button>
+
+💌 Mesaj Gönder
+
+</button>
+
+<button>
+
+🎁 Hediye Gönder
+
+</button>
+
+<button>
+
+🚫 Engelle
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+ROOM SCRIPTS
+========================================== -->
+
 <script src="../js/db.js"></script>
+
 <script src="../js/ui.js"></script>
+
 <script src="../js/firebase-config.js"></script>
+
 <script src="../js/room.js"></script>
+
 </body>
-</html>
+
+  </html>
