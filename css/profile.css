@@ -1,367 +1,703 @@
+/* ==========================================================
+   EY LIVE - PROFILE PAGE STYLES
+   (class isimleri profile.html ile birebir eşleşecek şekilde
+   yeniden yazıldı)
+   ========================================================== */
+
 :root {
-    --bg-color: #080b1c;
+    --bg-color: #0a0d1f;
     --card-bg: rgba(255, 255, 255, 0.06);
+    --card-bg-2: rgba(255, 255, 255, 0.04);
     --card-border: rgba(255, 255, 255, 0.08);
     --text-primary: #ffffff;
-    --text-secondary: #8e92b2;
+    --text-secondary: #9096b8;
     --accent-blue: #3a86ff;
-    --accent-green: #00bbf9;
+    --accent-green: #00e0a4;
     --accent-gold: #ffb703;
-    --accent-pink: #ff006e;
+    --accent-pink: #ff2d78;
+    --accent-purple: #7c3aed;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     -webkit-tap-highlight-color: transparent;
 }
 
-body {
-    background-color: #000;
-    color: var(--text-primary);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+html, body {
+    background: #000;
+}
+
+.profile-page {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
     min-height: 100vh;
-}
-
-/* Mobil Çerçeve Düzeni */
-.app-container {
-    width: 100%;
-    max-width: 430px;
-    height: 100vh;
-    min-height: 840px;
-    background: linear-gradient(180deg, #0f1636 0%, #070a1e 40%, #030511 100%);
+    background: linear-gradient(180deg, #10163a 0%, #0a0d24 35%, #05060f 100%);
+    color: var(--text-primary);
     position: relative;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 80px;
+    padding-bottom: 90px;
+    overflow-x: hidden;
 }
 
-/* Arka Plan Bannerı */
-.header-banner {
-    width: 100%;
-    height: 140px;
-    background: linear-gradient(135deg, #0d4b31 0%, #0c2340 50%, #1a0b36 100%);
-    border-bottom: 2px solid rgba(0, 255, 128, 0.2);
+/* ===========================
+   COVER
+=========================== */
+.profile-cover {
     position: relative;
-}
-
-.top-actions {
-    display: flex;
-    justify-content: space-between;
-    padding: 16px;
-    position: absolute;
-    top: 0;
     width: 100%;
-    z-index: 10;
-}
-
-.action-btn {
-    background: rgba(0, 0, 0, 0.4);
-    border: none;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    backdrop-filter: blur(5px);
-}
-
-.right-buttons {
-    display: flex;
-    gap: 10px;
-}
-
-/* Profil Alanı */
-.profile-section {
-    padding: 0 16px;
-    margin-top: -50px;
-    position: relative;
-    z-index: 5;
-}
-
-.profile-header-main {
-    display: flex;
-    align-items: flex-end;
-    gap: 16px;
-    margin-bottom: 16px;
-}
-
-.avatar-container {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    background: #111;
-    border: 3px solid #1f2544;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+    height: 170px;
+    background: linear-gradient(135deg, #123a2e 0%, #0c2340 55%, #23103f 100%);
     overflow: hidden;
 }
 
-.avatar-container img {
+.profile-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.cover-shadow {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(6,8,20,0.35) 55%, rgba(8,10,26,0.95) 100%);
+}
+
+.back-btn,
+.setting-btn {
+    position: absolute;
+    top: 16px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(6px);
+    z-index: 20;
+    cursor: pointer;
+}
+
+.back-btn { left: 14px; }
+.setting-btn { right: 14px; }
+
+/* ===========================
+   PROFILE HEADER
+=========================== */
+.profile-header {
+    position: relative;
+    padding: 0 18px;
+    margin-top: -55px;
+    z-index: 5;
+}
+
+.avatar-area {
+    position: relative;
+    width: 92px;
+    height: 92px;
+    margin-bottom: 10px;
+}
+
+.avatar-frame {
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    background: #1a1e35;
+    border: 3px solid #171b33;
+    box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.5), 0 8px 20px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+
+.avatar-frame img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.user-details {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    padding-bottom: 4px;
+.online-dot {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #00e676;
+    border: 3px solid #10163a;
 }
 
-.username {
+#nickname {
     font-size: 20px;
     font-weight: 700;
-    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
 }
 
-/* Rozet Yapısı */
-.badge-container {
+.verify {
+    color: #3a9dff;
+    font-size: 15px;
+}
+
+.badge-row {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
+    margin-bottom: 10px;
 }
 
 .badge {
-    padding: 2px 8px;
-    border-radius: 12px;
+    padding: 3px 10px;
+    border-radius: 20px;
     font-size: 11px;
     font-weight: 600;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 3px;
+    color: #fff;
 }
 
-.badge-gender { background: linear-gradient(90deg, #3a86ff, #00bbf9); }
-.badge-vip { background: linear-gradient(90deg, #20bf55, #01baef); font-style: italic; }
-.badge-level { background: linear-gradient(90deg, #7209b7, #f72585); }
-.badge-heart { background: linear-gradient(90deg, #ff4d6d, #ff758f); }
+.badge.gender { background: linear-gradient(90deg, #3a86ff, #00bbf9); }
+.badge.vip { background: linear-gradient(90deg, #1fbf6b, #06b6d4); font-style: italic; }
+.badge.level { background: linear-gradient(90deg, #7209b7, #f72585); }
+.badge.noble { background: linear-gradient(90deg, #ffb703, #ff7a00); color: #2b1600; }
 
-.user-id {
+.id-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.id-card > div {
     font-size: 13px;
     color: var(--text-secondary);
     display: flex;
     align-items: center;
     gap: 6px;
-    margin-top: 4px;
 }
 
-.copy-icon {
-    cursor: pointer;
-    fill: var(--text-secondary);
+.id-card b {
+    color: var(--text-primary);
+    font-weight: 600;
 }
 
-/* Canlı Yayın Panel Metrikleri */
-.live-metrics-bar {
-    display: flex;
-    background: rgba(255, 255, 255, 0.03);
+#copyID {
+    background: rgba(255, 255, 255, 0.08);
     border: 1px solid var(--card-border);
-    border-radius: 12px;
-    padding: 10px;
-    margin-bottom: 16px;
+    color: var(--text-secondary);
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* ===========================
+   FOLLOW GRID
+=========================== */
+.follow-grid {
+    display: flex;
     justify-content: space-around;
     text-align: center;
+    padding: 0 18px;
+    margin-bottom: 18px;
 }
 
-.metric-box-title {
-    font-size: 11px;
-    color: var(--text-secondary);
-    margin-bottom: 2px;
-}
-
-.metric-box-value {
-    font-size: 14px;
-    font-weight: 700;
-    color: #00f5d4;
-}
-
-/* İstatistik Sıralaması */
-.stats-row {
-    display: flex;
-    justify-content: flex-start;
-    gap: 30px;
-    padding: 4px 10px;
-    margin-bottom: 20px;
-}
-
-.stat-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.stat-value {
-    font-size: 18px;
+.follow-box h2 {
+    font-size: 19px;
     font-weight: 700;
 }
 
-.stat-label {
+.follow-box span {
     font-size: 12px;
     color: var(--text-secondary);
-    margin-top: 2px;
 }
 
-/* Finansal Kart Düzeni */
-.wallet-row {
+/* ===========================
+   WALLET
+=========================== */
+.wallet-grid {
     display: flex;
     gap: 12px;
-    margin-bottom: 16px;
+    padding: 0 18px;
+    margin-bottom: 14px;
 }
 
 .wallet-card {
     flex: 1;
-    border-radius: 14px;
-    padding: 14px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.card-xcoins { background: linear-gradient(135deg, #2c221e 0%, #18151c 100%); }
-.card-diamonds { background: linear-gradient(135deg, #19223c 0%, #111424 100%); }
-
-.wallet-info {
-    display: flex;
-    flex-direction: column;
-}
-
-.wallet-title {
-    font-size: 12px;
-    color: var(--text-secondary);
-}
-
-.wallet-value {
-    font-size: 16px;
-    font-weight: 700;
-    margin-top: 2px;
-}
-
-/* Ajans Merkezi Girişi */
-.banner-link {
-    background: linear-gradient(90deg, #1b2246 0%, #151933 100%);
-    border: 1px solid var(--card-border);
-    border-radius: 14px;
+    border-radius: 16px;
     padding: 14px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 20px;
+    border: 1px solid var(--card-border);
+}
+
+.wallet-card.coin-card {
+    background: linear-gradient(135deg, #2c2418 0%, #1a1712 100%);
+}
+
+.wallet-card.diamond-card {
+    background: linear-gradient(135deg, #17203c 0%, #10121f 100%);
+}
+
+.wallet-card span {
+    font-size: 12px;
+    color: var(--text-secondary);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.wallet-card h2 {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.wallet-card img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+/* ===========================
+   AGENCY CARD
+=========================== */
+.agency-card {
+    margin: 0 18px 18px;
+    background: linear-gradient(90deg, #241a45 0%, #171933 100%);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     cursor: pointer;
 }
 
-.banner-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+.agency-card h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 3px;
 }
 
-.banner-text h4 { font-size: 14px; font-weight: 600; }
-.banner-text p { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+.agency-card p {
+    font-size: 11px;
+    color: var(--text-secondary);
+}
 
-/* Grid Menü */
+/* ===========================
+   MENU GRID
+=========================== */
 .menu-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-bottom: 20px;
+    row-gap: 20px;
+    padding: 0 18px 20px;
 }
 
 .menu-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    cursor: pointer;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--text-primary);
 }
 
-.menu-icon-wrapper {
-    width: 48px;
-    height: 48px;
-    border-radius: 14px;
+.menu-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 16px;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 8px;
-    transition: transform 0.2s;
 }
 
-.menu-item:hover .menu-icon-wrapper { transform: scale(1.05); }
-.menu-label { font-size: 11px; color: #d1d4e5; text-align: center; white-space: nowrap; }
+.menu-icon img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+}
 
-/* Odam Alanı */
-.room-section {
+.menu-item span {
+    font-size: 11px;
+    color: #d1d4e5;
+    text-align: center;
+}
+
+/* ===========================
+   MY ROOM
+=========================== */
+.my-room {
+    margin: 0 18px 20px;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
-    border-radius: 14px;
-    padding: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-}
-
-.room-left {
+    border-radius: 16px;
+    padding: 12px;
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-.room-avatar {
-    width: 40px;
-    height: 40px;
+.room-cover {
+    width: 44px;
+    height: 44px;
     border-radius: 10px;
-    background: #2a1b4e;
-    border: 1px solid rgba(255,255,255,0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden;
+    background: #241a45;
+    flex-shrink: 0;
 }
 
-.room-details h5 { font-size: 14px; font-weight: 600; }
-.room-details p { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
-
-/* Sabit Alt Menü */
-.bottom-nav {
-    position: absolute;
-    bottom: 0;
-    left: 0;
+.room-cover img {
     width: 100%;
-    height: 68px;
-    background: #070913;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    z-index: 100;
+    height: 100%;
+    object-fit: cover;
 }
 
-.nav-item {
+.room-info {
+    flex: 1;
+}
+
+.room-info h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.room-info p {
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+.enter-room {
+    background: linear-gradient(90deg, #7c3aed, #ff2d78);
+    border: none;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* ===========================
+   GENERIC CARD SECTIONS
+   (about / photo / achievement / stats / gift / activity / visitor / settings / logout / official)
+=========================== */
+.about-card,
+.photo-card,
+.achievement-card,
+.stats-card,
+.gift-card,
+.activity-card,
+.visitor-card,
+.settings-card,
+.logout-card,
+.official-card {
+    margin: 0 18px 18px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 16px;
+}
+
+.card-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.card-title h3 {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.card-title a {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-decoration: none;
+}
+
+#bio {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* Photo gallery */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.photo-grid img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 10px;
+    background: #1a1e35;
+}
+
+/* Achievements */
+.achievement-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.achievement-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.achievement-item img {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    object-fit: contain;
+    background: #1a1e35;
+}
+
+.achievement-item h4 {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.achievement-item p {
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+/* Stats */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    text-align: center;
+}
+
+.stat-box h2 {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.stat-box span {
+    font-size: 10px;
+    color: var(--text-secondary);
+}
+
+/* Gifts */
+.gift-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.gift-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    width: 50px;
-    height: 50px;
+    gap: 4px;
 }
 
-.nav-item.active .nav-icon-circle {
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
-    border-radius: 50%;
+.gift-item img {
     width: 42px;
     height: 42px;
+    object-fit: contain;
+}
+
+.gift-item span {
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+/* Activity */
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.activity-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+}
+
+.activity-item h4 {
+    font-size: 12.5px;
+    font-weight: 500;
+}
+
+.activity-item span {
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+/* Actions */
+.profile-actions {
+    margin: 0 18px 18px;
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    flex: 1;
+    border: none;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn.primary { background: linear-gradient(90deg, #ff2d78, #ff7a90); }
+.btn.secondary { background: linear-gradient(90deg, #3a86ff, #00bbf9); }
+.btn.success { background: linear-gradient(90deg, #1fbf6b, #06b6d4); }
+
+/* Visitors */
+.visitor-list {
+    display: flex;
+    gap: -8px;
+}
+
+.visitor-list img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #10163a;
+    margin-left: -10px;
+    background: #1a1e35;
+}
+
+.visitor-list img:first-child { margin-left: 0; }
+
+/* Settings list */
+.settings-card { padding: 6px 16px; }
+
+.setting-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--card-border);
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 13px;
+}
+
+.setting-item:last-child { border-bottom: none; }
+.setting-item span:last-child { color: var(--text-secondary); }
+
+/* Logout */
+.logout-card {
+    display: flex;
+    justify-content: center;
+}
+
+#logoutBtn {
+    width: 100%;
+    background: rgba(255, 45, 45, 0.12);
+    border: 1px solid rgba(255, 45, 45, 0.3);
+    color: #ff5c5c;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 12px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+/* Official card */
+.official-card {
+    text-align: center;
+    padding: 22px 16px;
+}
+
+.official-logo {
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+    margin-bottom: 8px;
+}
+
+.official-card h2 {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.official-card p {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin: 4px 0;
+}
+
+.official-card span {
+    font-size: 11px;
+    color: #565b7d;
+}
+
+/* ===========================
+   BOTTOM NAV (populated by ui.js into #navHost)
+=========================== */
+#navHost {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-width: 480px;
+    margin: 0 auto;
+    height: 68px;
+    background: #0a0c1c;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    z-index: 100;
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 90px;
+    transform: translateX(-50%) translateY(20px);
+    background: rgba(20, 22, 40, 0.95);
+    border: 1px solid var(--card-border);
+    color: #fff;
+    font-size: 12.5px;
+    padding: 10px 18px;
+    border-radius: 30px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s ease;
+    z-index: 999;
+    white-space: nowrap;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
 }
