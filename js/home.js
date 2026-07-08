@@ -6,9 +6,10 @@
   const me = UI.requireAuth();
   if (!me) return;
 
-  document.getElementById("meAvatar").textContent = me.avatar;
-  document.getElementById("meName").textContent = me.username + " " + UI.vipBadge(me.vip);
-  document.getElementById("meCoins").textContent = `💰 ${me.coin}  💎 ${me.diamond}`;
+  document.getElementById("miniProfile").innerHTML = `
+    <a href="profile.html" class="flexCenter" style="gap:8px">
+      <div class="avatarCircle" style="width:36px;height:36px;font-size:18px">${me.avatar}</div>
+    </a>`;
   document.getElementById("navHost").innerHTML = UI.bottomNav("home");
 
   const unread = DB.userNotifications(me.id).filter(n => !n.read).length;
@@ -19,8 +20,14 @@
     { h: "💎 VIP Ol, Ayrıcalıkları Kap", p: "Cüzdan sekmesinden VIP satın al" },
     { h: "🎮 Oyunlarda Şansını Dene", p: "Lucky Slot, Çark ve Zar seni bekliyor" }
   ];
-  const b = banners[Math.floor(Math.random() * banners.length)];
-  document.getElementById("banner").innerHTML = `<div><h3>${b.h}</h3><p>${b.p}</p></div>`;
+  let bannerIdx = Math.floor(Math.random() * banners.length);
+  function renderBanner() {
+    const b = banners[bannerIdx];
+    document.getElementById("banner").innerHTML = `<div><h3>${b.h}</h3><p>${b.p}</p></div>`;
+    document.getElementById("bannerDots").innerHTML = banners.map((_, i) => `<span class="${i === bannerIdx ? "active" : ""}"></span>`).join("");
+  }
+  renderBanner();
+  setInterval(() => { bannerIdx = (bannerIdx + 1) % banners.length; renderBanner(); }, 4000);
 
   /* daily tasks */
   const tasks = DB.load().dailyTasks;
@@ -47,15 +54,22 @@
     </a>
   `).join("") || `<p class="muted">Şu an çevrimiçi kimse yok</p>`;
 
-  /* agency announcements */
-  const agencyAnns = DB.load().agencies.flatMap(a => a.announcements.map(x => ({ ...x, agencyName: a.name })));
-  agencyAnns.sort((a, b) => b.ts - a.ts);
-  document.getElementById("agencyEvents").innerHTML = agencyAnns.slice(0, 3).map(a => `
-    <div class="agencyCard">
-      <div class="aTitle">🏢 ${UI.esc(a.agencyName)}</div>
-      <div class="aTxt">${UI.esc(a.text)}</div>
-    </div>
-  `).join("") || `<p class="muted">Henüz ajans etkinliği yok</p>`;
+  /* agencies */
+  const agencies = DB.load().agencies;
+  document.getElementById("agencyEvents").innerHTML = agencies.length ? agencies.map(a => {
+    const members = a.streamers.slice(0, 4).map(id => DB.getUser(id)).filter(Boolean);
+    const lastAnn = a.announcements[0];
+    return `
+    <a href="agency.html" class="agencyCard">
+      <div class="aCover">🏢</div>
+      <div class="aBody">
+        <div class="aTitle">${UI.esc(a.name)}</div>
+        <div class="aTxt">${lastAnn ? UI.esc(lastAnn.text) : a.streamers.length + " yayıncı"}</div>
+        <div class="aMembers">${members.map(u => `<div class="avatarCircle">${u.avatar}</div>`).join("") || ""}</div>
+      </div>
+      <div class="aArrow">›</div>
+    </a>`;
+  }).join("") : `<p class="muted">Henüz ajans yok</p>`;
 
   /* rooms + categories */
   const rooms = DB.allRooms();

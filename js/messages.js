@@ -20,13 +20,20 @@
 
   function renderList() {
     document.getElementById("msgPage").innerHTML = `
-      ${UI.topBar("Mesajlar")}
+      ${UI.topBar("Mesaj")}
+      <div class="quickIconsRow">
+        <div class="quickIcon" onclick="UI.toast('Kullanıcı ekleme yakında')"><div class="qBox">➕</div><div class="qLabel">Uygula</div></div>
+        <div class="quickIcon" onclick="UI.toast('Aktivite akışı yakında')"><div class="qBox">📣</div><div class="qLabel">Aktivite</div></div>
+        <div class="quickIcon" id="qNotif"><div class="qBox">🔔</div><div class="qLabel">Bildirim</div></div>
+        <div class="quickIcon" onclick="UI.toast('Ziyaretçi listesi yakında')"><div class="qBox">👤</div><div class="qLabel">Ziyaretçiler</div></div>
+      </div>
       <div class="msgTabs">
         <button class="pill ${tab === "chats" ? "active" : ""}" id="tabChats">💬 Sohbetler</button>
         <button class="pill ${tab === "notif" ? "active" : ""}" id="tabNotif">🔔 Bildirimler</button>
       </div>
       <div id="listBody"></div>
     `;
+    document.getElementById("qNotif").onclick = () => { tab = "notif"; renderList(); };
     document.getElementById("tabChats").onclick = () => { tab = "chats"; renderList(); };
     document.getElementById("tabNotif").onclick = () => { tab = "notif"; renderList(); };
     tab === "chats" ? renderChats() : renderNotifs();
@@ -45,7 +52,7 @@
       <div class="sectionTitle"><span>📢 Sistem Duyuruları</span></div>
       ${DB.load().announcements.slice(0, 2).map(a => `
         <div class="notifRow"><div class="nIcon">📢</div>
-          <div><div class="nTxt"><b>${UI.esc(a.title)}</b><br>${UI.esc(a.text)}</div>
+          <div><div class="nTxt"><b>${UI.esc(a.title)}</b><span class="officialTag">resmi</span><br>${UI.esc(a.text)}</div>
           <div class="nTime">${UI.timeAgo(a.ts)}</div></div>
         </div>`).join("")}
 
@@ -54,7 +61,7 @@
         <a href="messages.html?with=${other.id}" class="convoRow">
           <div class="avatarCircle" style="width:46px;height:46px;font-size:22px">${other.avatar}${other.online ? '<span class="dot"></span>' : ""}</div>
           <div style="flex:1;min-width:0">
-            <div class="cName">${UI.esc(other.username)}</div>
+            <div class="cName">${UI.esc(other.username)}${other.vip ? `<span class="vipTagSm">VIP${other.vip}</span>` : ""}</div>
             <div class="cLast">${last ? UI.esc(last.text) : "Henüz mesaj yok"}</div>
           </div>
           ${unread ? `<span class="badgeDot" style="position:static">${unread}</span>` : ""}
