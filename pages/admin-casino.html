@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Casino Yönetimi | EY LIVE</title>
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/admin-casino.css">
+
+</head>
+
+<body>
+
+<div class="adminCasino">
+
+<header class="casinoHeader">
+
+<h1>🎰 EY CASINO PANELİ</h1>
+
+<p>Casino Yönetim Merkezi</p>
+
+</header>
+
+<div class="statsGrid">
+
+<div class="statCard">
+
+<h2 id="todaySpin">0</h2>
+
+<span>Bugünkü Spin</span>
+
+</div>
+
+<div class="statCard">
+
+<h2 id="todayIncome">0</h2>
+
+<span>Coin Girişi</span>
+
+</div>
+
+<div class="statCard">
+
+<h2 id="todayPayout">0</h2>
+
+<span>Coin Çıkışı</span>
+
+</div>
+
+<div class="statCard">
+
+<h2 id="casinoProfit">0</h2>
+
+<span>Kasa Kârı</span>
+
+</div>
+
+</div>
+
+<section class="gameCard">
+
+<h2>🍭 EY Candy</h2>
+
+<label>
+
+<input type="checkbox" id="candyEnabled">
+
+Oyun Aktif
+
+</label>
+
+<label>
+
+RTP %
+
+<input type="number" id="candyRtp">
+
+</label>
+
+<label>
+
+Minimum Bahis
+
+<input type="number" id="candyMin">
+
+</label>
+
+<label>
+
+Maksimum Bahis
+
+<input type="number" id="candyMax">
+
+</label>
+
+<label>
+
+Maksimum Çarpan
+
+<input type="number" id="candyMultiplier">
+
+</label>
+
+<button id="saveCandy">
+
+Kaydet
+
+</button>
+
+</section>
+<!-- ===========================
+EY OLYMPUS
+=========================== -->
+
+<section class="gameCard">
+
+<h2>⚡ EY Olympus</h2>
+
+<label>
+
+<input type="checkbox" id="olympusEnabled">
+
+Oyun Aktif
+
+</label>
+
+<label>
+
+RTP %
+
+<input
+type="number"
+id="olympusRtp"
+value="90">
+
+</label>
+
+<label>
+
+Minimum Bahis
+
+<input
+type="number"
+id="olympusMin"
+value="10">
+
+</label>
+
+<label>
+
+Maksimum Bahis
+
+<input
+type="number"
+id="olympusMax"
+value="100000">
+
+</label>
+
+<label>
+
+Maksimum Çarpan
+
+<input
+type="number"
+id="olympusMultiplier"
+value="1000">
+
+</label>
+
+<label>
+
+Free Spin
+
+<input
+type="number"
+id="olympusFree"
+value="15">
+
+</label>
+
+<button id="saveOlympus">
+
+Kaydet
+
+</button>
+
+</section>
+
+<!-- ===========================
+LUCKY WHEEL
+=========================== -->
+
+<section class="gameCard">
+
+<h2>🎡 Lucky Wheel</h2>
+
+<label>
+
+<input
+type="checkbox"
+id="wheelEnabled">
+
+Oyun Aktif
+
+</label>
+
+<label>
+
+Günlük Çevirme
+
+<input
+type="number"
+id="wheelDaily"
+value="1">
+
+</label>
+
+<label>
+
+Minimum Ödül
+
+<input
+type="number"
+id="wheelMin"
+value="50">
+
+</label>
+
+<label>
+
+Maksimum Ödül
+
+<input
+type="number"
+id="wheelMax"
+value="5000">
+
+</label>
+
+<button id="saveWheel">
+
+Kaydet
+
+</button>
+
+</section>
+
+<!-- ===========================
+DIAMOND SPIN
+=========================== -->
+
+<section class="gameCard">
+
+<h2>💎 Diamond Spin</h2>
+
+<label>
+
+<input
+type="checkbox"
+id="diamondEnabled">
+
+Oyun Aktif
+
+</label>
+
+<label>
+
+Minimum Bahis
+
+<input
+type="number"
+id="diamondMin"
+value="10">
+
+</label>
+
+<label>
+
+Maksimum Bahis
+
+<input
+type="number"
+id="diamondMax"
+value="50000">
+
+</label>
+
+<label>
+
+Diamond Ödülü
+
+<input
+type="number"
+id="diamondPrize"
+value="100">
+
+</label>
+
+<button id="saveDiamond">
+
+Kaydet
+
+</button>
+
+</section>
+
+<!-- ===========================
+EVENT SETTINGS
+=========================== -->
+
+<section class="gameCard">
+
+<h2>🎉 Etkinlik Ayarları</h2>
+
+<label>
+
+Etkinlik Adı
+
+<input
+type="text"
+id="eventName"
+placeholder="Happy Hour">
+
+</label>
+
+<label>
+
+Bonus Çarpanı
+
+<input
+type="number"
+id="eventMultiplier"
+value="2">
+
+</label>
+
+<label>
+
+Başlangıç
+
+<input
+type="datetime-local"
+id="eventStart">
+
+</label>
+
+<label>
+
+Bitiş
+
+<input
+type="datetime-local"
+id="eventEnd">
+
+</label>
+
+<button id="saveEvent">
+
+Etkinliği Kaydet
+
+</button>
+
+</section>
+<!-- ===========================
+CANLI İSTATİSTİKLER
+=========================== -->
+
+<section class="gameCard">
+
+<h2>📊 Canlı Casino İstatistikleri</h2>
+
+<div class="liveStats">
+
+<div class="liveBox">
+
+<h3 id="onlinePlayers">0</h3>
+
+<span>Aktif Oyuncu</span>
+
+</div>
+
+<div class="liveBox">
+
+<h3 id="currentSpins">0</h3>
+
+<span>Şu An Dönen Oyun</span>
+
+</div>
+
+<div class="liveBox">
+
+<h3 id="todayWins">0</h3>
+
+<span>Bugünkü Kazanan</span>
+
+</div>
+
+<div class="liveBox">
+
+<h3 id="todayLose">0</h3>
+
+<span>Bugünkü Kaybeden</span>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================
+OYUNCU ARAMA
+=========================== -->
+
+<section class="gameCard">
+
+<h2>🔍 Oyuncu Ara</h2>
+
+<input
+type="text"
+id="searchPlayer"
+placeholder="UID veya Kullanıcı ID">
+
+<button id="findPlayer">
+
+Oyuncuyu Bul
+
+</button>
+
+<div id="playerResult"></div>
+
+</section>
+
+<!-- ===========================
+OYUNCU YÖNETİMİ
+=========================== -->
+
+<section class="gameCard">
+
+<h2>👤 Oyuncu Casino Yetkisi</h2>
+
+<label>
+
+Casino Engeli
+
+<input
+type="checkbox"
+id="casinoBan">
+
+</label>
+
+<label>
+
+Günlük Max Kazanç
+
+<input
+type="number"
+id="dailyLimit"
+value="500000">
+
+</label>
+
+<label>
+
+Maksimum Bahis
+
+<input
+type="number"
+id="playerMaxBet"
+value="100000">
+
+</label>
+
+<button id="savePlayer">
+
+Kaydet
+
+</button>
+
+</section>
+
+<!-- ===========================
+BAKIM MODU
+=========================== -->
+
+<section class="gameCard">
+
+<h2>🛠 Bakım Modu</h2>
+
+<label>
+
+<input
+type="checkbox"
+id="maintenance">
+
+Casino Bakım Modunda
+
+</label>
+
+<button id="saveMaintenance">
+
+Kaydet
+
+</button>
+
+</section>
+
+<!-- ===========================
+CANLI LOG
+=========================== -->
+
+<section class="gameCard">
+
+<h2>📜 Son Spinler</h2>
+
+<div id="spinLog">
+
+<!-- Firebase'den gelecek -->
+
+</div>
+
+</section>
