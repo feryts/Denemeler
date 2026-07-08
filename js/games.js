@@ -186,6 +186,22 @@ function renderHome(){
 
         </div>
 
+        <div class="casinoQuickActions">
+
+            <button class="btn btnGhost" onclick="Games.dailyBonus()">🎁 Günlük Bonus</button>
+
+            <button class="btn btnGhost" onclick="Games.mysteryBox()">📦 Sandık</button>
+
+            <button class="btn btnGhost" onclick="Games.missions()">🎯 Görevler</button>
+
+            <button class="btn btnGhost" onclick="Games.history()">📜 Geçmiş</button>
+
+            <button class="btn btnGhost" onclick="Games.leaderboard()">🏆 Lider Tablosu</button>
+
+            <button class="btn btnGhost" onclick="Games.tournament()">🏅 Turnuva</button>
+
+        </div>
+
         <div class="sectionTitle">
 
             Casino Oyunları
@@ -323,6 +339,52 @@ spin(){
 
 playCurrentGame();
 
+},
+
+history(){
+
+renderHistory();
+
+},
+
+leaderboard(){
+
+renderLeaderboard();
+
+},
+
+missions(){
+
+renderMissions();
+
+},
+
+claimMission(id){
+
+claimMission(id);
+
+},
+
+mysteryBox(){
+
+openMysteryBox();
+
+renderHome();
+
+},
+
+dailyBonus(){
+
+claimDailyBonus();
+
+renderHome();
+
+},
+
+tournament(){
+
+joinTournament();
+
 }
 
 };
@@ -364,6 +426,26 @@ ${currentBet}
 </div>
 
 `;
+
+}
+
+/*==================================
+SPIN SONUCUNU İŞLE (ORTAK)
+==================================*/
+
+function finalizeSpin(gameName,bet,win,multiplier){
+
+    if(win>0){
+
+        checkWinAnimation(multiplier,win);
+
+        checkJackpot(multiplier);
+
+    }
+
+    addHistory(gameName,bet,win);
+
+    rewardXP();
 
 }
 
@@ -652,6 +734,8 @@ function calculateCandyWin(){
 
     showCandyResult(total);
 
+    finalizeSpin("EY Candy",currentBet,total,multiplier);
+
 }
    /*==================================
 CASCADE (DÜŞEN SEMBOLLER)
@@ -851,6 +935,90 @@ function renderOlympus(){
     </button>
 
     `;
+
+}
+
+function playOlympus(){
+
+    player=loadPlayer();
+
+    if(player.coin<currentBet){
+
+        UI.toast("Yetersiz Coin","error");
+
+        return;
+
+    }
+
+    DB.updateUser(player.id,{
+
+        coin:player.coin-currentBet
+
+    });
+
+    const board=document.getElementById("olympusBoard");
+
+    const cells=board.querySelectorAll(".olympusCell");
+
+    cells.forEach(cell=>{
+
+        cell.classList.add("spin");
+
+    });
+
+    setTimeout(()=>{
+
+        cells.forEach(cell=>{
+
+            cell.classList.remove("spin");
+
+            cell.innerHTML=randomOlympus();
+
+        });
+
+        const multiplier=generateMultiplier("olympus");
+
+        const multiEl=document.getElementById("olympusMultiplier");
+
+        if(multiEl){
+
+            multiEl.innerHTML=multiplier+"x";
+
+        }
+
+        const win=currentBet*multiplier;
+
+        if(win>0){
+
+            player=loadPlayer();
+
+            DB.updateUser(player.id,{
+
+                coin:player.coin+win
+
+            });
+
+            DB.addWalletTx(
+
+                player.id,
+
+                "casino_win",
+
+                win,
+
+                "coin",
+
+                "EY Olympus"
+
+            );
+
+        }
+
+        showCandyResult(win);
+
+        finalizeSpin("EY Olympus",currentBet,win,multiplier);
+
+    },1800);
 
 }
    /*==================================
@@ -1073,6 +1241,214 @@ function playDiamond(){
 
         showCandyResult(win);
 
+        finalizeSpin("Diamond Spin",currentBet,win,multiplier);
+
+    },1800);
+
+}
+
+/*==================================
+LUCKY SLOT
+==================================*/
+
+const slotSymbols=[
+
+"🍒",
+"🍋",
+"🍇",
+"🔔",
+"⭐",
+"💰",
+"7️⃣"
+
+];
+
+const slotPayouts={
+
+"7️⃣":50,
+"💰":30,
+"⭐":20,
+"🔔":15,
+"🍇":10,
+"🍋":8,
+"🍒":5
+
+};
+
+function randomSlot(){
+
+    return slotSymbols[
+        Math.floor(Math.random()*slotSymbols.length)
+    ];
+
+}
+
+function renderSlot(){
+
+    player=loadPlayer();
+
+    let reels="";
+
+    for(let i=0;i<3;i++){
+
+        reels+=`
+
+        <div class="slotReel" id="slotReel${i}">
+
+            ${randomSlot()}
+
+        </div>
+
+        `;
+
+    }
+
+    document.getElementById("gamesPage").innerHTML=`
+
+    ${UI.topBar("🎰 Lucky Slot",{back:true})}
+
+    <div class="casinoWallet">
+
+        💰 ${player.coin.toLocaleString("tr-TR")}
+
+    </div>
+
+    <div id="slotBoard" class="slotBoard">
+
+        ${reels}
+
+    </div>
+
+    <div class="multiBox">
+
+        Çarpan
+
+        <span id="slotMultiplier">
+
+            1x
+
+        </span>
+
+    </div>
+
+    ${betPanel()}
+
+    ${resultPanel()}
+
+    <button
+
+        class="btn btnPrimary btnBlock"
+
+        onclick="Games.spin()">
+
+        🎰 ÇEVİR
+
+    </button>
+
+    `;
+
+}
+
+function playSlot(){
+
+    player=loadPlayer();
+
+    if(player.coin<currentBet){
+
+        UI.toast("Yetersiz Coin","error");
+
+        return;
+
+    }
+
+    DB.updateUser(player.id,{
+
+        coin:player.coin-currentBet
+
+    });
+
+    const reels=document.querySelectorAll(".slotReel");
+
+    reels.forEach(r=>{
+
+        r.classList.add("spin");
+
+    });
+
+    setTimeout(()=>{
+
+        const results=[];
+
+        reels.forEach(r=>{
+
+            r.classList.remove("spin");
+
+            const symbol=randomSlot();
+
+            r.innerHTML=symbol;
+
+            results.push(symbol);
+
+        });
+
+        let multiplier=0;
+
+        if(results[0]===results[1] && results[1]===results[2]){
+
+            multiplier=slotPayouts[results[0]]||10;
+
+        }else if(
+
+            results[0]===results[1] ||
+            results[1]===results[2] ||
+            results[0]===results[2]
+
+        ){
+
+            multiplier=2;
+
+        }
+
+        const multiEl=document.getElementById("slotMultiplier");
+
+        if(multiEl){
+
+            multiEl.innerHTML=multiplier+"x";
+
+        }
+
+        const win=currentBet*multiplier;
+
+        if(win>0){
+
+            player=loadPlayer();
+
+            DB.updateUser(player.id,{
+
+                coin:player.coin+win
+
+            });
+
+            DB.addWalletTx(
+
+                player.id,
+
+                "casino_win",
+
+                win,
+
+                "coin",
+
+                "Lucky Slot"
+
+            );
+
+        }
+
+        showCandyResult(win);
+
+        finalizeSpin("Lucky Slot",currentBet,win,multiplier);
+
     },1800);
 
 }
@@ -1167,9 +1543,25 @@ function playWheel(){
 
             });
 
+            DB.addWalletTx(
+
+                player.id,
+
+                "casino_win",
+
+                win,
+
+                "coin",
+
+                "Lucky Wheel"
+
+            );
+
         }
 
         showCandyResult(win);
+
+        finalizeSpin("Lucky Wheel",currentBet,win,multiplier);
 
     },2500);
 
@@ -1292,6 +1684,8 @@ function playDice(){
         }
 
         showCandyResult(win);
+
+        finalizeSpin("Zar At",currentBet,win,multiplier);
 
     },1200);
 
@@ -2043,4 +2437,6 @@ function rewardXP(){
     addCasinoXP(10);
 
 }
-   
+
+})();
+
