@@ -6325,4 +6325,526 @@ onclick="Admin.backup()">
 `;
 
 },
+   /*==================================
+ŞİKAYETLER
+==================================*/
+
+reportsCenter(){
+
+const d=DB.load();
+
+d.reports=d.reports||[];
+
+const body=document.getElementById("dashboardContent");
+
+body.innerHTML=`
+
+<div class="adminCard">
+
+<h2>🚨 Kullanıcı Şikayetleri</h2>
+
+<div class="tableWrap">
+
+<table class="adminTable">
+
+<thead>
+
+<tr>
+
+<th>Tarih</th>
+
+<th>Şikayet Eden</th>
+
+<th>Şikayet Edilen</th>
+
+<th>Sebep</th>
+
+<th>Durum</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${d.reports.map((r,i)=>`
+
+<tr>
+
+<td>${new Date(r.ts).toLocaleString()}</td>
+
+<td>${r.from}</td>
+
+<td>${r.to}</td>
+
+<td>${r.reason}</td>
+
+<td>
+
+<button
+
+class="btnAdmin"
+
+onclick="Admin.closeReport(${i})">
+
+Kapat
+
+</button>
+
+</td>
+
+</tr>
+
+`).join("")}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+`;
+
+},
+   /*==================================
+ŞİKAYET KAPAT
+==================================*/
+
+closeReport(index){
+
+const d=DB.load();
+
+d.reports.splice(index,1);
+
+DB.save();
+
+UI.toast(
+
+"Şikayet kapatıldı",
+
+"success"
+
+);
+
+this.reportsCenter();
+
+},
+   /*==================================
+YASAKLI KELİMELER
+==================================*/
+
+badWords(){
+
+const d=DB.load();
+
+d.badWords=d.badWords||[];
+
+const body=document.getElementById("dashboardContent");
+
+body.innerHTML=`
+
+<div class="adminCard">
+
+<h2>🚫 Yasaklı Kelimeler</h2>
+
+<button
+
+class="btnAdmin"
+
+onclick="Admin.addBadWord()">
+
++ Kelime
+
+</button>
+
+<div class="tableWrap">
+
+<table class="adminTable">
+
+<tbody>
+
+${d.badWords.map((w,i)=>`
+
+<tr>
+
+<td>${w}</td>
+
+<td>
+
+<button
+
+class="btnDanger"
+
+onclick="Admin.removeBadWord(${i})">
+
+Sil
+
+</button>
+
+</td>
+
+</tr>
+
+`).join("")}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+`;
+
+},
+   /*==================================
+KELİME EKLE
+==================================*/
+
+addBadWord(){
+
+const word=prompt(
+
+"Yasaklı Kelime"
+
+);
+
+if(!word) return;
+
+const d=DB.load();
+
+d.badWords.push(word);
+
+DB.save();
+
+this.badWords();
+
+},
+
+removeBadWord(index){
+
+const d=DB.load();
+
+d.badWords.splice(index,1);
+
+DB.save();
+
+this.badWords();
+
+},
+   /*==================================
+SİSTEM BİLGİSİ
+==================================*/
+
+systemInfo(){
+
+const s=DB.stats();
+
+const body=document.getElementById("dashboardContent");
+
+body.innerHTML=`
+
+<div class="statsGrid">
+
+<div class="statBox">
+
+<h4>👥 Kullanıcı</h4>
+
+<h2>${s.totalUsers}</h2>
+
+</div>
+
+<div class="statBox">
+
+<h4>🎤 Oda</h4>
+
+<h2>${s.totalRooms}</h2>
+
+</div>
+
+<div class="statBox">
+
+<h4>🏢 Ajans</h4>
+
+<h2>${s.totalAgencies}</h2>
+
+</div>
+
+<div class="statBox">
+
+<h4>💰 Coin</h4>
+
+<h2>${s.totalCoin.toLocaleString()}</h2>
+
+</div>
+
+<div class="statBox">
+
+<h4>💎 Diamond</h4>
+
+<h2>${s.totalDiamond.toLocaleString()}</h2>
+
+</div>
+
+<div class="statBox">
+
+<h4>🟢 Online</h4>
+
+<h2>${s.onlineUsers}</h2>
+
+</div>
+
+</div>
+
+`;
+
+},
+   /*==================================
+SYSTEM HEALTH
+==================================*/
+
+health(){
+
+const d=DB.load();
+
+const body=document.getElementById("dashboardContent");
+
+const errors=[];
+
+if(!d.users.length) errors.push("Kullanıcı bulunamadı");
+
+if(!d.rooms.length) errors.push("Oda bulunamadı");
+
+if(!d.gifts.length) errors.push("Hediye listesi boş");
+
+if(!d.coinPackages.length) errors.push("Coin paketi yok");
+
+body.innerHTML=`
+
+<div class="adminCard">
+
+<h2>🩺 Sistem Sağlığı</h2>
+
+${errors.length?
+
+errors.map(x=>`
+
+<div class="alert alertDanger">
+
+${x}
+
+</div>
+
+`).join("")
+
+:
+
+`
+
+<div class="alert alertSuccess">
+
+Sistem sağlıklı çalışıyor.
+
+</div>
+
+`
+
+}
+
+</div>
+
+`;
+
+},
+   /*==================================
+ONLINE KULLANICILAR
+==================================*/
+
+onlineUsers(){
+
+const users=
+
+DB.allUsers()
+
+.filter(
+
+u=>u.online
+
+);
+
+const body=document.getElementById("dashboardContent");
+
+body.innerHTML=`
+
+<div class="adminCard">
+
+<h2>
+
+🟢 Online Kullanıcılar
+
+</h2>
+
+<table class="adminTable">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Kullanıcı</th>
+
+<th>Rol</th>
+
+<th>İşlem</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${users.map(u=>`
+
+<tr>
+
+<td>${u.id}</td>
+
+<td>${u.username}</td>
+
+<td>${u.role}</td>
+
+<td>
+
+<button
+
+class="btnDanger"
+
+onclick="Admin.forceLogout('${u.id}')">
+
+Çıkart
+
+</button>
+
+</td>
+
+</tr>
+
+`).join("")}
+
+</tbody>
+
+</table>
+
+</div>
+
+`;
+
+},
+   /*==================================
+ZORLA ÇIKIŞ
+==================================*/
+
+forceLogout(id){
+
+DB.updateUser(id,{
+
+online:false
+
+});
+
+DB.addNotification(
+
+id,
+
+"Oturumunuz yönetici tarafından sonlandırıldı.",
+
+"system"
+
+);
+
+UI.toast(
+
+"Kullanıcı çıkış yaptı",
+
+"success"
+
+);
+
+this.onlineUsers();
+
+},
+   /*==================================
+SUNUCU MESAJI
+==================================*/
+
+broadcast(){
+
+const msg=
+
+prompt(
+
+"Tüm kullanıcılara gönderilecek mesaj"
+
+);
+
+if(!msg) return;
+
+DB.allUsers().forEach(u=>{
+
+DB.addNotification(
+
+u.id,
+
+msg,
+
+"broadcast"
+
+);
+
+});
+
+DB.addAdminLog(
+
+"broadcast",
+
+"all",
+
+msg
+
+);
+
+UI.toast(
+
+"Mesaj gönderildi",
+
+"success"
+
+);
+
+},
+   /*==================================
+SİSTEMİ YENİLE
+==================================*/
+
+reloadSystem(){
+
+if(
+
+!confirm(
+
+"Sistem yeniden yüklensin mi?"
+
+)
+
+)
+
+return;
+
+location.reload();
+
+},
    
