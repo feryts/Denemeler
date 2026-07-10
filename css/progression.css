@@ -1,0 +1,128 @@
+/* ===========================================
+   EY LIVE — VIP / NOBLE / SEVİYE / İLİŞKİ /
+   MAĞAZA / SIRT ÇANTASI ORTAK STİLLERİ
+=========================================== */
+
+.progHero {
+  text-align: center;
+  padding: 30px 16px 10px;
+}
+.progHero .badgeImg {
+  width: 120px; height: 120px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 54px; margin: 0 auto 14px;
+  background: radial-gradient(circle at 50% 30%, rgba(255,255,255,.12), rgba(255,255,255,0));
+  border: 3px solid rgba(255,255,255,.15);
+}
+.progHero .avatarCircle { width: 84px; height: 84px; font-size: 38px; border: 3px solid #ffd76a; }
+.progHero .lvName { font-size: 20px; font-weight: 800; margin-top: 10px; }
+.progHero .lvSub { font-size: 12px; color: var(--text2); margin-top: 4px; }
+
+.progBarRow { display: flex; align-items: center; gap: 10px; padding: 0 20px; margin: 18px 0 6px; }
+.progBarRow .lvTag { font-size: 12px; color: var(--text2); font-weight: 700; white-space: nowrap; }
+.progTrack { flex: 1; height: 8px; border-radius: 20px; background: rgba(255,255,255,.08); position: relative; overflow: hidden; }
+.progTrack .fill { height: 100%; border-radius: 20px; background: linear-gradient(90deg, var(--secondary), var(--primary)); transition: width .4s; }
+.progNote { text-align: center; font-size: 12.5px; color: var(--text2); margin-bottom: 4px; }
+.progNote b { color: #ffd76a; }
+
+.progTabs { display: flex; justify-content: center; gap: 22px; margin: 6px 0 4px; }
+.progTabs .pt { font-size: 14px; color: var(--text2); padding-bottom: 8px; border-bottom: 2px solid transparent; cursor: pointer; }
+.progTabs .pt.active { color: #fff; font-weight: 700; border-color: var(--secondary); }
+
+.rewardGrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; padding: 14px 16px 6px; }
+.rewardCard {
+  background: rgba(255,255,255,.05); border-radius: 16px; padding: 14px 8px; text-align: center;
+  position: relative; border: 1px solid rgba(255,255,255,.06);
+}
+.rewardCard.unlocked { border-color: rgba(255,215,106,.5); background: rgba(255,215,106,.08); }
+.rewardCard .rIcon { font-size: 26px; margin-bottom: 8px; }
+.rewardCard .rName { font-size: 12.5px; font-weight: 700; }
+.rewardCard .rHint { font-size: 10px; color: var(--text2); margin-top: 3px; }
+.rewardCard .lockDot {
+  position: absolute; top: 8px; left: 8px; width: 18px; height: 18px; border-radius: 50%;
+  background: rgba(123,46,255,.5); display: flex; align-items: center; justify-content: center; font-size: 10px;
+}
+
+.ctaBtn {
+  display: block; margin: 20px 16px; text-align: center; padding: 15px;
+  border-radius: 30px; font-weight: 700; font-size: 15px; color: #fff;
+  background: linear-gradient(135deg, var(--secondary), var(--primary));
+}
+.ctaBtn.gold { background: linear-gradient(135deg, #ffe08a, #f5a623); color: #201200; }
+
+/* Store */
+.storeTabs { display: flex; gap: 18px; overflow-x: auto; padding: 4px 4px 14px; }
+.storeTabs .st { font-size: 14px; color: var(--text2); white-space: nowrap; padding-bottom: 6px; border-bottom: 2px solid transparent; }
+.storeTabs .st.active { color: #fff; font-weight: 700; border-color: var(--secondary); }
+
+.storeGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.storeCard { background: rgba(255,255,255,.05); border-radius: 16px; padding: 12px; }
+.storeCard .badgeTime { font-size: 11px; color: var(--text2); display: flex; align-items: center; gap: 4px; }
+.storeCard .thumb { width: 100%; aspect-ratio: 1/1; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 46px; background: rgba(255,255,255,.04); margin: 8px 0; }
+.storeCard .price { display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: 13.5px; margin-bottom: 10px; }
+.storeCard .actionsRow { display: flex; gap: 8px; }
+.storeCard .actionsRow .btn { flex: 1; padding: 9px 6px; font-size: 12.5px; }
+
+/* Backpack */
+.bpEmpty { text-align: center; padding: 90px 30px 20px; color: var(--text2); }
+.bpEmpty .star { font-size: 42px; margin-bottom: 14px; opacity: .5; }
+.bpGrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; padding: 4px 2px; }
+.bpItem { background: rgba(255,255,255,.05); border-radius: 16px; padding: 12px 8px; text-align: center; }
+.bpItem .thumb { font-size: 32px; margin-bottom: 6px; }
+.bpItem .name { font-size: 11.5px; font-weight: 700; }
+.bpItem .expires { font-size: 10px; color: var(--text2); margin: 4px 0 8px; }
+
+/* Relationship */
+.relCard {
+  background: linear-gradient(135deg, rgba(123,46,255,.35), rgba(255,46,158,.2));
+  border-radius: 22px; padding: 16px; display: flex; align-items: center; gap: 14px; margin-bottom: 16px;
+}
+.relCard .avatarCircle { width: 60px; height: 60px; font-size: 28px; border: 2px solid #ffd76a; }
+.relCard .fire { font-size: 26px; }
+.relCard .plusBtn {
+  width: 60px; height: 60px; border-radius: 16px; background: rgba(255,255,255,.08);
+  display: flex; align-items: center; justify-content: center; font-size: 22px; margin-left: auto;
+}
+.relBuildBox {
+  border: 2px dashed rgba(255,255,255,.15); border-radius: 22px; padding: 40px 10px; text-align: center; color: var(--text2);
+  margin-bottom: 14px;
+}
+.relBuildBox .plusBtn { width: 54px; height: 54px; border-radius: 50%; background: rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center; font-size: 22px; margin: 0 auto 10px; }
+
+/* Settings / Privacy */
+.settRow { display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,.05); border-radius: 16px; padding: 15px 16px; margin-bottom: 10px; }
+.settRow .rTitle { font-weight: 700; font-size: 14px; }
+.settRow .rVal { color: var(--text2); font-size: 13px; display: flex; align-items: center; gap: 6px; }
+.settRow.danger .rTitle { color: var(--danger); }
+.settHint { font-size: 11.5px; color: var(--text2); margin: -4px 0 14px 4px; line-height: 1.5; }
+
+.toggle { width: 44px; height: 26px; border-radius: 20px; background: rgba(255,255,255,.15); position: relative; transition: background .2s; flex-shrink: 0; }
+.toggle::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; transition: transform .2s; }
+.toggle.on { background: linear-gradient(135deg, var(--secondary), var(--primary)); }
+.toggle.on::after { transform: translateX(18px); }
+
+/* Ranking */
+.rankTabs { display: flex; gap: 16px; overflow-x: auto; padding: 4px 2px 10px; }
+.rankTabs .rt { font-size: 13.5px; color: var(--text2); white-space: nowrap; padding-bottom: 6px; border-bottom: 2px solid transparent; }
+.rankTabs .rt.active { color: #fff; font-weight: 700; border-color: var(--secondary); }
+.rangeTabs { display: flex; gap: 8px; margin-bottom: 18px; }
+.rangeTabs .rg { flex: 1; text-align: center; padding: 8px; border-radius: 20px; background: rgba(255,255,255,.06); font-size: 12.5px; }
+.rangeTabs .rg.active { background: linear-gradient(135deg, var(--secondary), var(--primary)); font-weight: 700; }
+
+.podium { display: flex; align-items: flex-end; justify-content: center; gap: 10px; margin-bottom: 20px; }
+.podStep { text-align: center; }
+.podStep .avatarCircle { width: 60px; height: 60px; font-size: 28px; margin: 0 auto 8px; border: 2px solid rgba(255,255,255,.2); }
+.podStep.first .avatarCircle { width: 74px; height: 74px; font-size: 34px; border-color: #ffd76a; }
+.podStep .pName { font-size: 12px; font-weight: 700; }
+.podStep .pScore { font-size: 11px; color: var(--text2); margin-top: 2px; }
+.podStep .rankNum {
+  width: 22px; height: 22px; border-radius: 50%; background: rgba(255,255,255,.15); font-size: 11px;
+  display: flex; align-items: center; justify-content: center; margin: 6px auto 0; font-weight: 700;
+}
+
+.rankListRow { display: flex; align-items: center; gap: 12px; padding: 12px 4px; border-bottom: 1px solid rgba(255,255,255,.06); }
+.rankListRow .rNum { width: 22px; text-align: center; font-weight: 700; color: var(--text2); }
+.rankListRow .avatarCircle { width: 40px; height: 40px; font-size: 19px; }
+.rankListRow .rName { font-weight: 700; font-size: 13.5px; }
+.rankListRow .rMeta { font-size: 11px; color: var(--text2); display: flex; gap: 6px; margin-top: 2px; flex-wrap: wrap; }
+.rankListRow .rScore { margin-left: auto; font-weight: 700; color: #ffd76a; font-size: 13px; }
