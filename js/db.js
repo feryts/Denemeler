@@ -60,46 +60,76 @@ const DB = {
         id: "EY100000001", phone: "5550000001", username: "admin",
         password: "admin123", gender: "erkek", birthdate: "1995-01-01",
         avatar: "👑", cover: "", coin: 999999, diamond: 999999,
-        level: 99, exp: 0, vip: 7, verified: true, role: "admin",
+        level: 99, exp: 0, vip: 7, vipExp: 0, verified: true, role: "admin",
         agencyId: null, about: "EY LIVE Sistem Yöneticisi",
         followers: [], following: [], online: true, lastSeen: Date.now(),
-        banned: false, banReason: "", createdAt: Date.now()
+        banned: false, banReason: "", createdAt: Date.now(),
+        nobleLevel: 0, nobleExp: 0,
+        publisherLevel: 1, publisherExp: 0,
+        partnerId: null, relationshipExp: 0,
+        privacy: { hideCountry: false, hideLastSeen: false, hideCharm: false, hidePublisherMark: false, hideVisitHistory: false },
+        inventory: { cars: [], frames: [], cards: [], balloons: [] },
+        equipped: { car: null, frame: null, card: null, balloon: null }
       },
       {
         id: "EY100000002", phone: "5550000002", username: "AjansPatronu",
         password: "1234", gender: "kadın", birthdate: "1990-05-12",
         avatar: "🧑‍💼", cover: "", coin: 50000, diamond: 20000,
-        level: 40, exp: 0, vip: 5, verified: true, role: "agency",
+        level: 40, exp: 0, vip: 5, vipExp: 320000, verified: true, role: "agency",
         agencyId: "AG10000001", about: "Yıldız Ajans kurucusu",
         followers: [], following: [], online: true, lastSeen: Date.now(),
-        banned: false, banReason: "", createdAt: Date.now()
+        banned: false, banReason: "", createdAt: Date.now(),
+        nobleLevel: 3, nobleExp: 40000,
+        publisherLevel: 12, publisherExp: 5000,
+        partnerId: null, relationshipExp: 0,
+        privacy: { hideCountry: false, hideLastSeen: false, hideCharm: false, hidePublisherMark: false, hideVisitHistory: false },
+        inventory: { cars: ["car2"], frames: ["fr2"], cards: [], balloons: [] },
+        equipped: { car: "car2", frame: "fr2", card: null, balloon: null }
       },
       {
         id: "EY100000003", phone: "5550000003", username: "SesliMelis",
         password: "1234", gender: "kadın", birthdate: "1999-03-20",
         avatar: "🎤", cover: "", coin: 3200, diamond: 8400,
-        level: 27, exp: 0, vip: 3, verified: true, role: "streamer",
+        level: 27, exp: 0, vip: 3, vipExp: 45000, verified: true, role: "streamer",
         agencyId: "AG10000001", about: "Her gece burada 🎶",
         followers: ["EY100000004"], following: [], online: true, lastSeen: Date.now(),
-        banned: false, banReason: "", createdAt: Date.now()
+        banned: false, banReason: "", createdAt: Date.now(),
+        nobleLevel: 1, nobleExp: 8000,
+        publisherLevel: 6, publisherExp: 2200,
+        partnerId: "EY100000004", relationshipExp: 3400,
+        privacy: { hideCountry: false, hideLastSeen: false, hideCharm: false, hidePublisherMark: false, hideVisitHistory: false },
+        inventory: { cars: [], frames: ["fr1"], cards: [], balloons: [] },
+        equipped: { car: null, frame: "fr1", card: null, balloon: null }
       },
       {
         id: "EY100000004", phone: "5550000004", username: "Gezgin_Ali",
         password: "1234", gender: "erkek", birthdate: "1997-07-07",
         avatar: "🧑", cover: "", coin: 500, diamond: 20,
-        level: 8, exp: 0, vip: 0, verified: false, role: "user",
+        level: 8, exp: 0, vip: 0, vipExp: 200, verified: false, role: "user",
         agencyId: null, about: "Merhaba, EY LIVE'da yeniyim!",
         followers: [], following: ["EY100000003"], online: true, lastSeen: Date.now(),
-        banned: false, banReason: "", createdAt: Date.now()
+        banned: false, banReason: "", createdAt: Date.now(),
+        nobleLevel: 0, nobleExp: 0,
+        publisherLevel: 1, publisherExp: 0,
+        partnerId: "EY100000003", relationshipExp: 3400,
+        privacy: { hideCountry: false, hideLastSeen: false, hideCharm: false, hidePublisherMark: false, hideVisitHistory: false },
+        inventory: { cars: [], frames: [], cards: [], balloons: [] },
+        equipped: { car: null, frame: null, card: null, balloon: null }
       },
       {
         id: "EY100000005", phone: "5550000005", username: "ModEce",
         password: "1234", gender: "kadın", birthdate: "1998-11-02",
         avatar: "🛡️", cover: "", coin: 1200, diamond: 300,
-        level: 15, exp: 0, vip: 1, verified: true, role: "user",
+        level: 15, exp: 0, vip: 1, vipExp: 200, verified: true, role: "user",
         agencyId: null, about: "Oda moderatörü", followers: [], following: [],
         online: false, lastSeen: Date.now() - 3600_000, banned: false, banReason: "",
-        createdAt: Date.now()
+        createdAt: Date.now(),
+        nobleLevel: 0, nobleExp: 0,
+        publisherLevel: 1, publisherExp: 0,
+        partnerId: null, relationshipExp: 0,
+        privacy: { hideCountry: false, hideLastSeen: false, hideCharm: false, hidePublisherMark: false, hideVisitHistory: false },
+        inventory: { cars: [], frames: [], cards: [], balloons: [] },
+        equipped: { car: null, frame: null, card: null, balloon: null }
       }
     ];
 
@@ -200,6 +230,34 @@ const DB = {
       { id: "t4", text: "Bir hediye gönder", reward: 25, type: "send_gift" }
     ];
 
+    /* Bir sonraki seviyeye geçmek için gereken EXP adımları (kümülatif değil, adım büyüklüğü) */
+    const vipSteps = [50000, 150000, 300000, 600000, 1200000, 2500000, 5000000];
+    const nobleSteps = [200000, 500000, 1000000, 2000000, 4000000, 8000000, 15000000, 30000000, 60000000, 120000000];
+    const wealthSteps = [1000, 3000, 8000, 20000, 50000, 120000, 300000, 700000, 1500000, 3500000];
+    const publisherSteps = [10000, 30000, 80000, 200000, 500000, 1200000, 3000000, 7000000, 15000000, 35000000];
+
+    const storeCatalog = {
+      cars: [
+        { id: "car1", name: "Aslan Arabası", icon: "🦁", days: 10, price: 500000 },
+        { id: "car2", name: "Altın Bugatti", icon: "🚗", days: 30, price: 600000 },
+        { id: "car3", name: "Kırmızı Spor", icon: "🏎️", days: 3, price: 150000 },
+        { id: "car4", name: "Kristal Robot", icon: "🤖", days: 30, price: 800000 }
+      ],
+      frames: [
+        { id: "fr1", name: "Deniz Tanrısı Çerçeve", icon: "🔱", days: 15, price: 150000 },
+        { id: "fr2", name: "Altın Çerçeve", icon: "🟡", days: 30, price: 200000 },
+        { id: "fr3", name: "Palyaço Çerçeve", icon: "🤡", days: 1, price: 26999 }
+      ],
+      cards: [
+        { id: "cd1", name: "Özel Kart — Yıldız", icon: "⭐", days: 30, price: 100000 },
+        { id: "cd2", name: "Özel Kart — Kalp", icon: "💗", days: 15, price: 60000 }
+      ],
+      balloons: [
+        { id: "bl1", name: "Ateş Balonu", icon: "🔥", days: 7, price: 40000 },
+        { id: "bl2", name: "Yıldız Balonu", icon: "✨", days: 7, price: 40000 }
+      ]
+    };
+
     const announcements = [
       { id: "sys1", title: "EY LIVE'a Hoş Geldiniz!", text: "Uygulamamızı keşfedin, arkadaşlar edinin ve sesli odalarda vakit geçirin 🎉", ts: Date.now() - 86400000 },
       { id: "sys2", title: "Yeni Hediyeler Eklendi", text: "Mağazaya yeni hediyeler eklendi, hemen göz atın! 🎁", ts: Date.now() - 43200000 }
@@ -209,7 +267,7 @@ const DB = {
       counters: { user: 5, agency: 1, room: 1003, notif: 0, msg: 0, tx: 0, log: 0 },
       users, agencies, rooms, gifts, vipLevels, coinPackages, games, dailyTasks,
       announcements, notifications: [], conversations: [], walletTx: [], adminLogs: [],
-      bans: []
+      bans: [], vipSteps, nobleSteps, wealthSteps, publisherSteps, storeCatalog
     };
   },
 
@@ -248,10 +306,15 @@ const DB = {
     const d = this.load();
     const id = this.nextId("EY1", "user");
     const user = Object.assign({
-      id, coin: 100, diamond: 0, level: 1, exp: 0, vip: 0, verified: false,
+      id, coin: 100, diamond: 0, level: 1, exp: 0, vip: 0, vipExp: 0, verified: false,
       role: "user", agencyId: null, about: "", followers: [], following: [],
       online: true, lastSeen: Date.now(), banned: false, banReason: "",
-      createdAt: Date.now(), avatar: "🙂", cover: ""
+      createdAt: Date.now(), avatar: "🙂", cover: "",
+      nobleLevel: 0, nobleExp: 0, publisherLevel: 1, publisherExp: 0,
+      partnerId: null, relationshipExp: 0,
+      privacy: { hideCountry: false, hideLastSeen: false, hideCharm: false, hidePublisherMark: false, hideVisitHistory: false },
+      inventory: { cars: [], frames: [], cards: [], balloons: [] },
+      equipped: { car: null, frame: null, card: null, balloon: null }
     }, partial);
     d.users.push(user);
     this.save();
@@ -453,6 +516,83 @@ const DB = {
     u.coin -= vip.price * 10;
     u.vip = level;
     this.addWalletTx(userId, "vip", -(vip.price * 10), "coin", `${vip.name} satın alındı`);
+    this.save();
+    return { ok: true };
+  },
+
+  /* ---------- PROGRESS (VIP / Noble / Servet / Yayıncı) ---------- */
+
+  _progress(level, exp, steps, maxLevel) {
+    const lvl = Math.min(level, maxLevel);
+    const need = steps[lvl] || steps[steps.length - 1];
+    return { level: lvl, cur: exp, need, next: lvl + 1 };
+  },
+
+  vipProgress(u) {
+    const steps = this.load().vipSteps;
+    return this._progress(u.vip || 0, u.vipExp || 0, steps, steps.length);
+  },
+
+  nobleProgress(u) {
+    const steps = this.load().nobleSteps;
+    return this._progress(u.nobleLevel || 0, u.nobleExp || 0, steps, steps.length);
+  },
+
+  wealthProgress(u) {
+    const steps = this.load().wealthSteps;
+    return this._progress(u.level || 1, u.exp || 0, steps, steps.length);
+  },
+
+  publisherProgress(u) {
+    const steps = this.load().publisherSteps;
+    return this._progress(u.publisherLevel || 1, u.publisherExp || 0, steps, steps.length);
+  },
+
+  /* ---------- STORE / BACKPACK ---------- */
+
+  storeCatalog() { return this.load().storeCatalog; },
+
+  buyStoreItem(userId, category, itemId) {
+    const d = this.load();
+    const item = (d.storeCatalog[category] || []).find(i => i.id === itemId);
+    const u = this.getUser(userId);
+    if (!item || !u) return { ok: false, msg: "Ürün bulunamadı" };
+    if (u.coin < item.price) return { ok: false, msg: "Yetersiz Xcoin" };
+    u.coin -= item.price;
+    u.inventory = u.inventory || { cars: [], frames: [], cards: [], balloons: [] };
+    const expiresAt = this.now() + item.days * 86400000;
+    const existing = u.inventory[category].find(x => x.id === itemId);
+    if (existing) existing.expiresAt = Math.max(existing.expiresAt, this.now()) + item.days * 86400000;
+    else u.inventory[category].push({ id: itemId, expiresAt });
+    this.addWalletTx(userId, "store_purchase", -item.price, "coin", `${item.name} satın alındı (${item.days} gün)`);
+    this.save();
+    return { ok: true };
+  },
+
+  equipItem(userId, category, itemId) {
+    const u = this.getUser(userId);
+    if (!u) return;
+    const key = { cars: "car", frames: "frame", cards: "card", balloons: "balloon" }[category];
+    u.equipped = u.equipped || {};
+    u.equipped[key] = itemId;
+    this.save();
+  },
+
+  userInventory(userId, category) {
+    const u = this.getUser(userId);
+    if (!u || !u.inventory) return [];
+    return u.inventory[category].filter(x => x.expiresAt > this.now());
+  },
+
+  /* ---------- RELATIONSHIP ---------- */
+
+  setPartner(userId, partnerId) {
+    const u = this.getUser(userId), p = this.getUser(partnerId);
+    if (!u || !p) return { ok: false, msg: "Kullanıcı bulunamadı" };
+    if (u.partnerId) return { ok: false, msg: "Zaten bir ilişkin var" };
+    u.partnerId = partnerId; u.relationshipExp = 0;
+    p.partnerId = userId; p.relationshipExp = 0;
+    this.addNotification(partnerId, `${u.username} seninle ilişki kurdu 💗`, "system");
     this.save();
     return { ok: true };
   },

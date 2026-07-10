@@ -61,7 +61,7 @@
         <a href="messages.html?with=${other.id}" class="convoRow">
           <div class="avatarCircle" style="width:46px;height:46px;font-size:22px">${other.avatar}${other.online ? '<span class="dot"></span>' : ""}</div>
           <div style="flex:1;min-width:0">
-            <div class="cName">${UI.esc(other.username)}${other.vip ? `<span class="vipTagSm">VIP${other.vip}</span>` : ""}</div>
+            <div class="cName">${UI.esc(other.username)}${other.vip ? `<span class="vipTagSm">VIP${other.vip}</span>` : ""}${other.nobleLevel ? `<span class="vipTagSm" style="background:#1c8a4a">N${other.nobleLevel}</span>` : ""}</div>
             <div class="cLast">${last ? UI.esc(last.text) : "Henüz mesaj yok"}</div>
           </div>
           ${unread ? `<span class="badgeDot" style="position:static">${unread}</span>` : ""}

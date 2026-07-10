@@ -48,7 +48,7 @@
     const age = ageFromBirth(user.birthdate);
     const genderIcon = user.gender === "kadın" ? "♀" : user.gender === "erkek" ? "♂" : "⚧";
     document.getElementById("profilePage").innerHTML = `
-      ${UI.topBar("Profilim", { right: `<button class="topBtn" onclick="Profile.logout()">🚪</button>` })}
+      ${UI.topBar("Profilim", { right: `<span class="flexCenter" style="gap:8px"><a href="ranking.html" class="topBtn">🏆</a><a href="settings.html" class="topBtn">⚙️</a></span>` })}
 
       <div class="coverBox" style="${user.cover ? `background-image:url('${user.cover}');background-size:cover` : ""}">
         <button class="editCoverBtn" onclick="Profile.editCover()">✏️ Kapak</button>
@@ -90,13 +90,13 @@
         </a>`}
 
       <div class="menuGrid">
-        <a href="wallet.html" class="menuIcon"><div class="miBox">👑</div><div class="miLabel">VIP Merkezi</div></a>
-        <div class="menuIcon" onclick="UI.toast('Noble sistemi yakında')"><div class="miBox">🔰</div><div class="miLabel">Noble</div></div>
-        <div class="menuIcon" onclick="Profile.showLevel()"><div class="miBox">📶</div><div class="miLabel">Seviye</div></div>
+        <a href="vip.html" class="menuIcon"><div class="miBox">👑</div><div class="miLabel">VIP Merkezi</div></a>
+        <a href="noble.html" class="menuIcon"><div class="miBox">🔰</div><div class="miLabel">Noble</div></a>
+        <a href="level.html" class="menuIcon"><div class="miBox">📶</div><div class="miLabel">Seviye</div></a>
         <div class="menuIcon" onclick="Profile.showList('following')"><div class="miBox">👥</div><div class="miLabel">Grup</div></div>
-        <div class="menuIcon" onclick="Profile.showList('followers')"><div class="miBox">💗</div><div class="miLabel">İlişki</div></div>
-        <a href="wallet.html" class="menuIcon"><div class="miBox">🛍️</div><div class="miLabel">Mağaza</div></a>
-        <div class="menuIcon" onclick="UI.toast('Sırt çantası yakında')"><div class="miBox">🎒</div><div class="miLabel">Sırt çantası</div></div>
+        <a href="relationship.html" class="menuIcon"><div class="miBox">💗</div><div class="miLabel">İlişki</div></a>
+        <a href="store.html" class="menuIcon"><div class="miBox">🛍️</div><div class="miLabel">Mağaza</div></a>
+        <a href="backpack.html" class="menuIcon"><div class="miBox">🎒</div><div class="miLabel">Sırt çantası</div></a>
         <a href="games.html" class="menuIcon"><div class="miBox">🎮</div><div class="miLabel">Oyun Merkezi</div></a>
       </div>
 

@@ -6,14 +6,56 @@
   const me = UI.requireAuth();
   if (!me) return;
 
-  document.getElementById("miniProfile").innerHTML = `
-    <a href="profile.html" class="flexCenter" style="gap:8px">
-      <div class="avatarCircle" style="width:36px;height:36px;font-size:18px">${me.avatar}</div>
-    </a>`;
   document.getElementById("navHost").innerHTML = UI.bottomNav("home");
 
-  const unread = DB.userNotifications(me.id).filter(n => !n.read).length;
-  if (unread) document.getElementById("notifDot").outerHTML = `<span class="badgeDot" style="position:absolute;top:-4px;right:-4px">${unread}</span>`;
+  let homeTab = "parti";
+
+  function renderBenTab() {
+    const u = DB.getUser(me.id);
+    const myRoom = DB.allRooms().find(r => r.hostId === u.id);
+    const followedAgencies = DB.load().agencies;
+    document.getElementById("benBody").innerHTML = `
+      <a href="${myRoom ? "room.html?id=" + myRoom.id : "profile.html"}" class="agencyCard" style="margin-bottom:14px">
+        <div class="aCover">${u.avatar}</div>
+        <div class="aBody">
+          <div class="aTitle">Benim odam</div>
+          <div class="aTxt">Sohbet et ve yeni arkadaşlar edin</div>
+        </div>
+        <div class="aArrow">›</div>
+      </a>
+      <div class="scrollRow" style="margin-bottom:14px">
+        <button class="pill active">Son zamanlarda</button>
+        <button class="pill" onclick="location.href='profile.html'">Takip ettim</button>
+        <button class="pill" onclick="location.href='profile.html'">Arkadaşlar</button>
+      </div>
+      ${followedAgencies.map(a => {
+        const members = a.streamers.slice(0, 6).map(id => DB.getUser(id)).filter(Boolean);
+        return `
+        <a href="agency.html" class="agencyCard" style="margin-bottom:10px">
+          <div class="aCover">🏢</div>
+          <div class="aBody">
+            <div class="aTitle">${UI.esc(a.name)}</div>
+            <div class="aMembers">${members.map(mm => `<div class="avatarCircle">${mm.avatar}</div>`).join("")}</div>
+          </div>
+          <div class="aArrow">${a.streamers.length}</div>
+        </a>`;
+      }).join("") || `<p class="muted">Henüz takip ettiğin bir ajans yok</p>`}
+    `;
+  }
+
+  function setTab(t) {
+    homeTab = t;
+    document.querySelectorAll("#homeTabs .hTab").forEach(el => el.classList.toggle("active", el.dataset.t === t));
+    document.getElementById("benBody").style.display = t === "ben" ? "block" : "none";
+    document.getElementById("partiBody").style.display = t === "ben" ? "none" : "block";
+    document.getElementById("roomsSectionTitle").textContent = t === "canli" ? "📡 Canlı Odalar" : "🔥 Popüler Odalar";
+    if (t === "ben") renderBenTab();
+    else renderRooms(document.getElementById("searchBox").value);
+  }
+
+  document.querySelectorAll("#homeTabs .hTab").forEach(el => {
+    el.onclick = () => setTab(el.dataset.t);
+  });
 
   const banners = [
     { h: "🎉 Hoş Geldin Bonusu", p: "İlk girişte 100 coin hediye!" },
@@ -87,6 +129,7 @@
 
   function renderRooms(filterText) {
     let list = rooms;
+    if (homeTab === "canli") list = list.filter(r => r.mics.filter(m => m.userId).length > 0);
     if (activeCat !== "Tümü") list = list.filter(r => r.category === activeCat);
     if (filterText) {
       const q = filterText.toLowerCase();
@@ -113,5 +156,12 @@
   renderRooms();
 
   document.getElementById("searchBox").addEventListener("input", (e) => renderRooms(e.target.value));
+
+  document.getElementById("searchToggle").onclick = (e) => {
+    e.preventDefault();
+    const box = document.getElementById("searchBox");
+    box.style.display = box.style.display === "none" ? "block" : "none";
+    if (box.style.display === "block") box.focus();
+  };
 
 })();
