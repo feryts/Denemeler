@@ -1,21 +1,282 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Admin Panel — EY LIVE</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/style.css">
-<link rel="stylesheet" href="../css/admin.css">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>
+
+EY LIVE Admin
+
+</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="../css/style.css">
+
+<link rel="stylesheet"
+href="../css/admin.css">
+
 </head>
+
 <body>
 
-<div class="page" id="adminPage"></div>
-<div id="navHost"></div>
+<div
+class="adminPage">
+
+<div
+class="adminSidebar">
+
+<div
+class="adminLogo">
+
+👑
+
+<h2>
+
+EY LIVE
+
+</h2>
+
+<p>
+
+ADMIN PANEL
+
+</p>
+
+</div>
+
+<ul
+class="adminMenu">
+
+<li
+class="active"
+onclick="Admin.open('dashboard')">
+
+🏠 Dashboard
+
+</li>
+
+<li
+onclick="Admin.open('users')">
+
+👤 Kullanıcılar
+
+</li>
+
+<li
+onclick="Admin.open('rooms')">
+
+🎤 Odalar
+
+</li>
+
+<li
+onclick="Admin.open('agencies')">
+
+🏢 Ajanslar
+
+</li>
+
+<li
+onclick="Admin.open('casino')">
+
+🎰 Casino
+
+</li>
+
+<li
+onclick="Admin.open('shop')">
+
+🛍️ Mağaza
+
+</li>
+
+<li
+onclick="Admin.open('gifts')">
+
+🎁 Hediyeler
+
+</li>
+
+<li
+onclick="Admin.open('tasks')">
+
+📅 Görevler
+
+</li>
+
+<li
+onclick="Admin.open('wallet')">
+
+💰 Coin
+
+</li>
+
+<li
+onclick="Admin.open('ranking')">
+
+🏆 Sıralama
+
+</li>
+        <li onclick="Admin.open('banner')">
+
+            🖼️ Banner
+
+        </li>
+
+        <li onclick="Admin.open('vip')">
+
+            👑 VIP / Noble
+
+        </li>
+
+        <li onclick="Admin.open('reports')">
+
+            🚨 Şikayetler
+
+        </li>
+
+        <li onclick="Admin.open('logs')">
+
+            📋 Loglar
+
+        </li>
+
+        <li onclick="Admin.open('settings')">
+
+            ⚙️ Sistem
+
+        </li>
+
+        <li onclick="Admin.logout()">
+
+            🚪 Çıkış
+
+        </li>
+
+    </ul>
+
+</div>
+
+<div class="adminContent">
+
+<div class="adminTopBar">
+
+<div class="adminTitle">
+
+Dashboard
+
+</div>
+
+<div class="adminInfo">
+
+<span id="adminName">
+
+👑 Admin
+
+</span>
+
+</div>
+
+</div>
+
+<div id="adminBody">
+
+<div class="dashboardGrid">
+
+<div class="dashCard">
+
+<h3>
+
+👥 Toplam Kullanıcı
+
+</h3>
+
+<h1 id="totalUsers">
+
+0
+
+</h1>
+
+</div>
+
+<div class="dashCard">
+
+<h3>
+
+🎤 Aktif Oda
+
+</h3>
+
+<h1 id="totalRooms">
+
+0
+
+</h1>
+
+</div>
+
+<div class="dashCard">
+
+<h3>
+
+🟢 Online
+
+</h3>
+
+<h1 id="onlineUsers">
+
+0
+
+</h1>
+
+</div>
+
+<div class="dashCard">
+
+<h3>
+
+💰 Toplam Coin
+
+</h3>
+
+<h1 id="totalCoins">
+
+0
+
+</h1>
+
+</div>
+
+</div>
+
+<div class="adminSection" id="dashboardContent">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 <script src="../js/db.js"></script>
 <script src="../js/ui.js"></script>
-<script src="../js/firebase-config.js"></script>
 <script src="../js/admin.js"></script>
+
 </body>
 </html>
