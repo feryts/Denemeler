@@ -11,40 +11,47 @@
 <body>
 
 <div class="homeTopBar">
-  <div class="miniProfile" id="miniProfile"></div>
-  <div class="homeTabs">
-    <span class="hTab active">Parti</span>
-    <span class="hTab">Canlı</span>
+  <div class="homeTabs" id="homeTabs">
+    <span class="hTab" data-t="ben">Ben</span>
+    <span class="hTab active" data-t="parti">Parti</span>
+    <span class="hTab" data-t="canli">Canlı</span>
   </div>
-  <div class="flexCenter" style="gap:12px">
-    <a href="messages.html?tab=notif" class="topBtn" style="position:relative">🔔<span id="notifDot"></span></a>
-    <a href="wallet.html" class="topBtn">💰</a>
+  <div class="flexCenter" style="gap:10px">
+    <a href="messages.html" class="topBtn" title="Günlük görevler">✅</a>
+    <a href="ranking.html" class="topBtn" title="Xena Sıralaması">👑</a>
+    <a href="#" class="topBtn" id="searchToggle">🔍</a>
   </div>
 </div>
 
 <div class="page" style="padding-top:6px">
 
-  <input class="input" id="searchBox" placeholder="🔍 Oda, kullanıcı veya etiket ara...">
+  <input class="input" id="searchBox" placeholder="🔍 Oda, kullanıcı veya etiket ara..." style="display:none">
 
-  <div class="bannerWrap">
-    <div class="banner" id="banner"></div>
-    <div class="bannerDots" id="bannerDots"></div>
+  <!-- BEN sekmesi -->
+  <div id="benBody" style="display:none"></div>
+
+  <!-- PARTİ / CANLI sekmeleri -->
+  <div id="partiBody">
+    <div class="bannerWrap">
+      <div class="banner" id="banner"></div>
+      <div class="bannerDots" id="bannerDots"></div>
+    </div>
+
+    <div class="sectionTitle"><span>📋 Günlük Görevler</span></div>
+    <div class="scrollRow" id="tasksRow"></div>
+
+    <div class="sectionTitle"><span>🟢 Çevrimiçi Kullanıcılar</span></div>
+    <div class="scrollRow" id="onlineRow"></div>
+
+    <div class="sectionTitle"><span>🏢 Öne Çıkan Ajanslar</span></div>
+    <div id="agencyEvents"></div>
+
+    <div class="sectionTitle">
+      <span id="roomsSectionTitle">🔥 Popüler Odalar</span>
+    </div>
+    <div class="categoryTabs" id="catTabs"></div>
+    <div class="roomGrid" id="roomGrid"></div>
   </div>
-
-  <div class="sectionTitle"><span>📋 Günlük Görevler</span></div>
-  <div class="scrollRow" id="tasksRow"></div>
-
-  <div class="sectionTitle"><span>🟢 Çevrimiçi Kullanıcılar</span></div>
-  <div class="scrollRow" id="onlineRow"></div>
-
-  <div class="sectionTitle"><span>🏢 Öne Çıkan Ajanslar</span></div>
-  <div id="agencyEvents"></div>
-
-  <div class="sectionTitle">
-    <span>🔥 Popüler Odalar</span>
-  </div>
-  <div class="categoryTabs" id="catTabs"></div>
-  <div class="roomGrid" id="roomGrid"></div>
 </div>
 
 <div id="navHost"></div>
