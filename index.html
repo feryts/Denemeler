@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>EY LIVE</title>
 
@@ -13,77 +14,100 @@
 
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/login.css">
+
 </head>
 
 <body>
 
 <div class="loginPage">
 
-    <div class="bgBlur"></div>
+<div class="bgBlur"></div>
 
-    <div class="logoArea">
+<div class="logoArea">
 
-        <img src="assets/logo.png" class="logo">
+<img
+src="assets/logo.png"
+class="logo"
+onerror="this.src='https://placehold.co/180x180?text=EY';">
 
-        <h1>EY LIVE</h1>
+<h1>EY LIVE</h1>
 
-        <p>Sohbet • Yayın • Eğlence</p>
+<p>Sohbet • Yayın • Eğlence</p>
 
-    </div>
+</div>
 
-    <div class="loginButtons">
+<div class="loginButtons">
 
-        <button class="googleBtn" onclick="loginGoogle()">
+<button
+class="googleBtn"
+onclick="loginGoogle()">
 
-            <img src="assets/google.png">
+<img
+src="assets/google.png"
+onerror="this.style.display='none'">
 
-            <span>Google ile Giriş Yap</span>
+<span>Google ile Giriş Yap</span>
 
-        </button>
+</button>
 
-        <button class="phoneBtn" onclick="openPhoneLogin()">
+<button
+class="phoneBtn"
+onclick="openPhoneLogin()">
 
-            <img src="assets/phone.png">
+<img
+src="assets/phone.png"
+onerror="this.style.display='none'">
 
-            <span>Telefon Numarası ile Giriş</span>
+<span>Telefon Numarası ile Giriş</span>
 
-        </button>
+</button>
 
-    </div>
+</div>
 
-    <div class="otherTitle">
+<div class="otherTitle">
 
-        Diğer giriş yöntemleri
+Diğer giriş yöntemleri
 
-    </div>
+</div>
 
-    <div class="socialLogin">
+<div class="socialLogin">
 
-        <img src="assets/facebook.png">
+<img
+src="assets/facebook.png"
+onerror="this.style.display='none'">
 
-        <img src="assets/tiktok.png">
+<img
+src="assets/tiktok.png"
+onerror="this.style.display='none'">
 
-        <img src="assets/snapchat.png">
+<img
+src="assets/snapchat.png"
+onerror="this.style.display='none'">
 
-    </div>
+</div>
 
-    <div class="agree">
+<div class="agree">
 
-        <input type="checkbox" id="agree">
+<input
+type="checkbox"
+id="agree"
+checked>
 
-        <label for="agree">
+<label for="agree">
 
-        Hizmet Şartları ve Gizlilik Politikasını kabul ediyorum.
+Hizmet Şartları ve Gizlilik Politikasını kabul ediyorum.
 
-        </label>
+</label>
 
-    </div>
+</div>
 
 </div>
 
 <script src="js/firebase-config.js"></script>
 <script src="js/db.js"></script>
+<script src="js/ui.js"></script>
 <script src="js/login.js"></script>
 
 </body>
+
 </html>
