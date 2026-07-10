@@ -2,53 +2,88 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>EY LIVE</title>
-<meta name="theme-color" content="#0B0618">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/auth.css">
+<link rel="stylesheet" href="css/login.css">
 </head>
+
 <body>
 
-<div id="splash" class="splashScreen">
-  <div class="logoBox">
-    <div class="logoCircle">🎤</div>
-    <h1>EY LIVE</h1>
-    <p>Connect • Chat • Play</p>
-    <div class="loader"><div></div><div></div><div></div></div>
-  </div>
+<div class="loginPage">
+
+    <div class="bgBlur"></div>
+
+    <div class="logoArea">
+
+        <img src="assets/logo.png" class="logo">
+
+        <h1>EY LIVE</h1>
+
+        <p>Sohbet • Yayın • Eğlence</p>
+
+    </div>
+
+    <div class="loginButtons">
+
+        <button class="googleBtn" onclick="loginGoogle()">
+
+            <img src="assets/google.png">
+
+            <span>Google ile Giriş Yap</span>
+
+        </button>
+
+        <button class="phoneBtn" onclick="openPhoneLogin()">
+
+            <img src="assets/phone.png">
+
+            <span>Telefon Numarası ile Giriş</span>
+
+        </button>
+
+    </div>
+
+    <div class="otherTitle">
+
+        Diğer giriş yöntemleri
+
+    </div>
+
+    <div class="socialLogin">
+
+        <img src="assets/facebook.png">
+
+        <img src="assets/tiktok.png">
+
+        <img src="assets/snapchat.png">
+
+    </div>
+
+    <div class="agree">
+
+        <input type="checkbox" id="agree">
+
+        <label for="agree">
+
+        Hizmet Şartları ve Gizlilik Politikasını kabul ediyorum.
+
+        </label>
+
+    </div>
+
 </div>
 
-<div id="loginPage" class="authWrap" style="display:none">
-  <div class="authTop">
-    <div class="logoCircle sm">🎤</div>
-    <h2>EY LIVE</h2>
-    <p class="muted">Hoş Geldiniz, giriş yapın</p>
-  </div>
-
-  <div class="card authCard">
-    <label class="fieldLabel">Telefon veya Kullanıcı Adı</label>
-    <input class="input" id="loginId" placeholder="5551234567 veya kullanıcı adı">
-    <label class="fieldLabel">Şifre</label>
-    <input class="input" id="loginPass" type="password" placeholder="••••••••">
-    <button class="btn btnPrimary btnBlock" onclick="Auth.login()">Giriş Yap</button>
-    <button class="btn btnGhost btnBlock" style="margin-top:10px" onclick="Auth.goRegister()">Kayıt Ol</button>
-    <button class="btn btnGhost btnBlock" style="margin-top:10px" onclick="Auth.guestLogin()">👤 Misafir Girişi</button>
-  </div>
-
-  <p class="demoNote">
-    Demo hesap: <b>admin</b> / <b>admin123</b> (yönetici) ·
-    <b>SesliMelis</b> / <b>1234</b> (yayıncı) ·
-    <b>Gezgin_Ali</b> / <b>1234</b> (kullanıcı)
-  </p>
-</div>
-
-<script src="js/db.js"></script>
-<script src="js/ui.js"></script>
 <script src="js/firebase-config.js"></script>
-<script src="js/auth.js"></script>
+<script src="js/db.js"></script>
+<script src="js/login.js"></script>
+
 </body>
 </html>
